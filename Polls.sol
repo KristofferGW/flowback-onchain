@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
 contract Polls {
@@ -9,8 +10,8 @@ contract Polls {
         uint votingStartDate;
         uint delegateEndDate;
         uint endDate;
-        mapping(uint => Proposal) proposals;
-        uint proposalCount;
+        // mapping(uint => Proposal) proposals;
+        // uint proposalCount;
     }
 
     struct Proposal {
@@ -30,11 +31,11 @@ contract Polls {
     function createPoll(
         string memory _title,
         string memory _tag,
-        uint memory _pollStartDate,
-        uint memory _proposalEndDate,
-        uint memory _votingStartDate, 
-        uint memory _delegateEndDate,
-        uint memory _endDate
+        uint _pollStartDate,
+        uint _proposalEndDate,
+        uint _votingStartDate, 
+        uint _delegateEndDate,
+        uint _endDate
         ) public {
             pollCount++;
 
@@ -50,7 +51,7 @@ contract Polls {
 
             polls[pollCount] = newPoll;
 
-            emit PollCreated(pollCount, _title, _subject);
+            emit PollCreated(pollCount, _title);
         }
     
 }
