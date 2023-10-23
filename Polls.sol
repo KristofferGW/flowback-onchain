@@ -10,19 +10,18 @@ contract Polls {
         uint votingStartDate;
         uint delegateEndDate;
         uint endDate;
-        // mapping(uint => Proposal) proposals;
-        // uint proposalCount;
+        uint proposalCount;
     }
 
     struct Proposal {
         string description;
         uint voteCount;
-        uint proposalId;
-        mapping(address => bool) hasVoted;
     }
 
     mapping(uint => Poll) public polls;
     uint public pollCount;
+
+    mapping(uint => Proposal) public proposals;
 
     event PollCreated(uint pollId, string title);
 
@@ -46,12 +45,17 @@ contract Polls {
                 proposalEndDate: _proposalEndDate,
                 votingStartDate: _votingStartDate,
                 delegateEndDate: _delegateEndDate,
-                endDate: _endDate
+                endDate: _endDate,
+                proposalCount: 0
             });
 
             polls[pollCount] = newPoll;
 
             emit PollCreated(pollCount, _title);
         }
+
+    function addProposal(uint pollId, string memory description) public {
+        polls[pollId].proposalCount++;
+    }
     
 }
