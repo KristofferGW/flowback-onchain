@@ -10,6 +10,21 @@ contract Polls {
         uint delegateEndDate;
         uint endDate;
         uint pollId;
+        mapping(uint => Proposal) proposals;
+        uint proposalCount;
     }
+
+    struct Proposal {
+        string description;
+        uint voteCount;
+        uint proposalId;
+        mapping(address => bool) hasVoted;
+    }
+
+    mapping(uint => Poll) public polls;
+
+    event PollCreated(uint pollId, string name);
+
+    event ProposalAdded(uint pollId, uint proposalId, string description);
     
 }
