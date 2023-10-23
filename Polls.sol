@@ -34,7 +34,7 @@ contract Polls {
         uint memory _proposalEndDate,
         uint memory _votingStartDate, 
         uint memory _delegateEndDate,
-        uint memory _endDate;
+        uint memory _endDate
         ) public {
             pollCount++;
 
