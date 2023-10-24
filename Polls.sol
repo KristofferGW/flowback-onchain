@@ -26,8 +26,6 @@ contract Polls {
 
     event PollCreated(uint pollId, string title);
 
-    event ProposalAdded(uint pollId, uint proposalId, string description);
-
     function createPoll(
         string memory _title,
         string memory _tag,
@@ -59,6 +57,8 @@ contract Polls {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
     }
 
+    event ProposalAdded(uint pollId, uint proposalId, string description);
+
     function addProposal(uint _pollId, string memory _description) public {
         requirePollToExist(_pollId);
         polls[_pollId].proposalCount++;
@@ -71,9 +71,30 @@ contract Polls {
         emit ProposalAdded(_pollId, polls[_pollId].proposalCount, _description);
     }
 
-    function getProposals(uint pollId) external view returns(Proposal[] memory) {
-        requirePollToExist(pollId);
-        return proposals[pollId];
+    function getProposals(uint _pollId) external view returns(Proposal[] memory) {
+        requirePollToExist(_pollId);
+        return proposals[_pollId];
+    }
+
+    event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote);
+
+    function vote(uint _pollId, uint _proposalId, bytes32 _hashedVote) public {
+        requirePollToExist(_pollId);
+
+        require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        
+        require(!hasVoted(), "Vote has already been cast");
+
+        require(_proposalId > 0 && _proposalId <= polls[_pollId].proposalCount, "Proposal does not exist");
+
+        //Fix the below logic
+        polls[_pollId].proposals[_proposalId - 1].voteCount++;
+
+        emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
+    }
+
+    function hasVoted() internal view returns(bool) {
+        //Verify that the voter hasn't allready voted in the specified poll
     }
     
 }
