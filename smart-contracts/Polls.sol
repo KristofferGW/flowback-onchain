@@ -102,7 +102,7 @@ contract Polls {
     }
 
     function hasVoted() internal view returns(bool) {
-        //Verify that the voter hasn't allready voted in the specified poll
+        //Verify that the voter hasn't allready voted in the specified poll//
     }
     
 }
