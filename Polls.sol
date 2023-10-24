@@ -21,7 +21,8 @@ contract Polls {
     mapping(uint => Poll) public polls;
     uint public pollCount;
 
-    mapping(uint => Proposal) public proposals;
+    //Ties proposals to polls by pollId
+    mapping(uint => Proposal[]) public proposals;
 
     event PollCreated(uint pollId, string title);
 
@@ -54,8 +55,25 @@ contract Polls {
             emit PollCreated(pollCount, _title);
         }
 
-    function addProposal(uint pollId, string memory description) public {
-        polls[pollId].proposalCount++;
+    function requirePollToExist(uint _pollId) internal view {
+        require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
+    }
+
+    function addProposal(uint _pollId, string memory _description) public {
+        requirePollToExist(_pollId);
+        polls[_pollId].proposalCount++;
+
+        proposals[_pollId].push(Proposal({
+            description: _description,
+            voteCount: 0
+        }));
+
+        emit ProposalAdded(_pollId, polls[_pollId].proposalCount, _description);
+    }
+
+    function getProposals(uint pollId) external view returns(Proposal[] memory) {
+        requirePollToExist(pollId);
+        return proposals[pollId];
     }
     
 }
