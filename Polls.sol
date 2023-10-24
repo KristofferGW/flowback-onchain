@@ -16,6 +16,7 @@ contract Polls {
     struct Proposal {
         string description;
         uint voteCount;
+        uint proposalId;
     }
 
     mapping(uint => Poll) public polls;
@@ -62,13 +63,15 @@ contract Polls {
     function addProposal(uint _pollId, string memory _description) public {
         requirePollToExist(_pollId);
         polls[_pollId].proposalCount++;
+        uint _proposalId = polls[_pollId].proposalCount;
 
         proposals[_pollId].push(Proposal({
             description: _description,
-            voteCount: 0
+            voteCount: 0,
+            proposalId: _proposalId
         }));
 
-        emit ProposalAdded(_pollId, polls[_pollId].proposalCount, _description);
+        emit ProposalAdded(_pollId, _proposalId, _description);
     }
 
     function getProposals(uint _pollId) external view returns(Proposal[] memory) {
@@ -87,11 +90,15 @@ contract Polls {
 
         require(_proposalId > 0 && _proposalId <= polls[_pollId].proposalCount, "Proposal does not exist");
 
-        //Fix the below logic
-        polls[_pollId].proposals[_proposalId - 1].voteCount++;
-        // end
+        Proposal[] storage pollProposals = proposals[_pollId];
 
-        emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
+        for (uint i = 1; i < pollProposals.length; i++) {
+            if (pollProposals[i].proposalId == _proposalId) {
+                pollProposals[i].voteCount++;
+                emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
+            }
+        }
+        revert("There is no such proposal for the specified pollId");
     }
 
     function hasVoted() internal view returns(bool) {
