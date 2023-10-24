@@ -89,6 +89,7 @@ contract Polls {
 
         //Fix the below logic
         polls[_pollId].proposals[_proposalId - 1].voteCount++;
+        // end
 
         emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
     }
