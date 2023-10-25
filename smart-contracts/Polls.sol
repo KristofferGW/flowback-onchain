@@ -83,8 +83,6 @@ contract Polls {
 
     event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote);
 
-    event PollProposals(uint pollId, Proposal[] proposals);
-
     function vote(uint _pollId, uint _proposalId, bytes32 _hashedVote) public {
         requirePollToExist(_pollId);
 
@@ -96,18 +94,15 @@ contract Polls {
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
-        emit PollProposals(_pollId, pollProposals);
-
-        // Something goes wrong here
-        for (uint i = 1; i < pollProposals.length; i++) {
+        for (uint i = 0; i < pollProposals.length; i++) {
             if (pollProposals[i].proposalId == _proposalId) {
                 pollProposals[i].voteCount++;
                 voters[_pollId].push(msg.sender);
                 emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
+                return;
             }
         }
         revert("There is no such proposal for the specified pollId");
-        // End
     }
 
     mapping(uint => address[]) internal voters;
