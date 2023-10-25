@@ -88,7 +88,7 @@ contract Polls {
 
         // require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
         
-        require(!hasVoted(), "Vote has already been cast");
+        require(!hasVoted(_pollId), "Vote has already been cast");
 
         require(_proposalId > 0 && _proposalId <= polls[_pollId].proposalCount, "Proposal does not exist");
 
@@ -107,7 +107,14 @@ contract Polls {
 
     mapping(uint => address[]) internal voters;
 
-    function hasVoted() internal pure returns(bool) {
+    function hasVoted(uint _pollId) internal view returns(bool voted) {
+        address[] memory addresses = voters[_pollId];
+
+        for (uint i = 0; i < addresses.length; i++) {
+            if (addresses[i] == msg.sender) {
+                return true;
+            }
+        }
         return false;
     }
     
