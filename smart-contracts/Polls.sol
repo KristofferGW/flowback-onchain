@@ -10,6 +10,7 @@ contract Polls {
         uint votingStartDate;
         uint delegateEndDate;
         uint endDate;
+        uint pollId;
         uint proposalCount;
     }
 
@@ -46,6 +47,7 @@ contract Polls {
                 votingStartDate: _votingStartDate,
                 delegateEndDate: _delegateEndDate,
                 endDate: _endDate,
+                pollId: pollCount, 
                 proposalCount: 0
             });
 
@@ -81,10 +83,12 @@ contract Polls {
 
     event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote);
 
+    event PollProposals(uint pollId, Proposal[] proposals);
+
     function vote(uint _pollId, uint _proposalId, bytes32 _hashedVote) public {
         requirePollToExist(_pollId);
 
-        require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        // require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
         
         require(!hasVoted(), "Vote has already been cast");
 
@@ -92,17 +96,24 @@ contract Polls {
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
+        emit PollProposals(_pollId, pollProposals);
+
+        // Something goes wrong here
         for (uint i = 1; i < pollProposals.length; i++) {
             if (pollProposals[i].proposalId == _proposalId) {
                 pollProposals[i].voteCount++;
+                voters[_pollId].push(msg.sender);
                 emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
             }
         }
         revert("There is no such proposal for the specified pollId");
+        // End
     }
 
-    function hasVoted() internal view returns(bool) {
-        //Verify that the voter hasn't allready voted in the specified poll//
+    mapping(uint => address[]) internal voters;
+
+    function hasVoted() internal pure returns(bool) {
+        return false;
     }
     
 }
