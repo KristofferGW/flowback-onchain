@@ -86,7 +86,7 @@ contract Polls {
     function vote(uint _pollId, uint _proposalId, bytes32 _hashedVote) public {
         requirePollToExist(_pollId);
 
-        // require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
         
         require(!hasVoted(_pollId), "Vote has already been cast");
 
