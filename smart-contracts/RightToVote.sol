@@ -9,16 +9,16 @@ contract RightToVote {
         bool hasRightToVote;
     }
 
-    mapping(address => Voter) internal Voters;
+    mapping(address => Voter) internal voters;
     
     function giveRightToVote (uint _group) public payable {
-        Voters[msg.sender].groups.push(_group);
-        Voters[msg.sender].hasRightToVote = true;
+        voters[msg.sender].groups.push(_group);
+        voters[msg.sender].hasRightToVote = true; // I don't think this is needed since vote function only checks if one of the user groups coincides with poll group
     }
 
     function checkRightsInGroup (uint _group) public view returns (bool hasRight) {
-    for (uint i = 0; i < Voters[msg.sender].groups.length; i++) {
-        if (Voters[msg.sender].groups[i] == _group) {
+    for (uint i = 0; i < voters[msg.sender].groups.length; i++) {
+        if (voters[msg.sender].groups[i] == _group) {
             return true;
         }
     }
@@ -26,7 +26,7 @@ contract RightToVote {
     }
 
     function checkAllRights () public view returns (uint[] memory groups) {
-        return  Voters[msg.sender].groups; 
+        return  voters[msg.sender].groups; 
     }
 
 }
