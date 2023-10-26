@@ -1,15 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-contract Polls {
+import './RightToVote.sol';
+
+contract Polls is RightToVote {
     struct Poll {
         string title;
         string tag;
+        uint group;
         uint pollStartDate;
         uint proposalEndDate;
         uint votingStartDate;
         uint delegateEndDate;
         uint endDate;
+        uint pollId;
         uint proposalCount;
     }
 
@@ -30,6 +34,7 @@ contract Polls {
     function createPoll(
         string memory _title,
         string memory _tag,
+        uint _group,
         uint _pollStartDate,
         uint _proposalEndDate,
         uint _votingStartDate, 
@@ -41,11 +46,13 @@ contract Polls {
             Poll memory newPoll = Poll({
                 title: _title,
                 tag: _tag,
+                group: _group,
                 pollStartDate: _pollStartDate,
                 proposalEndDate: _proposalEndDate,
                 votingStartDate: _votingStartDate,
                 delegateEndDate: _delegateEndDate,
                 endDate: _endDate,
+                pollId: pollCount, 
                 proposalCount: 0
             });
 
@@ -79,30 +86,53 @@ contract Polls {
         return proposals[_pollId];
     }
 
+    function userIsMemberOfPollGroup(uint _pollId) internal view returns(bool isInGroup) {
+        uint[] memory userGroups = voters[msg.sender].groups;
+
+        for (uint i = 0; i < userGroups.length; i++) {
+            if (userGroups[i] == polls[_pollId].group) {
+                return true;
+            }
+        }
+    }
+
     event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote);
 
     function vote(uint _pollId, uint _proposalId, bytes32 _hashedVote) public {
         requirePollToExist(_pollId);
 
-        require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        require(userIsMemberOfPollGroup(_pollId), "The user is not a member of poll group");
+
+        // require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
         
-        require(!hasVoted(), "Vote has already been cast");
+        require(!hasVoted(_pollId), "Vote has already been cast");
 
         require(_proposalId > 0 && _proposalId <= polls[_pollId].proposalCount, "Proposal does not exist");
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
-        for (uint i = 1; i < pollProposals.length; i++) {
+        for (uint i = 0; i < pollProposals.length; i++) {
             if (pollProposals[i].proposalId == _proposalId) {
                 pollProposals[i].voteCount++;
+                votersForPoll[_pollId].push(msg.sender);
                 emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
+                return;
             }
         }
         revert("There is no such proposal for the specified pollId");
     }
 
-    function hasVoted() internal view returns(bool) {
-        //Verify that the voter hasn't allready voted in the specified poll//
+    mapping(uint => address[]) internal votersForPoll;
+
+    function hasVoted(uint _pollId) internal view returns(bool voted) {
+        address[] memory addresses = votersForPoll[_pollId];
+
+        for (uint i = 0; i < addresses.length; i++) {
+            if (addresses[i] == msg.sender) {
+                return true;
+            }
+        }
+        return false;
     }
     
 }
