@@ -1,0 +1,352 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_pollId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "string",
+				"name": "_description",
+				"type": "string"
+			}
+		],
+		"name": "addProposal",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "_title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "_tag",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_pollStartDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_proposalEndDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_votingStartDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_delegateEndDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_endDate",
+				"type": "uint256"
+			}
+		],
+		"name": "createPoll",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "giveRightToVote",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "pollId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			}
+		],
+		"name": "PollCreated",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "pollId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "proposalId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			}
+		],
+		"name": "ProposalAdded",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_pollId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "_proposalId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "bytes32",
+				"name": "_hashedVote",
+				"type": "bytes32"
+			}
+		],
+		"name": "vote",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "pollId",
+				"type": "uint256"
+			},
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "voter",
+				"type": "address"
+			},
+			{
+				"indexed": false,
+				"internalType": "bytes32",
+				"name": "hashedVote",
+				"type": "bytes32"
+			}
+		],
+		"name": "VoteSubmitted",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "checkAllRights",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "groups",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "checkRightsInGroup",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "hasRight",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_pollId",
+				"type": "uint256"
+			}
+		],
+		"name": "getProposals",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "description",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "voteCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "proposalId",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct Polls.Proposal[]",
+				"name": "",
+				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "pollCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "polls",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "title",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "tag",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "group",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "pollStartDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "proposalEndDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "votingStartDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "delegateEndDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "endDate",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "pollId",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "proposalCount",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "proposals",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "description",
+				"type": "string"
+			},
+			{
+				"internalType": "uint256",
+				"name": "voteCount",
+				"type": "uint256"
+			},
+			{
+				"internalType": "uint256",
+				"name": "proposalId",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
