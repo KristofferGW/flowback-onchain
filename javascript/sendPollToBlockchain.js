@@ -13,9 +13,31 @@ async function sendPollToBlockchain(title, tag, group, pollStartDate, proposalEn
 
     const tx = await contract.createPoll(title, tag, group, pollStartDate, proposalEndDate, votingStartDate, delegateEndDate, endDate);
 
-    await tx.wait();
+    const txReceipt = await tx.wait();
 
-    console.log('Transaction successful! Transaction hash:', tx.hash);
+    if (txReceipt.status === 1) {
+        console.log('Transaction successful');
+
+        const logs = txReceipt.logs;
+
+        const parsedLogs = logs.map(log => contract.interface.parseLog(log));
+
+        const pollCreatedEvent = parsedLogs.find(log => log.name === 'PollCreated');
+
+        if (pollCreatedEvent) {
+            const pollId = pollCreatedEvent.args.pollId;
+            const pollTitle = pollCreatedEvent.args.title;
+
+            console.log('PollCreated event emitted');
+            console.log('Poll Id', pollId.toString());
+            console.log('Poll Title', pollTitle);
+        } else {
+            console.log('PollCreated event not found in the transaction logs');
+        }
+    } else {
+        console.error('Transaction failed');
+        console.log(txReceipt);
+    }
 }
 
 sendPollToBlockchain("What should we have for dinner?", "Food", 1, 2, 3, 4, 5, 6);
