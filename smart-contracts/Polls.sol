@@ -21,6 +21,7 @@ contract Polls is RightToVote {
         string description;
         uint voteCount;
         uint proposalId;
+        uint predictionCount;
     }
 
     mapping(uint => Poll) public polls;
@@ -75,7 +76,8 @@ contract Polls is RightToVote {
         proposals[_pollId].push(Proposal({
             description: _description,
             voteCount: 0,
-            proposalId: _proposalId
+            proposalId: _proposalId,
+            predictionCount: 0
         }));
 
         emit ProposalAdded(_pollId, _proposalId, _description);
