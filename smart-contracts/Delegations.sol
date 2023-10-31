@@ -2,9 +2,9 @@
 pragma solidity ^0.8.0;
 
 contract Delegations {
-    //Mapping över vilka som är delegates i vilken grupp
+    //Mappping over who is delegate in which group
     mapping(uint => GroupDelegate[]) public groupDelegates;
-    //Mapping över antal delegater via groupId
+    //Mapping that keeps track of the number of delegates corresponding to groupId
     mapping(uint => uint) internal groupDelegateCount;
 
     struct GroupDelegate {
@@ -34,7 +34,5 @@ contract Delegations {
     // function delegate
 
     // function removeDelegation
-
-    // function showDelegationsToDelegate
 }
 
