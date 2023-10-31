@@ -27,7 +27,7 @@ contract Predictions is Polls{
         uint _likelihood
         ) public {
             
-            proposals[_proposalId].predictionCount++; //!
+            proposals[_proposalId].predictionCount++; //--------!!!!!!
             uint _predictionId = proposals[_proposalId].predictionCount;
 
             predictions[_proposalId].push(Prediction({
@@ -46,10 +46,11 @@ contract Predictions is Polls{
     
     //----------------------------------------------------------------------------------------------------
 
-    function placePrediction(predictionBet _option)  external payable {
+    function placePrediction(predictionBet _option, uint _likelihood)  external payable {
         require(predictionFinished==false, "Prediction is finished");
          //add likelihood
         bets[_option] += 1;
+        bets[_option].likelihood = _likelihood;
     }
 
     // function getResult() external view returns (predictionBet winner){
