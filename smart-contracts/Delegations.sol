@@ -15,6 +15,8 @@ contract Delegations {
         uint groupDelegateId;
     }
 
+    event NewDelegate(address delegate, uint groupId, uint delegatedVotes, address[] delegationsFrom, uint groupDelegateId);
+
     function becomeDelegate(uint _groupId) public {
         groupDelegateCount[_groupId]++;
 
@@ -27,6 +29,8 @@ contract Delegations {
         });
 
         groupDelegates[_groupId].push(newGroupDelegate);
+
+        emit NewDelegate(newGroupDelegate.delegate, newGroupDelegate.groupId, newGroupDelegate.delegatedVotes, newGroupDelegate.delegationsFrom, newGroupDelegate.groupDelegateId);
     }
 
     // function resignAsDelegate
