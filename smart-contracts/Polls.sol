@@ -91,9 +91,12 @@ contract Polls is RightToVote {
     function userIsMemberOfPollGroup(uint _pollId) internal view returns(bool isInGroup) {
         uint[] memory userGroups = voters[msg.sender].groups;
 
-        for (uint i = 0; i < userGroups.length; i++) {
+        for (uint i; i < userGroups.length;) {
             if (userGroups[i] == polls[_pollId].group) {
                 return true;
+            }
+            unchecked {
+                ++i;
             }
         }
     }
@@ -113,12 +116,15 @@ contract Polls is RightToVote {
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
-        for (uint i = 0; i < pollProposals.length; i++) {
+        for (uint i; i < pollProposals.length;) {
             if (pollProposals[i].proposalId == _proposalId) {
                 pollProposals[i].voteCount++;
                 votersForPoll[_pollId].push(msg.sender);
                 emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
                 return;
+            }
+            unchecked {
+                ++i;
             }
         }
         revert("There is no such proposal for the specified pollId");
@@ -129,9 +135,12 @@ contract Polls is RightToVote {
     function hasVoted(uint _pollId) internal view returns(bool voted) {
         address[] memory addresses = votersForPoll[_pollId];
 
-        for (uint i = 0; i < addresses.length; i++) {
+        for (uint i; i < addresses.length;) {
             if (addresses[i] == msg.sender) {
                 return true;
+            }
+            unchecked {
+                ++i;
             }
         }
         return false;
