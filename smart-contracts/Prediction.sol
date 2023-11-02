@@ -6,12 +6,13 @@ contract Predictions is Polls{
 
     //this contract is only in development mode, some functions is only there for tests, functions may be deleted, a simple draft
 
-    enum predictionBet {Yes, No}
+   
     bool predictionFinished = false;
 
-    mapping(predictionBet => uint) internal bets;
+    
     mapping(uint => Prediction[]) public predictions;
     
+    Polls pollsInstance = new Polls();
 
     event PredictionCreated(string description, uint likelihood);
 
@@ -19,23 +20,36 @@ contract Predictions is Polls{
         uint predictionId;
         string description;
         uint likelihood;
+        uint yesBets;
+        uint noBets;
     }
 
     function createPrediction(
         uint _proposalId,
         string memory _description,
-        uint _likelihood
+        uint _likelihood,
+        uint _pollId // Added pollId as function parameter
         ) public {
             
-            proposals[_proposalId].predictionCount++; //--------!!!!!!
-            uint _predictionId = proposals[_proposalId].predictionCount;
+            Proposal storage proposal = proposals[_pollId][_proposalId]; // Get the proposal from the proposals mapping
+            
+
+            proposal.predictionCount++; //Increment by one
+            uint _predictionId = proposal.predictionCount; // Set prediction id
+
+            proposals[_pollId][_proposalId] = proposal; // Update mapping
+
+            // proposals[_proposalId].predictionCount++; //!
+            // uint _predictionId = proposals[_proposalId].predictionCount;
 
             predictions[_proposalId].push(Prediction({
                 predictionId: _predictionId,
                 description: _description,
-                likelihood: _likelihood
+                likelihood: _likelihood,
+                yesBets: 0,
+                noBets: 0
             }));
-        
+            //Prediction storage prediction = predictions[_proposalId][_predictionId];
             emit PredictionCreated(_description, _likelihood);
     }
         
@@ -46,11 +60,17 @@ contract Predictions is Polls{
     
     //----------------------------------------------------------------------------------------------------
 
-    function placePrediction(predictionBet _option, uint _likelihood)  external payable {
+    function placePrediction(
+        uint _proposalId,
+        uint _yesBets,
+        uint _noBets, 
+        uint _likelihood, 
+        uint _predictionId
+    )  external payable {
         require(predictionFinished==false, "Prediction is finished");
-         //add likelihood
-        bets[_option] += 1;
-        bets[_option].likelihood = _likelihood;
+        predictions[_proposalId][_predictionId].likelihood = _likelihood;
+        predictions[_proposalId][_predictionId].yesBets += _yesBets;
+        predictions[_proposalId][_predictionId].noBets += _noBets;
     }
 
     // function getResult() external view returns (predictionBet winner){
