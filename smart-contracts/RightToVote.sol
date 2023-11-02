@@ -16,9 +16,13 @@ contract RightToVote {
     }
 
     function indexOfGroup(uint[] memory groups, uint searchFor) internal pure returns (uint256) {
-        for (uint i = 0; i < groups.length; i++) {
+        for (uint i; i < groups.length;) {
             if (groups[i] == searchFor) {
-            return i;
+                return i;
+            }
+
+            unchecked {
+                ++i;
             }
         }
         revert("Not Found");
@@ -28,17 +32,23 @@ contract RightToVote {
         uint index = indexOfGroup(voters[msg.sender].groups, _group);
         require(index<voters[msg.sender].groups.length, "index out of bound");
 
-        for (uint i = index; i < voters[msg.sender].groups.length - 1; i++) {
+        for (uint i = index; i < voters[msg.sender].groups.length - 1;) {
             voters[msg.sender].groups[i] = voters[msg.sender].groups[i+1];
+            unchecked {
+                ++i;
+            }
         }
         voters[msg.sender].groups.pop();
 
     }
     
     function checkRightsInGroup (uint _group) public view returns (bool hasRight) {
-        for (uint i = 0; i < voters[msg.sender].groups.length; i++) {
+        for (uint i; i < voters[msg.sender].groups.length;) {
             if (voters[msg.sender].groups[i] == _group) {
                 return true;
+            }
+            unchecked {
+                ++i;
             }
         }
     return false;
