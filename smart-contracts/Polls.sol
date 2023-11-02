@@ -99,6 +99,7 @@ contract Polls is RightToVote {
                 ++i;
             }
         }
+        return false;
     }
 
     event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote);
@@ -108,7 +109,7 @@ contract Polls is RightToVote {
 
         require(userIsMemberOfPollGroup(_pollId), "The user is not a member of poll group");
 
-        // require(block.timestamp >= polls[_pollId].votingStartDate && block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        // require(block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
         
         require(!hasVoted(_pollId), "Vote has already been cast");
 
@@ -116,7 +117,9 @@ contract Polls is RightToVote {
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
-        for (uint i; i < pollProposals.length;) {
+        uint proposalsLength = pollProposals.length;
+
+        for (uint i; i < proposalsLength;) {
             if (pollProposals[i].proposalId == _proposalId) {
                 pollProposals[i].voteCount++;
                 votersForPoll[_pollId].push(msg.sender);
