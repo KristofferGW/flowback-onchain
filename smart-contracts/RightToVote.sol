@@ -3,13 +3,9 @@ pragma solidity ^0.8.0;
 
 contract RightToVote {
 
-    // Mapping over which groups users have delegated in by address
-    mapping(address => uint[]) internal groupDelegationsByUser;
-
     struct Voter{
         address publicKey;
         uint[] groups;
-        bool hasDelegated;
     }
 
     mapping(address => Voter) internal voters;

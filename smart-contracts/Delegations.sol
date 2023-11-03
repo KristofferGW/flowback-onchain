@@ -8,6 +8,8 @@ contract Delegations is RightToVote {
     mapping(uint => GroupDelegate[]) public groupDelegates;
     //Mapping that keeps track of the number of delegates corresponding to groupId
     mapping(uint => uint) internal groupDelegateCount;
+    // Mapping over which groups users have delegated in by address
+    mapping(address => uint[]) internal groupDelegationsByUser;
 
     struct GroupDelegate {
         address delegate;
