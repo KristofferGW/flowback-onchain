@@ -37,6 +37,7 @@ contract Delegations is RightToVote {
 
     event ResignationAsDelegate(address resigner, uint groupId);
 
+    // Needs to be rewritten since users can delegate in more groups than one
     // resignAsDelegate function needs testing
     function resignAsDelegate(uint _groupId) public {
         // change hasDelegated to false for everyone who has delegated to the user who is resigning
@@ -55,8 +56,34 @@ contract Delegations is RightToVote {
         emit ResignationAsDelegate(msg.sender, _groupId);
     }
 
-    // function delegate
-    // will have to add voting power to standard users with the value 1, which can be substracted from the one that delegates to prevent double voting
+    event NewDelegation(address from, address to, uint groupId);
+
+    function delegate(uint _groupId, address _delegateTo) public {
+        require(addressIsDelegate(_groupId, _delegateTo), "The address is not a delegate in the specified group");
+        require(delegaterIsInGroup(_groupId), "You can only delegate in groups you are a member of.");
+
+    }
+
+    function addressIsDelegate(uint _groupId, address _potentialDelegate) view private returns(bool isDelegate) {
+        for (uint i; i < groupDelegates[_groupId].length; i++) {
+            if (groupDelegates[_groupId][i].delegate == _potentialDelegate) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function delegaterIsInGroup(uint _groupId) view private returns(bool isInGroup) {
+        for (uint i; i < voters[msg.sender].groups.length; i++) {
+            if (voters[msg.sender].groups[i] == _groupId) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function hasDelegated(uint _groupId)
+    
 
     // function removeDelegation
 }
