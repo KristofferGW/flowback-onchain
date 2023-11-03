@@ -37,10 +37,22 @@ contract Delegations is RightToVote {
 
     event ResignationAsDelegate(address resigner, uint groupId);
 
+    // resignAsDelegate function needs testing
     function resignAsDelegate(uint _groupId) public {
         // change hasDelegated to false for everyone who has delegated to the user who is resigning
-        // delete from groupDelegates
-        // emit event
+        // then delete the delegate from groupDelegates
+        address[] memory hasDelegated;
+
+        for (uint i; i < groupDelegates[_groupId].length; i++) {
+            if (groupDelegates[_groupId][i].delegate == msg.sender) {
+                for (uint k; k < groupDelegates[_groupId][i].delegationsFrom.length; k++) {
+                    hasDelegated[k] = groupDelegates[_groupId][i].delegationsFrom[k];
+                }
+                delete groupDelegates[_groupId][i];
+            }
+        }
+
+        emit ResignationAsDelegate(msg.sender, _groupId);
     }
 
     // function delegate
