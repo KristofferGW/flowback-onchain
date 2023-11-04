@@ -39,9 +39,6 @@ contract Predictions is Polls{
 
             proposals[_pollId][_proposalId] = proposal; // Update mapping
 
-            // proposals[_proposalId].predictionCount++; //!
-            // uint _predictionId = proposals[_proposalId].predictionCount;
-
             predictions[_proposalId].push(Prediction({
                 predictionId: _predictionId,
                 description: _description,
@@ -49,39 +46,41 @@ contract Predictions is Polls{
                 yesBets: 0,
                 noBets: 0
             }));
-            //Prediction storage prediction = predictions[_proposalId][_predictionId];
             emit PredictionCreated(_description, _likelihood);
     }
-        
+
+     function requirePredictionToExist(uint _proposalId, uint _predictionId) internal view {
+        //Prediction storage predictionExist = predictions[_proposalId][_predictionId];
+       // require(predictionExist, "Poll ID does not exist");       // there is id 0 now  -----------------------------------
+    }   
         
     function getPrediction(uint _proposalId) external view returns(Prediction[] memory) {
         return predictions[_proposalId];
     }
     
-    //----------------------------------------------------------------------------------------------------
-
-    function placePrediction(
+    function placePredictionBet(
+    
         uint _proposalId,
         uint _yesBets,
-        uint _noBets, 
-        uint _likelihood, 
+        uint _noBets,  
         uint _predictionId
     )  external payable {
         require(predictionFinished==false, "Prediction is finished");
-        predictions[_proposalId][_predictionId].likelihood = _likelihood;
         predictions[_proposalId][_predictionId].yesBets += _yesBets;
         predictions[_proposalId][_predictionId].noBets += _noBets;
     }
 
-    // function getResult() external view returns (predictionBet winner){
+    // function getResult(uint _proposalId, uint _predictionId) external view returns (string memory winner){
     //     require(predictionFinished == true, "Prediction is not finished");
         
-    //     if (bets[predictionBet.Yes] > bets[predictionBet.No]){
-    //         return predictionBet.Yes;                                       // yes is currently 0
-    //     }else if(bets[predictionBet.Yes] < bets[predictionBet.No]){
-    //         return predictionBet.No;                                        // no is currently 1
+    //     if (predictions[_proposalId][_predictionId].yesBets > predictions[_proposalId][_predictionId].noBets){
+    //         return "Yes";                               
+    //     }else if(predictions[_proposalId][_predictionId].yesBets < predictions[_proposalId][_predictionId].noBets){
+    //         return "No";                                     
     //     }
-    //     //else if(A==B)
+    //     else if(predictions[_proposalId][_predictionId].yesBets < predictions[_proposalId][_predictionId].noBets){
+    //         return "Tie";
+    //     }
     // }
     
    
