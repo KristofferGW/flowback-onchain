@@ -71,8 +71,17 @@ contract Predictions is Polls{
     )  external payable {
         require(!predictionFinished, "Prediction is finished");
         require(requirePredictionToExist(_proposalId, _predictionId), "Prediction does not exist"); 
-        predictions[_proposalId][_predictionId].yesBets += _yesBets;
-        predictions[_proposalId][_predictionId].noBets += _noBets;
+
+        if (_yesBets > 1 || _noBets > 1)
+            revert("Input must be 1");
+        else if(_yesBets==0 && _noBets==0)
+            revert("Please place bet");
+        else if(_yesBets==1 && _noBets==1)
+            revert("Please bet yes or no");
+        else if(_yesBets==1 && _noBets==0)
+            predictions[_proposalId][_predictionId].yesBets += 1; //revert The transaction has been reverted to the initial state.
+        else if(_yesBets==0 && _noBets==1)
+            predictions[_proposalId][_predictionId].noBets += 1;  //revert The transaction has been reverted to the initial state.
     }
 
     // function getResult(uint _proposalId, uint _predictionId) external view returns (string memory winner){
