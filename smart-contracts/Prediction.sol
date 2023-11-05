@@ -49,15 +49,19 @@ contract Predictions is Polls{
             emit PredictionCreated(_description, _likelihood);
     }
 
-     function requirePredictionToExist(uint _proposalId, uint _predictionId) internal view {
-        //Prediction storage predictionExist = predictions[_proposalId][_predictionId];
-       // require(predictionExist, "Poll ID does not exist");       // there is id 0 now  -----------------------------------
-    }   
+     function requirePredictionToExist(uint _proposalId, uint _predictionId) internal view returns (bool){
+        for (uint i; i< predictions[_proposalId].length;i++){
+          if (predictions[_proposalId][i].predictionId==_predictionId)
+          return true;
+        }
+        return false;
+    }
+    
         
     function getPrediction(uint _proposalId) external view returns(Prediction[] memory) {
         return predictions[_proposalId];
     }
-    
+
     function placePredictionBet(
     
         uint _proposalId,
@@ -65,7 +69,8 @@ contract Predictions is Polls{
         uint _noBets,  
         uint _predictionId
     )  external payable {
-        require(predictionFinished==false, "Prediction is finished");
+        require(!predictionFinished, "Prediction is finished");
+        require(requirePredictionToExist(_proposalId, _predictionId), "Prediction does not exist"); 
         predictions[_proposalId][_predictionId].yesBets += _yesBets;
         predictions[_proposalId][_predictionId].noBets += _noBets;
     }
