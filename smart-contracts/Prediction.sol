@@ -23,16 +23,24 @@ contract Predictions is Polls{
         uint yesBets;
         uint noBets;
     }
+    function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){
+        for (uint i=0; i <= proposals[_pollId].length;i++){
+           
+          if (proposals[_pollId][i].proposalId==_proposalId)
+          return true;
+        }
+        return false;
+    }
 
     function createPrediction(
         uint _proposalId,
         string memory _description,
         uint _likelihood,
         uint _pollId // Added pollId as function parameter
-        ) public {
+        ) public payable{
             
             Proposal storage proposal = proposals[_pollId][_proposalId]; // Get the proposal from the proposals mapping
-            
+            require(requireProposalToExist(_pollId, _proposalId));
 
             proposal.predictionCount++; //Increment by one
             uint _predictionId = proposal.predictionCount; // Set prediction id
@@ -50,15 +58,14 @@ contract Predictions is Polls{
     }
 
      function requirePredictionToExist(uint _proposalId, uint _predictionId) internal view returns (bool){
-        for (uint i; i< predictions[_proposalId].length;i++){
+        for (uint i=0; i <= predictions[_proposalId].length;i++){   
           if (predictions[_proposalId][i].predictionId==_predictionId)
           return true;
         }
         return false;
     }
     
-        
-    function getPrediction(uint _proposalId) external view returns(Prediction[] memory) {
+    function getPredictions(uint _proposalId) external view returns(Prediction[] memory) {
         return predictions[_proposalId];
     }
 
@@ -79,14 +86,13 @@ contract Predictions is Polls{
         else if(_yesBets==1 && _noBets==1)
             revert("Please bet yes or no");
         else if(_yesBets==1 && _noBets==0)
-            predictions[_proposalId][_predictionId].yesBets += 1; //revert The transaction has been reverted to the initial state.
+            predictions[_proposalId][_predictionId].yesBets += _yesBets; 
         else if(_yesBets==0 && _noBets==1)
-            predictions[_proposalId][_predictionId].noBets += 1;  //revert The transaction has been reverted to the initial state.
+            predictions[_proposalId][_predictionId].noBets += _noBets;  
     }
 
     // function getResult(uint _proposalId, uint _predictionId) external view returns (string memory winner){
     //     require(predictionFinished == true, "Prediction is not finished");
-        
     //     if (predictions[_proposalId][_predictionId].yesBets > predictions[_proposalId][_predictionId].noBets){
     //         return "Yes";                               
     //     }else if(predictions[_proposalId][_predictionId].yesBets < predictions[_proposalId][_predictionId].noBets){
@@ -96,8 +102,6 @@ contract Predictions is Polls{
     //         return "Tie";
     //     }
     // }
-    
-   
 
     function predictionIsFinished() public {
         predictionFinished = true;
