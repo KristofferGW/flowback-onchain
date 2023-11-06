@@ -1,0 +1,60 @@
+[
+	{
+		"inputs": [],
+		"name": "checkAllRights",
+		"outputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "groups",
+				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "checkRightsInGroup",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "hasRight",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "giveRightToVote",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "removeRightToVote",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	}
+]
