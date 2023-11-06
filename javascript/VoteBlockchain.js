@@ -18,4 +18,21 @@ const giveRightToVote = async(group)=> {
     const txReceipt = await tx.wait();
     console.log(txReceipt);
 }
-giveRightToVote(1)
+const removeRightToVote = async (group) => {
+    const tx = await contract.removeRightToVote(group);
+    console.log(tx);
+}
+const checkAllRights = async () => {
+    const tx = await contract.checkAllRights();
+    console.log(tx);
+}
+const checkRightsInGroup = async (group) => {
+    const tx = await contract.checkRightsInGroup(group);
+    console.log(tx);
+}
+
+
+//giveRightToVote(2);
+// checkAllRights();
+removeRightToVote(1);
+//checkRightsInGroup(1);
