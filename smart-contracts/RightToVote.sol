@@ -6,7 +6,6 @@ contract RightToVote {
     struct Voter{
         address publicKey;
         uint[] groups;
-        bool hasDelegated;
     }
 
     mapping(address => Voter) internal voters;

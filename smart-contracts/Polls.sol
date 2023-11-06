@@ -104,6 +104,7 @@ contract Polls is RightToVote {
 
     event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote);
 
+    //vote function needs controlls for delegated votes
     function vote(uint _pollId, uint _proposalId, bytes32 _hashedVote) public {
         requirePollToExist(_pollId);
 
