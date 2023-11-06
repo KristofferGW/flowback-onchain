@@ -12,8 +12,10 @@ const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
 const giveRightToVote = async(group)=> {
 
+    // const pollCreatedEvent = parsedLogs.find(log => log.name === 'PollCreated');
     const tx = await contract.giveRightToVote(group);
     console.log(tx);
-
+    const txReceipt = await tx.wait();
+    console.log(txReceipt);
 }
 giveRightToVote(1)
