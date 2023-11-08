@@ -66,7 +66,7 @@ contract Polls is RightToVote {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
     }
 
-    event ProposalAdded(uint pollId, uint proposalId, string description);
+    event ProposalAdded(uint pollId, uint proposalId, string description, uint proposalCount);
 
     function addProposal(uint _pollId, string memory _description) public {
         requirePollToExist(_pollId);
@@ -80,7 +80,7 @@ contract Polls is RightToVote {
             predictionCount: 0
         }));
 
-        emit ProposalAdded(_pollId, _proposalId, _description);
+        emit ProposalAdded(_pollId, _proposalId, _description, _prop);
     }
 
     function getProposals(uint _pollId) external view returns(Proposal[] memory) {

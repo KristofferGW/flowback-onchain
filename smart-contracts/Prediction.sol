@@ -23,11 +23,12 @@ contract Predictions is Polls{
         uint yesBets;
         uint noBets;
     }
-    function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){
+    function requireProposalToExist(uint _pollId, uint _proposalId) public view returns (bool){
         for (uint i=0; i <= proposals[_pollId].length;i++){
            
-          if (proposals[_pollId][i].proposalId==_proposalId)
-          return true;
+          if (proposals[_pollId][i].proposalId==_proposalId) {
+            return true;
+          }
         }
         return false;
     }
@@ -37,15 +38,15 @@ contract Predictions is Polls{
         string memory _description,
         uint _likelihood,
         uint _pollId // Added pollId as function parameter
-        ) public payable{
+        ) public{
             
-            Proposal storage proposal = proposals[_pollId][_proposalId]; // Get the proposal from the proposals mapping
+            Proposal storage proposal = proposals[_pollId][_proposalId -1]; // Get the proposal from the proposals mapping
             require(requireProposalToExist(_pollId, _proposalId));
 
             proposal.predictionCount++; //Increment by one
             uint _predictionId = proposal.predictionCount; // Set prediction id
 
-            proposals[_pollId][_proposalId] = proposal; // Update mapping
+            proposals[_pollId][_proposalId -1] = proposal; // Update mapping
 
             predictions[_proposalId].push(Prediction({
                 predictionId: _predictionId,
