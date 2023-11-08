@@ -18,40 +18,42 @@ async function delegate(groupId, reciever) {
 
     if (txReceipt.status === 1) {
         // console.log('Transaction successful');
-        // console.log (txReceipt);
-        const logs = txReceipt.logs;
-        console.log(logs);
+        // console.log (txReceipt.logs);
+        
 
-    //     const parsedLogs = logs.map(log => contract.interface.parseLog(log));
+    }
+}
+async function becomeMemberOfGroup(groupId){
+    const tx = await contract.giveRightToVote(groupId);
+    
 
-    //     const pollCreatedEvent = parsedLogs.find(log => log.name === 'PollCreated');
+    const txReceipt = await tx.wait();
+    
+    if (txReceipt.status === 1) {
+        console.log('Transaction successful');
+        console.log(txReceipt);
 
-    //     if (pollCreatedEvent) {
-    //         const pollId = pollCreatedEvent.args.pollId;
-    //         const pollTitle = pollCreatedEvent.args.title;
-
-    //         console.log('PollCreated event emitted');
-    //         console.log('Poll Id', pollId.toString());
-    //         console.log('Poll Title', pollTitle);
-    //     } else {
-    //         console.log('PollCreated event not found in the transaction logs');
-    //     }
-    // } else {
-    //     console.error('Transaction failed');
-    //     console.log(txReceipt);
     }
 }
 async function becomeDelegate(groupId){
     const tx = await contract.becomeDelegate(groupId);
+    
 
     const txReceipt = await tx.wait();
-
+    
     if (txReceipt.status === 1) {
-        // console.log('Transaction successful');
-        // console.log (txReceipt);
+        console.log('Transaction successful');
         const logs = txReceipt.logs;
         console.log(logs);
+
+        const parsedLogs = logs.map(log => contract.interface.parseLog(log));
+        console.log(parsedLogs);
     }
 }
-becomeDelegate(1);
-delegate(1, "0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD");
+
+
+//becomeMemberOfGroup(1)
+//becomeDelegate(1);
+
+//delegate(1,"adress");
+
