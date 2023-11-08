@@ -3,13 +3,9 @@ pragma solidity ^0.8.0;
 import './Polls.sol';
 
 contract Predictions is Polls{
-
-    //this contract is only in development mode, some functions is only there for tests, functions may be deleted, a simple draft
-
-   
+ 
     bool predictionFinished = false;
 
-    
     mapping(uint => Prediction[]) public predictions;
     
     Polls pollsInstance = new Polls();
@@ -47,6 +43,7 @@ contract Predictions is Polls{
             uint _predictionId = proposal.predictionCount; // Set prediction id
 
             proposals[_pollId][_proposalId -1] = proposal; // Update mapping
+   
 
             predictions[_proposalId].push(Prediction({
                 predictionId: _predictionId,
@@ -60,7 +57,7 @@ contract Predictions is Polls{
 
      function requirePredictionToExist(uint _proposalId, uint _predictionId) internal view returns (bool){
         for (uint i=0; i <= predictions[_proposalId].length;i++){   
-          if (predictions[_proposalId][i].predictionId==_predictionId)
+          if (predictions[_proposalId][i].predictionId ==_predictionId)
           return true;
         }
         return false;
@@ -71,12 +68,12 @@ contract Predictions is Polls{
     }
 
     function placePredictionBet(
-    
         uint _proposalId,
         uint _yesBets,
         uint _noBets,  
         uint _predictionId
-    )  external payable {
+    )  external {
+            
         require(!predictionFinished, "Prediction is finished");
         require(requirePredictionToExist(_proposalId, _predictionId), "Prediction does not exist"); 
 
@@ -87,24 +84,24 @@ contract Predictions is Polls{
         else if(_yesBets==1 && _noBets==1)
             revert("Please bet yes or no");
         else if(_yesBets==1 && _noBets==0)
-            predictions[_proposalId][_predictionId].yesBets += _yesBets; 
+            predictions[_proposalId][_predictionId-1].yesBets += _yesBets; 
         else if(_yesBets==0 && _noBets==1)
-            predictions[_proposalId][_predictionId].noBets += _noBets;  
+            predictions[_proposalId][_predictionId-1].noBets += _noBets;  
     }
 
     // function getResult(uint _proposalId, uint _predictionId) external view returns (string memory winner){
     //     require(predictionFinished == true, "Prediction is not finished");
-    //     if (predictions[_proposalId][_predictionId].yesBets > predictions[_proposalId][_predictionId].noBets){
+    //     if (predictions[_proposalId][_predictionId-1].yesBets > predictions[_proposalId][_predictionId-1].noBets){
     //         return "Yes";                               
-    //     }else if(predictions[_proposalId][_predictionId].yesBets < predictions[_proposalId][_predictionId].noBets){
+    //     }else if(predictions[_proposalId][_predictionId-1].yesBets < predictions[_proposalId][_predictionId-1].noBets){
     //         return "No";                                     
     //     }
-    //     else if(predictions[_proposalId][_predictionId].yesBets < predictions[_proposalId][_predictionId].noBets){
+    //     else if(predictions[_proposalId][_predictionId-1].yesBets < predictions[_proposalId][_predictionId-1].noBets){
     //         return "Tie";
     //     }
     // }
 
-    function predictionIsFinished() public {
+    function predictionIsFinished() internal {
         predictionFinished = true;
     }
 
