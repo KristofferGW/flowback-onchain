@@ -2,8 +2,9 @@
 pragma solidity ^0.8.0;
 
 import './RightToVote.sol';
+import './Delegations.sol';
 
-contract Polls is RightToVote {
+contract Polls is RightToVote, Delegations {
     struct Poll {
         string title;
         string tag;
@@ -80,12 +81,26 @@ contract Polls is RightToVote {
             predictionCount: 0
         }));
 
-        emit ProposalAdded(_pollId, _proposalId, _description, _prop);
+        emit ProposalAdded(_pollId, _proposalId, _description, _proposalId);
     }
 
     function getProposals(uint _pollId) external view returns(Proposal[] memory) {
         requirePollToExist(_pollId);
         return proposals[_pollId];
+    }
+
+    function userHasDelegatedInGroup(uint _pollGroup) private view returns(bool) {
+        uint[] memory delegatedGroups = groupDelegationsByUser[msg.sender];
+
+        for (uint i; i < delegatedGroups.length;) {
+            if (delegatedGroups[i] == _pollGroup) {
+                return true;
+            }
+            unchecked {
+                ++i;
+            }
+        }
+        return false;
     }
 
     function userIsMemberOfPollGroup(uint _pollId) internal view returns(bool isInGroup) {
@@ -102,10 +117,12 @@ contract Polls is RightToVote {
         return false;
     }
 
-    event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote);
+    event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote, uint votesForProposal);
 
-    //vote function needs controlls for delegated votes
     function vote(uint _pollId, uint _proposalId, bytes32 _hashedVote) public {
+        uint _pollGroup = polls[_pollId].group;
+        uint delegatedVotingPower;
+
         requirePollToExist(_pollId);
 
         require(userIsMemberOfPollGroup(_pollId), "The user is not a member of poll group");
@@ -116,15 +133,29 @@ contract Polls is RightToVote {
 
         require(_proposalId > 0 && _proposalId <= polls[_pollId].proposalCount, "Proposal does not exist");
 
+        require(!userHasDelegatedInGroup(_pollGroup), "You have delegated your vote in the polls group.");
+
         Proposal[] storage pollProposals = proposals[_pollId];
+
+        for (uint i; i < groupDelegates[_pollGroup].length;) {
+            if (groupDelegates[_pollGroup][i].delegate == msg.sender) {
+                delegatedVotingPower = groupDelegates[_pollGroup][i].delegatedVotes;
+            }
+            unchecked {
+                ++i;
+            }
+        } 
 
         uint proposalsLength = pollProposals.length;
 
+        uint _votesForProposal;
+
         for (uint i; i < proposalsLength;) {
             if (pollProposals[i].proposalId == _proposalId) {
-                pollProposals[i].voteCount++;
+                pollProposals[i].voteCount += delegatedVotingPower + 1;
+                _votesForProposal = pollProposals[i].voteCount;
                 votersForPoll[_pollId].push(msg.sender);
-                emit VoteSubmitted(_pollId, msg.sender, _hashedVote);
+                emit VoteSubmitted(_pollId, msg.sender, _hashedVote, _votesForProposal);
                 return;
             }
             unchecked {
