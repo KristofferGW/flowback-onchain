@@ -49,12 +49,16 @@ contract Delegations is RightToVote {
         // increase the delegates delegatedVotes
         uint delegatedVotes;
         address[] memory delegationsFrom;
-        for (uint i; i < groupDelegates[_groupId].length; i++) {
+        for (uint i; i < groupDelegates[_groupId].length;) {
             if (groupDelegates[_groupId][i].delegate == _delegateTo) {
                 groupDelegates[_groupId][i].delegatedVotes++;
                 groupDelegates[_groupId][i].delegationsFrom.push(msg.sender);
                 delegatedVotes = groupDelegates[_groupId][i].delegatedVotes;
                 delegationsFrom = groupDelegates[_groupId][i].delegationsFrom;
+            }
+
+            unchecked {
+                ++i;
             }
         }
 
@@ -69,21 +73,33 @@ contract Delegations is RightToVote {
         // decrease the number of delegated votes from the delegate
         // remove the user from the delegates delegationsFrom array
         uint delegatedVotes;
-        for (uint i; i < groupDelegates[_groupId].length; i++) {
+        for (uint i; i < groupDelegates[_groupId].length;) {
             if (groupDelegates[_groupId][i].delegate == _delegate) {
                 groupDelegates[_groupId][i].delegatedVotes--;
                 delegatedVotes = groupDelegates[_groupId][i].delegatedVotes;
-                for (uint k; k < groupDelegates[_groupId][i].delegationsFrom.length; k++) {
+                for (uint k; k < groupDelegates[_groupId][i].delegationsFrom.length;) {
                     if (groupDelegates[_groupId][i].delegationsFrom[k] == msg.sender) {
                         delete groupDelegates[_groupId][i].delegationsFrom[k];
                     }
+
+                    unchecked {
+                        ++k;
+                    }
                 }
+            }
+
+            unchecked {
+                ++i;
             }
         }
         // remove the group from the users groupDelegationsByUser array
-        for (uint i; i < groupDelegationsByUser[msg.sender].length; i++) {
+        for (uint i; i < groupDelegationsByUser[msg.sender].length;) {
             if (groupDelegationsByUser[msg.sender][i] == _groupId) {
                 delete groupDelegationsByUser[msg.sender][i];
+            }
+
+            unchecked {
+                ++i;
             }
         }
         emit DelegationRemoved(_delegate, msg.sender, _groupId, delegatedVotes);
@@ -94,17 +110,25 @@ contract Delegations is RightToVote {
     function resignAsDelegate(uint _groupId) public {
         address[] memory affectedUsers;
         // remove groupDelegationsByUsers for affected users
-        for (uint i; i < groupDelegates[_groupId].length; i++) {
+        for (uint i; i < groupDelegates[_groupId].length;) {
             if (groupDelegates[_groupId][i].delegate == msg.sender) {
                 affectedUsers = groupDelegates[_groupId][i].delegationsFrom;
                 delete groupDelegates[_groupId][i];
             }
+
+            unchecked {
+                ++i;
+            }
         }
 
         for (uint i; i < affectedUsers.length; i++) {
-            for (uint k; k < groupDelegationsByUser[affectedUsers[i]].length; k++) {
+            for (uint k; k < groupDelegationsByUser[affectedUsers[i]].length;) {
                 if (groupDelegationsByUser[affectedUsers[i]][k] == _groupId) {
                     delete groupDelegationsByUser[affectedUsers[i]][k];
+                }
+
+                unchecked {
+                    ++k;
                 }
             }
         }
@@ -112,18 +136,26 @@ contract Delegations is RightToVote {
     }
 
     function addressIsDelegate(uint _groupId, address _potentialDelegate) view private returns(bool isDelegate) {
-        for (uint i; i < groupDelegates[_groupId].length; i++) {
+        for (uint i; i < groupDelegates[_groupId].length;) {
             if (groupDelegates[_groupId][i].delegate == _potentialDelegate) {
                 return true;
+            }
+
+            unchecked {
+                ++i;
             }
         }
         return false;
     }
 
     function delegaterIsInGroup(uint _groupId) view private returns(bool isInGroup) {
-        for (uint i; i < voters[msg.sender].groups.length; i++) {
+        for (uint i; i < voters[msg.sender].groups.length;) {
             if (voters[msg.sender].groups[i] == _groupId) {
                 return true;
+            }
+
+            unchecked {
+                ++i;
             }
         }
         return false;
@@ -131,22 +163,34 @@ contract Delegations is RightToVote {
 
     function hasDelegatedInGroup(uint _groupId) public view returns (bool) {
         uint[] memory userDelegatedGroups = groupDelegationsByUser[msg.sender];
-        for (uint i; i < userDelegatedGroups.length; i++) {
+        for (uint i; i < userDelegatedGroups.length;) {
             if (userDelegatedGroups[i] == _groupId) {
                 return true;
+            }
+
+            unchecked {
+                ++i;
             }
         }
         return false;
     }
 
     function hasDelegatedToDelegateInGroup(uint _groupId, address _delegate) public view returns (bool) {
-        for (uint i; i < groupDelegates[_groupId].length; i++) {
+        for (uint i; i < groupDelegates[_groupId].length;) {
             if (groupDelegates[_groupId][i].delegate == _delegate) {
-                for (uint k; k < groupDelegates[_groupId][i].delegationsFrom.length; k++) {
+                for (uint k; k < groupDelegates[_groupId][i].delegationsFrom.length;) {
                     if (groupDelegates[_groupId][i].delegationsFrom[k] == msg.sender) {
                         return true;
                     }
+
+                    unchecked {
+                        ++k;
+                    }
                 }
+            }
+
+            unchecked {
+                ++i;
             }
         }
         return false;
