@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import './RightToVote.sol';
+import 'src/RightToVote.sol';
 
 contract Delegations is RightToVote {
     //Mappping over who is delegate in which group

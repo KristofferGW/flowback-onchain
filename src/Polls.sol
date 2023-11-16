@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import './RightToVote.sol';
-import './Delegations.sol';
+import 'src/RightToVote.sol';
+import 'src/Delegations.sol';
 
 contract Polls is RightToVote, Delegations {
     struct Poll {
