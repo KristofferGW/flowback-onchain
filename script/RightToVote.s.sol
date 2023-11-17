@@ -2,16 +2,16 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "src/Delegations.sol";
+import "src/RightToVote.sol";
 
-contract DelegationsTest is Test, Delegations {
+contract RightToVoteTest is Test, RightToVote {
     function setUp() public {}
 
     function run() public {
         vm.broadcast();
     }
 
-    function testBecomeDelegate() public {
+    function testgiveRightToVote() public {
         
     }
     
