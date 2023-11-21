@@ -4,7 +4,7 @@ pragma solidity ^0.8.0;
 import 'src/RightToVote.sol';
 
 contract Delegations is RightToVote {
-    //Mappping over who is delegate in which group
+    //Mapping over who is delegate in which group
     mapping(uint => GroupDelegate[]) public groupDelegates;
     //Mapping that keeps track of the number of delegates corresponding to groupId
     mapping(uint => uint) internal groupDelegateCount;
@@ -49,7 +49,8 @@ contract Delegations is RightToVote {
         // increase the delegates delegatedVotes
         uint delegatedVotes;
         address[] memory delegationsFrom;
-        for (uint i; i < groupDelegates[_groupId].length;) {
+        uint arrayLength = groupDelegates[_groupId].length;
+        for (uint i; i < arrayLength;) {
             if (groupDelegates[_groupId][i].delegate == _delegateTo) {
                 groupDelegates[_groupId][i].delegatedVotes++;
                 groupDelegates[_groupId][i].delegationsFrom.push(msg.sender);
@@ -68,12 +69,13 @@ contract Delegations is RightToVote {
     event DelegationRemoved(address from, address by, uint groupId, uint delegatedVotes);
 
     function removeDelegation(address _delegate, uint _groupId) public {
-        // check that the user has delegated to the specified delegate in the specefied group
+        // check that the user has delegated to the specified delegate in the specified group
         require(hasDelegatedToDelegateInGroup(_groupId, _delegate), "You have not delegated to the specified delegate in this group");
         // decrease the number of delegated votes from the delegate
         // remove the user from the delegates delegationsFrom array
         uint delegatedVotes;
-        for (uint i; i < groupDelegates[_groupId].length;) {
+        uint arrayLength = groupDelegates[_groupId].length;
+        for (uint i; i < arrayLength;) {
             if (groupDelegates[_groupId][i].delegate == _delegate) {
                 groupDelegates[_groupId][i].delegatedVotes--;
                 delegatedVotes = groupDelegates[_groupId][i].delegatedVotes;
@@ -92,8 +94,9 @@ contract Delegations is RightToVote {
                 ++i;
             }
         }
-        // remove the group from the users groupDelegationsByUser array
-        for (uint i; i < groupDelegationsByUser[msg.sender].length;) {
+        // remove the group from the user's groupDelegationsByUser array
+        arrayLength = groupDelegationsByUser[msg.sender].length;
+        for (uint i; i < arrayLength;) {
             if (groupDelegationsByUser[msg.sender][i] == _groupId) {
                 delete groupDelegationsByUser[msg.sender][i];
             }
@@ -110,7 +113,8 @@ contract Delegations is RightToVote {
     function resignAsDelegate(uint _groupId) public {
         address[] memory affectedUsers;
         // remove groupDelegationsByUsers for affected users
-        for (uint i; i < groupDelegates[_groupId].length;) {
+        uint arrayLength = groupDelegates[_groupId].length;
+        for (uint i; i < arrayLength;) {
             if (groupDelegates[_groupId][i].delegate == msg.sender) {
                 affectedUsers = groupDelegates[_groupId][i].delegationsFrom;
                 delete groupDelegates[_groupId][i];
@@ -122,7 +126,8 @@ contract Delegations is RightToVote {
         }
 
         for (uint i; i < affectedUsers.length; i++) {
-            for (uint k; k < groupDelegationsByUser[affectedUsers[i]].length;) {
+            arrayLength = groupDelegationsByUser[affectedUsers[i]].length;
+            for (uint k; k < arrayLength;) {
                 if (groupDelegationsByUser[affectedUsers[i]][k] == _groupId) {
                     delete groupDelegationsByUser[affectedUsers[i]][k];
                 }
@@ -136,7 +141,8 @@ contract Delegations is RightToVote {
     }
 
     function addressIsDelegate(uint _groupId, address _potentialDelegate) view private returns(bool isDelegate) {
-        for (uint i; i < groupDelegates[_groupId].length;) {
+        uint arrayLength = groupDelegates[_groupId].length;
+        for (uint i; i < arrayLength;) {
             if (groupDelegates[_groupId][i].delegate == _potentialDelegate) {
                 return true;
             }
@@ -149,7 +155,8 @@ contract Delegations is RightToVote {
     }
 
     function delegaterIsInGroup(uint _groupId) view private returns(bool isInGroup) {
-        for (uint i; i < voters[msg.sender].groups.length;) {
+        uint arrayLength = voters[msg.sender].groups.length;
+        for (uint i; i < arrayLength;) {
             if (voters[msg.sender].groups[i] == _groupId) {
                 return true;
             }
@@ -176,9 +183,11 @@ contract Delegations is RightToVote {
     }
 
     function hasDelegatedToDelegateInGroup(uint _groupId, address _delegate) public view returns (bool) {
-        for (uint i; i < groupDelegates[_groupId].length;) {
+        uint arrayLength = groupDelegates[_groupId].length
+        for (uint i; i < arrayLength;) {
             if (groupDelegates[_groupId][i].delegate == _delegate) {
-                for (uint k; k < groupDelegates[_groupId][i].delegationsFrom.length;) {
+                arrayLength = groupDelegates[_groupId][i].delegationsFrom.length;
+                for (uint k; k < arrayLength;) {
                     if (groupDelegates[_groupId][i].delegationsFrom[k] == msg.sender) {
                         return true;
                     }
