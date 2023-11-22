@@ -9,6 +9,7 @@ import "forge-std/console.sol";
 contract PredictionTest is Test, Predictions{
 
     Predictions public prediction;
+    //event PredictionCreated(string description, uint likelihood);
     // vm.startPrank(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
 
     function setUp() public {
@@ -16,20 +17,23 @@ contract PredictionTest is Test, Predictions{
     }
 
     function run() public {
-        vm.broadcast();
+        vm.broadcast(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
     }
 
-    // function testCreatePrediction() public {
+    function testEmitPredictionCreated() public {
         
-    //     uint _proposalId = 1;
-    //     string memory _description = "pred";
-    //     uint _likelihood= 4;
-    //     uint _pollId = 1;
-     
-    //     // bool success = prediction.createPrediction(_proposalId, _description, _likelihood, _pollId);
-       
-    //     // console.log(success);
+        vm.expectEmit(false, true, true, false);
 
-    // }
+        emit PredictionCreated("pred", 5);
+        // uint _proposalId = 1;
+        // string memory _description = "pred";
+        // uint _likelihood= 4;
+        // uint _pollId = 1;
+     
+        prediction.createPrediction(1, "pred", 5, 1);
+       
+        // console.log(success);
+
+    }
     
 }
