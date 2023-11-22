@@ -22,7 +22,7 @@ contract PredictionTest is Test, Predictions{
 
     function testEmitPredictionCreated() public {
         
-        vm.expectEmit(false, true, true, false);
+        vm.expectEmit(true, true, true, true);
 
         emit PredictionCreated("pred", 5);
         // uint _proposalId = 1;

@@ -851,8 +851,8 @@
         "lib/forge-std/src/StdStyle.sol",
         "lib/forge-std/src/StdUtils.sol",
         "lib/forge-std/src\\Test.sol",
-        "lib/forge-std/src/Vm.sol",
-        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src\\Vm.sol",
+        "lib/forge-std/src\\console.sol",
         "lib/forge-std/src/console2.sol",
         "lib/forge-std/src/interfaces/IMulticall3.sol",
         "lib/forge-std/src/safeconsole.sol",
@@ -913,8 +913,8 @@
         "lib/forge-std/src/StdStyle.sol",
         "lib/forge-std/src/StdUtils.sol",
         "lib/forge-std/src\\Test.sol",
-        "lib/forge-std/src/Vm.sol",
-        "lib/forge-std/src/console.sol",
+        "lib/forge-std/src\\Vm.sol",
+        "lib/forge-std/src\\console.sol",
         "lib/forge-std/src/console2.sol",
         "lib/forge-std/src/interfaces/IMulticall3.sol",
         "lib/forge-std/src/safeconsole.sol",
@@ -930,8 +930,8 @@
       }
     },
     "script/Prediction.t.sol": {
-      "lastModificationDate": 1700643715677,
-      "contentHash": "dd74c76a20c0aeee9ef632778e09c9f0",
+      "lastModificationDate": 1700644697871,
+      "contentHash": "f80d67106e9d290f021d4bf47d84564d",
       "sourceName": "script/Prediction.t.sol",
       "solcConfig": {
         "settings": {
@@ -1055,8 +1055,8 @@
       }
     },
     "src/Delegations.sol": {
-      "lastModificationDate": 1700562831213,
-      "contentHash": "b617102e9a8e4b685d39018bb8dfe62e",
+      "lastModificationDate": 1700644149642,
+      "contentHash": "e9217a24f5b2406ab8ac3c08eb27efbe",
       "sourceName": "src/Delegations.sol",
       "solcConfig": {
         "settings": {
@@ -1142,8 +1142,8 @@
       }
     },
     "src/Prediction.sol": {
-      "lastModificationDate": 1700140333237,
-      "contentHash": "e75f90dca23483be4f90c3d430fda81d",
+      "lastModificationDate": 1700644764621,
+      "contentHash": "594d5a1ca6147fb4fa8e49032c778b8e",
       "sourceName": "src/Prediction.sol",
       "solcConfig": {
         "settings": {

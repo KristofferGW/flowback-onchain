@@ -183,7 +183,7 @@ contract Delegations is RightToVote {
     }
 
     function hasDelegatedToDelegateInGroup(uint _groupId, address _delegate) public view returns (bool) {
-        uint arrayLength = groupDelegates[_groupId].length
+        uint arrayLength = groupDelegates[_groupId].length;
         for (uint i; i < arrayLength;) {
             if (groupDelegates[_groupId][i].delegate == _delegate) {
                 arrayLength = groupDelegates[_groupId][i].delegationsFrom.length;
