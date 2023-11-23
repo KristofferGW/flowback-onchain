@@ -4,7 +4,7 @@ import './Polls.sol';
 
 contract Predictions is Polls{
  
-    bool predictionFinished = false;
+    bool predictionFinished;
 
     mapping(uint => Prediction[]) public predictions;
     
@@ -20,13 +20,18 @@ contract Predictions is Polls{
         uint noBets;
     }
     function requireProposalToExist(uint _pollId, uint _proposalId) public view returns (bool){
-        for (uint i=0; i <= proposals[_pollId].length;i++){
+        uint proposalsLength = proposals[_pollId].length;
+        for (uint i; i <= proposalsLength;){
            
           if (proposals[_pollId][i].proposalId==_proposalId) {
             return true;
           }
         }
         return false;
+
+        unchecked {
+            ++i;
+        }
     }
 
     function createPrediction(
@@ -56,11 +61,15 @@ contract Predictions is Polls{
     }
 
      function requirePredictionToExist(uint _proposalId, uint _predictionId) internal view returns (bool){
-        for (uint i=0; i <= predictions[_proposalId].length;i++){   
+        uint predictionsLength = predictions[_proposalId].length;
+        for (uint i; i <= predictionsLength;){   
           if (predictions[_proposalId][i].predictionId ==_predictionId)
           return true;
         }
         return false;
+        unchecked {
+            ++i;
+        }
     }
     
     function getPredictions(uint _proposalId) external view returns(Prediction[] memory) {
