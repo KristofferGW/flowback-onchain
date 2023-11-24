@@ -7,20 +7,30 @@ contract Predictions is Polls{
     bool predictionFinished = false;
 
     mapping(uint => Prediction[]) public predictions;
+    mapping(uint => PredictionBet[]) public predictionBets;
     
     Polls pollsInstance = new Polls();
 
-    event PredictionCreated(string prediction, uint likelihood);
+    event PredictionCreated(uint predictionId, string prediction);
+    event PredictionBetCreated(uint predictionId, bool bet, uint likelihood);
 
     struct Prediction{
         uint pollId;
         uint proposalId;
         uint predictionId;
         string prediction;
-        uint likelihood;
         uint yesBets;
         uint noBets;
     }
+
+    struct PredictionBet{
+        uint pollId;
+        uint proposalId;
+        uint predictionId;
+        bool bet;
+        uint likelihood;
+    }
+
     function requireProposalToExist(uint _pollId, uint _proposalId) public view returns (bool){
         for (uint i=0; i <= proposals[_pollId].length;i++){
            
@@ -34,8 +44,8 @@ contract Predictions is Polls{
     function createPrediction(
         uint _pollId, 
         uint _proposalId,
-        string memory _prediction,
-        uint _likelihood
+        string memory _prediction
+        
         
         ) public{
             
@@ -53,28 +63,34 @@ contract Predictions is Polls{
                 proposalId: _proposalId,
                 predictionId: _predictionId,
                 prediction: _prediction,
-                likelihood: _likelihood,
                 yesBets:0,
                 noBets:0
                 
             }));
-            emit PredictionCreated(_prediction, _likelihood);
+            emit PredictionCreated(_predictionId, _prediction);
     }
 
      function requirePredictionToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool){
 
         for (uint a=0; a <= proposals[_pollId].length; a++){
             if (proposals[_pollId][a].proposalId ==_proposalId){
-                for (uint b=0; b <= predictions[_proposalId].length;i++){   
-                    if (predictions[_proposalId][b].predictionId ==_predictionId)
+                for (uint b=0; b <= predictions[_proposalId].length;b++){   
+                    if (predictions[_proposalId][b].predictionId ==_predictionId)   //gasoptimering
                     return true;
                     }  
                  }
-            return false;  
         }
+         return false;  
     }
     
-    function getPredictions(uint _proposalId) external view returns(Prediction[] memory) {
+    function getPredictions(uint _pollId, uint _proposalId) external view returns(Prediction[] memory) {
+        
+        for (uint i=0; i <= proposals[_pollId].length;i++){   
+            if(proposals[_pollId][i].proposalId == _proposalId)
+            return predictions[_proposalId];
+        }  
+                 
+
         return predictions[_proposalId];
     }
 
@@ -82,51 +98,39 @@ contract Predictions is Polls{
         uint _pollId,
         uint _proposalId,
         uint _predictionId,
+        uint _likelihood,
         bool _bet
 
     )  external {
-
-            Proposal storage proposal = proposals[_pollId][_proposalId -1];
-            //proposal.predictions
-             
-            // get poll -  get proposal - get prediction
-
-            
-
         require(!predictionFinished, "Prediction is finished");
-        require(requirePredictionToExist(_pollId, _proposalId, _predictionId), "Prediction does not exist"); 
+        require(requirePredictionToExist(_pollId, _proposalId, _predictionId), "Prediction does not exist");
+            
+        predictionBets[_predictionId].push(PredictionBet({
+            pollId: _pollId,
+            proposalId: _proposalId,
+            predictionId: _predictionId,
+            likelihood: _likelihood,
+            bet: _bet
+                
+            }));
 
+        emit PredictionBetCreated(_predictionId, _bet, _likelihood);
 
-        if (_bet)
-            predictions[_proposalId][_predictionId-1].yesBets++; //POLLID behövs
-        else if(!_bet)
-            predictions[_proposalId][_predictionId-1].noBets++;
              
-
-
-        // if (_yesBets > 1 || _noBets > 1)
-        //     revert("Input must be 1");
-        // else if(_yesBets==0 && _noBets==0)
-        //     revert("Please place bet");
-        // else if(_yesBets==1 && _noBets==1)
-        //     revert("Please bet yes or no");
-        // else if(_yesBets==1 && _noBets==0)
-        //     predictions[_proposalId][_predictionId-1].yesBets += _yesBets; 
-        // else if(_yesBets==0 && _noBets==1)
-        //     predictions[_proposalId][_predictionId-1].noBets += _noBets;  
     }
 
-    // function getResult(uint _proposalId, uint _predictionId) external view returns (string memory winner){
-    //     require(predictionFinished == true, "Prediction is not finished");
-    //     if (predictions[_proposalId][_predictionId-1].yesBets > predictions[_proposalId][_predictionId-1].noBets){
-    //         return "Yes";                               
-    //     }else if(predictions[_proposalId][_predictionId-1].yesBets < predictions[_proposalId][_predictionId-1].noBets){
-    //         return "No";                                     
-    //     }
-    //     else if(predictions[_proposalId][_predictionId-1].yesBets < predictions[_proposalId][_predictionId-1].noBets){
-    //         return "Tie";
-    //     }
-    // }
+    function getPredictionBets(uint _pollId, uint _proposalId, uint _predictionId) external view returns(PredictionBet[] memory) {
+        
+        for (uint a=0; a <= proposals[_pollId].length;a++){   
+            if(proposals[_pollId][a].proposalId == _proposalId){
+                for (uint b=0; b <= predictions[_proposalId].length;b++){   
+                    if(predictions[_proposalId][b].predictionId == _predictionId)      //gasoptimering
+                        return predictionBets[_predictionId];
+                }  
+            }
+        }  
+        return predictionBets[_predictionId]; 
+    }
 
     function predictionIsFinished() internal {
         predictionFinished = true;
