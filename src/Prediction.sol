@@ -32,11 +32,16 @@ contract Predictions is Polls{
     }
 
     function requireProposalToExist(uint _pollId, uint _proposalId) public view returns (bool){
-        for (uint i=0; i <= proposals[_pollId].length;i++){
+
+        uint predictionsLength= proposals[_pollId].length;
+        for (uint i=0; i <= predictionsLength;){
            
-          if (proposals[_pollId][i].proposalId==_proposalId) {
-            return true;
-          }
+            if (proposals[_pollId][i].proposalId==_proposalId) {
+                return true;
+            }
+            unchecked {
+                ++i;
+            }
         }
         return false;
     }
@@ -72,25 +77,36 @@ contract Predictions is Polls{
 
      function requirePredictionToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool){
 
-        for (uint a=0; a <= proposals[_pollId].length; a++){
+        uint proposalsLength = proposals[_pollId].length;
+        for (uint a=0; a <= proposalsLength;){
             if (proposals[_pollId][a].proposalId ==_proposalId){
-                for (uint b=0; b <= predictions[_proposalId].length;b++){   
+                uint predictionsLength = predictions[_proposalId].length;
+                for (uint b=0; b <= predictionsLength;){   
                     if (predictions[_proposalId][b].predictionId ==_predictionId)   //gasoptimering
-                    return true;
-                    }  
-                 }
-        }
-         return false;  
+                        return true;
+                        unchecked {
+                            ++b;
+                        }  
+                }    
+                return false;   
+            }
+            unchecked {
+            ++a;
+            }
+        }    
+        return false;
     }
     
     function getPredictions(uint _pollId, uint _proposalId) external view returns(Prediction[] memory) {
         
-        for (uint i=0; i <= proposals[_pollId].length;i++){   
+        uint proposalsLength = proposals[_pollId].length;
+        for (uint i=0; i <= proposalsLength;){   
             if(proposals[_pollId][i].proposalId == _proposalId)
             return predictions[_proposalId];
+            unchecked {
+                ++i;
+            }  
         }  
-                 
-
         return predictions[_proposalId];
     }
 
@@ -121,13 +137,21 @@ contract Predictions is Polls{
 
     function getPredictionBets(uint _pollId, uint _proposalId, uint _predictionId) external view returns(PredictionBet[] memory) {
         
-        for (uint a=0; a <= proposals[_pollId].length;a++){   
+        uint proposalsLength = proposals[_pollId].length;
+        for (uint a=0; a <= proposalsLength;){   
             if(proposals[_pollId][a].proposalId == _proposalId){
-                for (uint b=0; b <= predictions[_proposalId].length;b++){   
+                uint predictionsLength =predictions[_proposalId].length;
+                for (uint b=0; b <= predictionsLength;b++){   
                     if(predictions[_proposalId][b].predictionId == _predictionId)      //gasoptimering
                         return predictionBets[_predictionId];
+                    unchecked {
+                        ++b;
+                    } 
                 }  
             }
+            unchecked {
+                ++a;
+            }  
         }  
         return predictionBets[_predictionId]; 
     }
