@@ -137,7 +137,9 @@ contract Polls is RightToVote, Delegations {
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
-        for (uint i; i < groupDelegates[_pollGroup].length;) {
+        uint pollGroupLength = groupDelegates[_pollGroup].length;
+
+        for (uint i; i < pollGroupLength;) {
             if (groupDelegates[_pollGroup][i].delegate == msg.sender) {
                 delegatedVotingPower = groupDelegates[_pollGroup][i].delegatedVotes;
             }
