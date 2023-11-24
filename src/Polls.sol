@@ -104,6 +104,8 @@ contract Polls is RightToVote, Delegations {
 
         return (proposalDescriptions, voteCounts);
 
+    }
+
     function userHasDelegatedInGroup(uint _pollGroup) private view returns(bool) {
         uint[] memory delegatedGroups = groupDelegationsByUser[msg.sender];
 
