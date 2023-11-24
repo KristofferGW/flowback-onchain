@@ -89,6 +89,15 @@ contract Polls is RightToVote, Delegations {
         return proposals[_pollId];
     }
 
+    function getPollResults(uint _pollId) public view returns (mapping(string => uint) memory) {
+        requirePollToExist(_pollId);
+
+        Proposal[] memory pollProposals = proposals[_pollId];
+        mapping(string => uint) memory results;
+
+        for (uint )
+    }
+
     function userHasDelegatedInGroup(uint _pollGroup) private view returns(bool) {
         uint[] memory delegatedGroups = groupDelegationsByUser[msg.sender];
 
