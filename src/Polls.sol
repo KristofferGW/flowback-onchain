@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
-import 'src/RightToVote.sol';
-import 'src/Delegations.sol';
+import './RightToVote.sol';
+import './Delegations.sol';
 
 contract Polls is RightToVote, Delegations {
     struct Poll {
@@ -87,6 +87,22 @@ contract Polls is RightToVote, Delegations {
     function getProposals(uint _pollId) external view returns(Proposal[] memory) {
         requirePollToExist(_pollId);
         return proposals[_pollId];
+    }
+
+    function getPollResults(uint _pollId) public view returns (string[] memory, uint[] memory) {
+        requirePollToExist(_pollId);
+
+        Proposal[] memory pollProposals = proposals[_pollId];
+
+        string[] memory proposalDescriptions = new string[](pollProposals.length);
+        uint[] memory voteCounts = new uint[](pollProposals.length);
+
+        for (uint i; i < pollProposals.length; i++) {
+            proposalDescriptions[i] = pollProposals[i].description;
+            voteCounts[i] = pollProposals[i].voteCount;
+        }
+
+        return (proposalDescriptions, voteCounts);
     }
 
     function userHasDelegatedInGroup(uint _pollGroup) private view returns(bool) {
