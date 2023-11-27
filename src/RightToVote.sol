@@ -9,9 +9,12 @@ contract RightToVote {
     }
 
     mapping(address => Voter) internal voters;
+
+    event PermissionGivenToVote(uint _group);
     
     function giveRightToVote (uint _group) public payable {
         voters[msg.sender].groups.push(_group);
+        emit PermissionGivenToVote(_group);
     }
 
     function indexOfGroup(uint[] memory groups, uint searchFor) internal pure returns (uint256) {

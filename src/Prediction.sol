@@ -31,7 +31,7 @@ contract Predictions is Polls{
         uint likelihood;
     }
 
-    function requireProposalToExist(uint _pollId, uint _proposalId) public view returns (bool){
+    function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){
 
         uint predictionsLength= proposals[_pollId].length;
         for (uint i=0; i <= predictionsLength;){
@@ -135,7 +135,7 @@ contract Predictions is Polls{
              
     }
 
-    function getPredictionBets(uint _pollId, uint _proposalId, uint _predictionId) external view returns(PredictionBet[] memory) {
+    function getPredictionBets(uint _pollId, uint _proposalId, uint _predictionId) internal view returns(PredictionBet[] memory) {
         
         uint proposalsLength = proposals[_pollId].length;
         for (uint a=0; a <= proposalsLength;){   
