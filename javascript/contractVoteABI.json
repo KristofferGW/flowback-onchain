@@ -1,5 +1,18 @@
 [
 	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "PermissionGivenToVote",
+		"type": "event"
+	},
+	{
 		"inputs": [],
 		"name": "checkAllRights",
 		"outputs": [
