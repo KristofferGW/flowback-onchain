@@ -13,58 +13,54 @@ const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 const giveRightToVote = async(group)=> {
 
     // const pollCreatedEvent = parsedLogs.find(log => log.name === 'PollCreated');
-    const tx = await contract.giveRightToVote(group);
-    console.log(tx);
-
-    //--------------------------------------------------------------
-    // const txReceipt = await tx.wait();
-    // console.log(txReceipt);
-    // if (txReceipt.status === 1) {
-    //     console.log('Transaction successful');
-
-    //     const logs = txReceipt.logs;
-    //     console.log(logs);
-    //     const parsedLogs = logs.map(log => contract.interface.parseLog(log));
-
-    //     const PermissionGivenToVote = parsedLogs.find(log => log.name === 'PermissionGivenToVote');
-    //     console.log(PermissionGivenToVote)
-
-    //     // if (pollCreatedEvent) {
-    //     //     const pollId = pollCreatedEvent.args.pollId;
-    //     //     const pollTitle = pollCreatedEvent.args.title;
-
-    //     //     console.log('PollCreated event emitted');
-    //     //     console.log('Poll Id', pollId.toString());
-    //     //     console.log('Poll Title', pollTitle);
-    //     // } else {
-    //     //     console.log('PollCreated event not found in the transaction logs');
-    //     // }
-    // }
-    //-------------------------------------------------------------------
+    try {
+        const tx = await contract.giveRightToVote(group);
+        const txReceipt = await tx.wait();
+        if (txReceipt.status === 1) {
+            console.log('Transaction successful');
+    
+            const logs = txReceipt.logs;
+    
+            const parsedLogs = logs.map(log => contract.interface.parseLog(log));
+    
+            const permissionGivenEvent = parsedLogs.find(log => log.name === 'PermissionGivenToVote');
+            if (permissionGivenEvent) {
+                console.log(permissionGivenEvent.args)
+                const group = parseInt(permissionGivenEvent.args._group)
+                console.log("You now have the right to vote in group:", group)
+                //const pollTitle = permissionGivenEvent.args.title;
+            }
+        }
+    } catch (error) {
+        console.log(error.error.reason)
+    }
+        
 }
+
 const removeRightToVote = async (group) => {
     const tx = await contract.removeRightToVote(group);
     //console.log(tx);
 }
+
 const checkAllRights = async () => {
     const tx = await contract.checkAllRights();
-    tx.map(group => {
-        if(!parseInt(group._hex)){
-            console.log("No groups found")
-        }else{
-            console.log(parseInt(group._hex)) 
-    
-        }})
-        
+    if(tx==""){
+        console.log("No groups found")
+    }else{
+        tx.map(group => {
+            console.log(parseInt(group._hex));
+        })
+    }   
 }
+
 const checkRightsInGroup = async (group) => {
     const tx = await contract.checkRightsInGroup(group);
     console.log(tx);
 }
 
 
-//giveRightToVote(1);
+//giveRightToVote(6); //- DONE
 //removeRightToVote(1);
-checkAllRights();
+checkAllRights(); //- DONE
 
 //checkRightsInGroup(4);
