@@ -1,4 +1,4 @@
-const {ethers} = require('ethers');
+const { ethers } = require('ethers');
 require('dotenv').config({path: '../.env'});
 const contractABI = require('./contractVoteABI.json');
 
@@ -17,6 +17,27 @@ const giveRightToVote = async(group)=> {
     console.log(tx);
     const txReceipt = await tx.wait();
     console.log(txReceipt);
+    // if (txReceipt.status === 1) {
+    //     console.log('Transaction successful');
+
+    //     const logs = txReceipt.logs;
+    //     console.log(logs);
+    //     const parsedLogs = logs.map(log => contract.interface.parseLog(log));
+
+    //     const PermissionGivenToVote = parsedLogs.find(log => log.name === 'PermissionGivenToVote');
+    //     console.log(PermissionGivenToVote)
+
+    //     // if (pollCreatedEvent) {
+    //     //     const pollId = pollCreatedEvent.args.pollId;
+    //     //     const pollTitle = pollCreatedEvent.args.title;
+
+    //     //     console.log('PollCreated event emitted');
+    //     //     console.log('Poll Id', pollId.toString());
+    //     //     console.log('Poll Title', pollTitle);
+    //     // } else {
+    //     //     console.log('PollCreated event not found in the transaction logs');
+    //     // }
+    // }
 }
 const removeRightToVote = async (group) => {
     const tx = await contract.removeRightToVote(group);
@@ -24,7 +45,8 @@ const removeRightToVote = async (group) => {
 }
 const checkAllRights = async () => {
     const tx = await contract.checkAllRights();
-    console.log(tx);
+    tx.map(group => console.log(parseInt(group._hex)) )
+    //console.log(tx);
 }
 const checkRightsInGroup = async (group) => {
     const tx = await contract.checkRightsInGroup(group);
@@ -33,6 +55,6 @@ const checkRightsInGroup = async (group) => {
 
 
 //giveRightToVote(2);
-// checkAllRights();
-removeRightToVote(1);
-//checkRightsInGroup(1);
+checkAllRights();
+//removeRightToVote(1);
+//checkRightsInGroup(4);
