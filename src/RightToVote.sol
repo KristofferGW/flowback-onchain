@@ -10,7 +10,7 @@ contract RightToVote {
 
     mapping(address => Voter) internal voters;
 
-    event PermissionGivenToVote(uint _group);
+    event PermissionGivenToVote(uint indexed _group);
     
     function giveRightToVote (uint _group) public payable {
         voters[msg.sender].groups.push(_group);

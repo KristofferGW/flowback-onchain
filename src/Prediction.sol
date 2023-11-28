@@ -12,7 +12,7 @@ contract Predictions is Polls{
     Polls pollsInstance = new Polls();
 
     event PredictionCreated(uint predictionId, string prediction);
-    event PredictionBetCreated(uint predictionId, bool bet, uint likelihood);
+    event PredictionBetCreated(uint indexed predictionId, bool bet, uint likelihood);
 
     struct Prediction{
         uint pollId;

@@ -67,7 +67,7 @@ contract Polls is RightToVote, Delegations {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
     }
 
-    event ProposalAdded(uint pollId, uint proposalId, string description);
+    event ProposalAdded(uint indexed pollId, uint proposalId, string description);
 
     function addProposal(uint _pollId, string memory _description) public {
         requirePollToExist(_pollId);
