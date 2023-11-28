@@ -67,7 +67,7 @@ contract Polls is RightToVote, Delegations {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
     }
 
-    event ProposalAdded(uint pollId, uint proposalId, string description, uint proposalCount);
+    event ProposalAdded(uint pollId, uint proposalId, string description);
 
     function addProposal(uint _pollId, string memory _description) public {
         requirePollToExist(_pollId);
@@ -81,7 +81,7 @@ contract Polls is RightToVote, Delegations {
             predictionCount: 0
         }));
 
-        emit ProposalAdded(_pollId, _proposalId, _description, _proposalId);
+        emit ProposalAdded(_pollId, _proposalId, _description);
     }
 
     function getProposals(uint _pollId) external view returns(Proposal[] memory) {
@@ -134,9 +134,9 @@ contract Polls is RightToVote, Delegations {
         return false;
     }
 
-    event VoteSubmitted(uint indexed pollId, address indexed voter, bytes32 hashedVote, uint votesForProposal);
+    event VoteSubmitted(uint indexed pollId, address indexed voter, uint votesForProposal);
 
-    function vote(uint _pollId, uint _proposalId, bytes32 _hashedVote) public {
+    function vote(uint _pollId, uint _proposalId) public {
         uint _pollGroup = polls[_pollId].group;
         uint delegatedVotingPower;
 
@@ -174,7 +174,7 @@ contract Polls is RightToVote, Delegations {
                 pollProposals[i].voteCount += delegatedVotingPower + 1;
                 _votesForProposal = pollProposals[i].voteCount;
                 votersForPoll[_pollId].push(msg.sender);
-                emit VoteSubmitted(_pollId, msg.sender, _hashedVote, _votesForProposal);
+                emit VoteSubmitted(_pollId, msg.sender, _votesForProposal);
                 return;
             }
             unchecked {
