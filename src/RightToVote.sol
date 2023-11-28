@@ -10,7 +10,8 @@ contract RightToVote {
 
     mapping(address => Voter) internal voters;
 
-    event PermissionGivenToVote(uint _group);
+
+    event PermissionGivenToVote(uint indexed _group);
 
     function permissionDoesntExist (uint group) internal view returns(bool permissionAlreadyExist){
         uint[] memory groups = voters[msg.sender].groups;
@@ -24,6 +25,7 @@ contract RightToVote {
         }
         return true;
     }
+
     
     function giveRightToVote (uint _group) public payable {
         require(permissionDoesntExist(_group), "Permission to vote is already given");
