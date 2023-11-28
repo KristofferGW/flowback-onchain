@@ -6,7 +6,7 @@ const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFU
 const wallet = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY, provider);
 
 
-const contractAddress = '0xcff51468cece75b64dd37e047ca6db70232939f1';
+const contractAddress = '0xca1a30490c83133c2b413c3d94ed53b6d360a04d';
 
 const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
@@ -15,8 +15,10 @@ const giveRightToVote = async(group)=> {
     // const pollCreatedEvent = parsedLogs.find(log => log.name === 'PollCreated');
     const tx = await contract.giveRightToVote(group);
     console.log(tx);
-    const txReceipt = await tx.wait();
-    console.log(txReceipt);
+
+    //--------------------------------------------------------------
+    // const txReceipt = await tx.wait();
+    // console.log(txReceipt);
     // if (txReceipt.status === 1) {
     //     console.log('Transaction successful');
 
@@ -38,15 +40,22 @@ const giveRightToVote = async(group)=> {
     //     //     console.log('PollCreated event not found in the transaction logs');
     //     // }
     // }
+    //-------------------------------------------------------------------
 }
 const removeRightToVote = async (group) => {
     const tx = await contract.removeRightToVote(group);
-    console.log(tx);
+    //console.log(tx);
 }
 const checkAllRights = async () => {
     const tx = await contract.checkAllRights();
-    tx.map(group => console.log(parseInt(group._hex)) )
-    //console.log(tx);
+    tx.map(group => {
+        if(!parseInt(group._hex)){
+            console.log("No groups found")
+        }else{
+            console.log(parseInt(group._hex)) 
+    
+        }})
+        
 }
 const checkRightsInGroup = async (group) => {
     const tx = await contract.checkRightsInGroup(group);
@@ -54,7 +63,8 @@ const checkRightsInGroup = async (group) => {
 }
 
 
-//giveRightToVote(2);
-checkAllRights();
+//giveRightToVote(1);
 //removeRightToVote(1);
+checkAllRights();
+
 //checkRightsInGroup(4);
