@@ -19,7 +19,7 @@ contract Delegations is RightToVote {
         uint groupDelegateId;
     }
 
-    event NewDelegate(address delegate, uint groupId, uint delegatedVotes, address[] delegationsFrom, uint groupDelegateId);
+    event NewDelegate(address indexed delegate, uint indexed groupId, uint delegatedVotes, address[] delegationsFrom, uint groupDelegateId);
 
     function becomeDelegate(uint _groupId) public {
         groupDelegateCount[_groupId]++;
@@ -37,7 +37,7 @@ contract Delegations is RightToVote {
         emit NewDelegate(newGroupDelegate.delegate, newGroupDelegate.groupId, newGroupDelegate.delegatedVotes, newGroupDelegate.delegationsFrom, newGroupDelegate.groupDelegateId);
     }
 
-    event NewDelegation(address from, address to, uint groupId, uint delegatedVotes, address[] delegationsFrom);
+    event NewDelegation(address indexed from, address indexed to, uint indexed groupId, uint delegatedVotes, address[] delegationsFrom);
 
     function delegate(uint _groupId, address _delegateTo) public {
         require(addressIsDelegate(_groupId, _delegateTo), "The address is not a delegate in the specified group");
@@ -66,7 +66,7 @@ contract Delegations is RightToVote {
         emit NewDelegation(msg.sender, _delegateTo, _groupId, delegatedVotes, delegationsFrom);
     }
 
-    event DelegationRemoved(address from, address by, uint groupId, uint delegatedVotes);
+    event DelegationRemoved(address indexed from, address indexed by, uint indexed groupId, uint delegatedVotes);
 
     function removeDelegation(address _delegate, uint _groupId) public {
         // check that the user has delegated to the specified delegate in the specified group
@@ -108,7 +108,7 @@ contract Delegations is RightToVote {
         emit DelegationRemoved(_delegate, msg.sender, _groupId, delegatedVotes);
     }
 
-    event DelegateResignation(address delegate, uint groupId);
+    event DelegateResignation(address indexed delegate, uint indexed groupId);
 
     function resignAsDelegate(uint _groupId) public {
         address[] memory affectedUsers;
