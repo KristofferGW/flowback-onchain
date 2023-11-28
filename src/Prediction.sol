@@ -82,7 +82,7 @@ contract Predictions is Polls{
             if (proposals[_pollId][a].proposalId ==_proposalId){
                 uint predictionsLength = predictions[_proposalId].length;
                 for (uint b=0; b <= predictionsLength;){   
-                    if (predictions[_proposalId][b].predictionId ==_predictionId)   //gasoptimering
+                    if (predictions[_proposalId][b].predictionId ==_predictionId)   
                         return true;
                         unchecked {
                             ++b;
