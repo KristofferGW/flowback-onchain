@@ -11,6 +11,7 @@ const contractAddress = '0x9ae98aa7c16e87f559b81c5d4ae0d44a5a46e740';
 
 const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
+
 const createPoll = async(title, tag, group, pollStartDate, proposalEndDate, votingStartDate, delegateEndDate, endDate)=> {
     try {
         const tx = await contract.createPoll(title, tag, group, pollStartDate, proposalEndDate, votingStartDate, delegateEndDate, endDate);
@@ -29,7 +30,7 @@ const createPoll = async(title, tag, group, pollStartDate, proposalEndDate, voti
         }
         
     } catch (error) {
-        console.log(error.error.reason)
+        console.log(error)
     }
 }
 
@@ -52,9 +53,11 @@ const createProposal = async(pollId, description)=> {
         }
         
     } catch (error) {
-        console.log(error.error.reason)
+        console.log(error)
     }
 }
-createProposal(1,"proposal");
+
+//createProposal(1,"proposal");
 
 //createPoll("Poll", "poll", 1,1,1,1,1,1);
+module.exports = createPoll, createProposal;

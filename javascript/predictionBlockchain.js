@@ -1,6 +1,8 @@
 const { ethers } = require('ethers');
 require('dotenv').config({path: '../.env'});
 const contractABI = require('./contractPredictionABI.json');
+const createPoll = require('./pollsBlockchain');
+const createProposal = require('./pollsBlockchain');
 
 const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFURA_API_KEY);
 const wallet = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY, provider);
@@ -30,5 +32,7 @@ const createPredictionBet = async(pollId, proposalId, predictionId, likelihood, 
     }
     
 }
-createPrediction(1,1,"prediction");
+//createPoll("Poll", "poll", 1, 1, 1, 1, 1, 1)
+// createProposal(2,"proposal");
+createPrediction(1,5,"prediction");
 //createPredictionBet(1,1,1,10,true);
