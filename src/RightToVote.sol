@@ -74,6 +74,7 @@ contract RightToVote {
 
     function checkAllRights () public view returns (uint[] memory groups) {
         return  voters[msg.sender].groups; 
+        
     }
 
 }

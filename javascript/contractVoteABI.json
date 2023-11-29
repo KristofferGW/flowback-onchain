@@ -1,9 +1,22 @@
 [
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "giveRightToVote",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
+	},
+	{
 		"anonymous": false,
 		"inputs": [
 			{
-				"indexed": false,
+				"indexed": true,
 				"internalType": "uint256",
 				"name": "_group",
 				"type": "uint256"
@@ -11,6 +24,32 @@
 		],
 		"name": "PermissionGivenToVote",
 		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "PermissionToVoteRemoved",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "removeRightToVote",
+		"outputs": [],
+		"stateMutability": "payable",
+		"type": "function"
 	},
 	{
 		"inputs": [],
@@ -42,32 +81,6 @@
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_group",
-				"type": "uint256"
-			}
-		],
-		"name": "giveRightToVote",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "_group",
-				"type": "uint256"
-			}
-		],
-		"name": "removeRightToVote",
-		"outputs": [],
-		"stateMutability": "payable",
 		"type": "function"
 	}
 ]
