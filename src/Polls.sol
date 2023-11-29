@@ -31,7 +31,13 @@ contract Polls is RightToVote, Delegations {
     //Ties proposals to polls by pollId
     mapping(uint => Proposal[]) public proposals;
 
-    // event PollCreated(uint pollId, string title);
+    // To implement in createPoll:
+    // end of proposal phase
+    // end of prediction phase
+    // end of betting phase
+    // end of voting phase
+    // end of delegate lock-in phase
+    // the result phase
 
     event PollCreated(uint pollId, string title);
 
