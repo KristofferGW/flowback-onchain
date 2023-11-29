@@ -168,8 +168,22 @@ contract Delegations is RightToVote {
         return false;
     }
 
-    function hasDelegatedInGroup(uint _groupId) public view returns (bool) {
-        uint[] memory userDelegatedGroups = groupDelegationsByUser[msg.sender];
+    // function hasDelegatedInGroup(uint _groupId) public view returns (bool) {
+    //     uint[] memory userDelegatedGroups = groupDelegationsByUser[msg.sender];
+    //     for (uint i; i < userDelegatedGroups.length;) {
+    //         if (userDelegatedGroups[i] == _groupId) {
+    //             return true;
+    //         }
+
+    //         unchecked {
+    //             ++i;
+    //         }
+    //     }
+    //     return false;
+    // }
+
+    function hasDelegatedInGroup(uint _groupId, uint[] calldata groupDelegationsByUser[msg.sender]) public view returns (bool) {
+        uint[] userDelegatedGroups = groupDelegationsByUser[msg.sender];
         for (uint i; i < userDelegatedGroups.length;) {
             if (userDelegatedGroups[i] == _groupId) {
                 return true;
