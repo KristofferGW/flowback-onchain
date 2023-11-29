@@ -10,7 +10,7 @@ contract RightToVote {
 
     mapping(address => Voter) internal voters;
 
-
+    event PermissionToVoteRemoved(uint indexed _group);
     event PermissionGivenToVote(uint indexed _group);
 
     function permissionDoesntExist (uint group) internal view returns(bool permissionAlreadyExist){
@@ -28,7 +28,7 @@ contract RightToVote {
 
     
     function giveRightToVote (uint _group) public payable {
-        require(permissionDoesntExist(_group), "Permission to vote is already given");
+        require(permissionDoesntExist(_group), "Permission is already given in group");
         voters[msg.sender].groups.push(_group);
         emit PermissionGivenToVote(_group);
     }
@@ -47,16 +47,18 @@ contract RightToVote {
     }
 
     function removeRightToVote (uint _group) public payable {
-        uint index = indexOfGroup(voters[msg.sender].groups, _group);
-        require(index<voters[msg.sender].groups.length, "index out of bound");
+        require(!permissionDoesntExist(_group), "Can't find group you are trying to remove");
+                uint index = indexOfGroup(voters[msg.sender].groups, _group);
+                require(index<voters[msg.sender].groups.length, "index out of bound");
 
-        for (uint i = index; i < voters[msg.sender].groups.length - 1;) {
-            voters[msg.sender].groups[i] = voters[msg.sender].groups[i+1];
-            unchecked {
-                ++i;
-            }
-        }
-        voters[msg.sender].groups.pop();
+                for (uint i = index; i < voters[msg.sender].groups.length - 1;) {
+                    voters[msg.sender].groups[i] = voters[msg.sender].groups[i+1];
+                    unchecked {
+                        ++i;
+                    }
+                }
+            voters[msg.sender].groups.pop();
+            emit PermissionToVoteRemoved(_group);
 
     }
     
@@ -74,7 +76,6 @@ contract RightToVote {
 
     function checkAllRights () public view returns (uint[] memory groups) {
         return  voters[msg.sender].groups; 
-        
     }
 
 }
