@@ -56,8 +56,38 @@ const createProposal = async(pollId, description)=> {
         console.log(error)
     }
 }
+const getProposals = async(pollId)=> {
 
+    try {
+        const tx = await contract.getProposals(pollId);
+        tx.map(info => console.log(parseInt(info.proposalId), info.description));
+        
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const getPollResults= async(pollId)=> {
+    try {
+        const tx = await contract.getProposals(pollId);
+        console.log(tx);
+    } catch (error) {
+        console.log(error)
+    }
+}
+const vote= async(pollId,proposalId)=> {
+    try {
+        const tx = await contract.vote(pollId,proposalId);
+        console.log(tx);
+    } catch (error) {
+        console.log(error.error.reason);
+    }
+}
 //createProposal(1,"proposal");
-
 //createPoll("Poll", "poll", 1,1,1,1,1,1);
+//getProposals(1);
+//*****getPollResults(1);
+//*****vote(1,1);
+
+
 module.exports = createPoll, createProposal;
