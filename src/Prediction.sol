@@ -49,7 +49,7 @@ contract Predictions is Polls{
     function createPrediction(
         uint _pollId, 
         uint _proposalId,
-        string memory _prediction
+        string calldata _prediction
         
         
         ) public{
