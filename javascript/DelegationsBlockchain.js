@@ -28,6 +28,7 @@ async function becomeMemberOfGroup(groupId){
     
 
     const txReceipt = await tx.wait();
+    console.log(txReceipt);
     
     if (txReceipt.status === 1) {
         console.log('Transaction successful');
@@ -36,23 +37,32 @@ async function becomeMemberOfGroup(groupId){
     }
 }
 async function becomeDelegate(groupId){
-    const tx = await contract.becomeDelegate(groupId);
-    
 
-    const txReceipt = await tx.wait();
+    try {
+        const tx = await contract.becomeDelegate(groupId);
+        const txReceipt = await tx.wait();
+        if (txReceipt.status === 1) {
+            console.log('Transaction successful');
     
-    if (txReceipt.status === 1) {
-        console.log('Transaction successful');
-        const logs = txReceipt.logs;
-        console.log(logs);
-
-        const parsedLogs = logs.map(log => contract.interface.parseLog(log));
-        console.log(parsedLogs);
+            const logs = txReceipt.logs;
+    
+            const parsedLogs = logs.map(log => contract.interface.parseLog(log));
+    
+            const NewDelegateEvent = parsedLogs.find(log => log.name === 'NewDelegate');
+            if (NewDelegateEvent) {
+                console.log(NewDelegateEvent.args)
+                // const group = parseInt(NewDelegateEvent.args._group)
+                // console.log("You now have the right to vote in group:", group)
+            }
+        }
+    } catch (error) {
+        console.log(error.error.reason)
     }
+    
 }
 
 
-//becomeMemberOfGroup(1)
+becomeMemberOfGroup(1)
 //becomeDelegate(1);
 
 //delegate(1,"adress");
