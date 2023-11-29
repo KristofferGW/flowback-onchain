@@ -33,7 +33,7 @@ contract RightToVote {
         emit PermissionGivenToVote(_group);
     }
 
-    function indexOfGroup(uint[] memory groups, uint searchFor) internal pure returns (uint256) {
+    function indexOfGroup(uint[] calldata groups, uint searchFor) internal pure returns (uint256) {
         for (uint i; i < groups.length;) {
             if (groups[i] == searchFor) {
                 return i;

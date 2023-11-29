@@ -31,11 +31,13 @@ contract Polls is RightToVote, Delegations {
     //Ties proposals to polls by pollId
     mapping(uint => Proposal[]) public proposals;
 
+    // event PollCreated(uint pollId, string title);
+
     event PollCreated(uint pollId, string title);
 
     function createPoll(
-        string memory _title,
-        string memory _tag,
+        string calldata _title,
+        string calldata _tag,
         uint _group,
         uint _pollStartDate,
         uint _proposalEndDate,
@@ -58,9 +60,11 @@ contract Polls is RightToVote, Delegations {
                 proposalCount: 0
             });
 
+            emit PollCreated(newPoll.pollId, newPoll.title);
+
             polls[pollCount] = newPoll;
 
-            emit PollCreated(pollCount, _title);
+            // emit PollCreated(pollCount, _title);
         }
 
     function requirePollToExist(uint _pollId) internal view {
@@ -69,7 +73,7 @@ contract Polls is RightToVote, Delegations {
 
     event ProposalAdded(uint indexed pollId, uint proposalId, string description);
 
-    function addProposal(uint _pollId, string memory _description) public {
+    function addProposal(uint _pollId, string calldata _description) public {
         requirePollToExist(_pollId);
         polls[_pollId].proposalCount++;
         uint _proposalId = polls[_pollId].proposalCount;
