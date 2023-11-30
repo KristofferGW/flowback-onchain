@@ -61,6 +61,7 @@ const getProposals = async(pollId)=> {
     try {
         const tx = await contract.getProposals(pollId);
         tx.map(info => console.log(parseInt(info.proposalId), info.description));
+        return tx.args;
         
     } catch (error) {
         console.log(error)
@@ -90,4 +91,4 @@ const vote= async(pollId,proposalId)=> {
 //*****vote(1,1);
 
 
-module.exports = createPoll, createProposal;
+module.exports = createPoll, createProposal, getProposals;
