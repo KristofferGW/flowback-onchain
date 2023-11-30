@@ -26,9 +26,9 @@ const createPrediction = async(pollId, proposalId, prediction)=> {
     }
     
 }
-const createPredictionBet = async(pollId, proposalId, predictionId, likelihood, bet)=> {
+const placePredictionBet = async(pollId, proposalId, predictionId, likelihood, bet)=> {
     try {
-        const tx = await contract.createPrediction(pollId, proposalId, predictionId,likelihood, bet);
+        const tx = await contract.placePredictionBet(pollId, proposalId, predictionId,likelihood, bet);
         const txReceipt = await tx.wait();
         console.log(txReceipt);
     } catch (error) {
@@ -36,6 +36,15 @@ const createPredictionBet = async(pollId, proposalId, predictionId, likelihood, 
     }
     
 }
+const getPredicions = async(pollId,proposalId) =>{
+    try {
+        const tx = await contract.getPredicions(pollId, proposalId);
+        tx.map(info => console.log(parseInt(info.proposalId), info.description));
+    } catch (error) {
+        console.log(error.error.reason);
+    }
+}
+
 //createPoll("Poll", "poll", 1, 1, 1, 1, 1, 1)
 // createProposal(2,"proposal");
 createPrediction(1,1,"prediction");
