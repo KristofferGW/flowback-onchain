@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
-import 'src/RightToVote.sol';
+import './RightToVote.sol';
 
 contract Delegations is RightToVote {
     //Mapping over who is delegate in which group
@@ -182,8 +182,8 @@ contract Delegations is RightToVote {
     //     return false;
     // }
 
-    function hasDelegatedInGroup(uint _groupId, uint[] calldata groupDelegationsByUser[msg.sender]) public view returns (bool) {
-        uint[] userDelegatedGroups = groupDelegationsByUser[msg.sender];
+    function hasDelegatedInGroup(uint _groupId) public view returns (bool) {
+        uint[] memory userDelegatedGroups = groupDelegationsByUser[msg.sender];
         for (uint i; i < userDelegatedGroups.length;) {
             if (userDelegatedGroups[i] == _groupId) {
                 return true;
