@@ -3,8 +3,9 @@ pragma solidity ^0.8.0;
 
 import './RightToVote.sol';
 import './Delegations.sol';
+import './Prediction.sol';
 
-contract Polls is RightToVote, Delegations {
+contract Polls is RightToVote, Delegations, Predictions {
     struct Poll {
         string title;
         string tag;
@@ -195,6 +196,47 @@ contract Polls is RightToVote, Delegations {
 
         for (uint i; i < addresses.length;) {
             if (addresses[i] == msg.sender) {
+                return true;
+            }
+            unchecked {
+                ++i;
+            }
+        }
+        return false;
+    }
+
+    function createPrediction(
+        uint _pollId, 
+        uint _proposalId,
+        string calldata _prediction
+        ) public {
+
+            Proposal storage proposal = proposals[_pollId][_proposalId -1];
+            require(requireProposalToExist(_pollId, _proposalId));
+            
+            proposal.predictionCount++; //Increment by one
+            uint _predictionId = proposal.predictionCount; // Set prediction id
+
+            proposals[_pollId][_proposalId -1] = proposal; // Update mapping
+
+            predictions[_proposalId].push(Prediction({
+                pollId: _pollId,
+                proposalId: _proposalId,
+                predictionId: _predictionId,
+                prediction: _prediction,
+                yesBets:0,
+                noBets:0
+                
+            }));
+            emit PredictionCreated(_predictionId, _prediction);
+    }
+
+    function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){
+
+        uint predictionsLength= proposals[_pollId].length;
+        for (uint i=0; i <= predictionsLength;){
+           
+            if (proposals[_pollId][i].proposalId==_proposalId) {
                 return true;
             }
             unchecked {
