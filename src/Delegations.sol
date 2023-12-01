@@ -22,6 +22,7 @@ contract Delegations is RightToVote {
     event NewDelegate(address indexed delegate, uint indexed groupId, uint delegatedVotes, address[] delegationsFrom, uint groupDelegateId);
 
     function becomeDelegate(uint _groupId) public {
+        require(!addressIsDelegate(_groupId, msg.sender), "You are already a delegate i specific group");
         groupDelegateCount[_groupId]++;
 
         GroupDelegate memory newGroupDelegate = GroupDelegate({
@@ -112,6 +113,7 @@ contract Delegations is RightToVote {
 
     function resignAsDelegate(uint _groupId) public {
         address[] memory affectedUsers;
+         require(addressIsDelegate(_groupId, msg.sender), "You are not a delegate in requested group");
         // remove groupDelegationsByUsers for affected users
         uint arrayLength = groupDelegates[_groupId].length;
         for (uint i; i < arrayLength;) {
