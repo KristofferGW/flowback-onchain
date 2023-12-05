@@ -5,6 +5,8 @@ import './RightToVote.sol';
 import './Delegations.sol';
 
 contract Polls is RightToVote, Delegations {
+
+    
     struct Poll {
         string title;
         string tag;
@@ -16,6 +18,7 @@ contract Polls is RightToVote, Delegations {
         uint endDate;
         uint pollId;
         uint proposalCount;
+        PollPhase phase;
     }
 
     struct Proposal {
@@ -23,6 +26,7 @@ contract Polls is RightToVote, Delegations {
         uint voteCount;
         uint proposalId;
         uint predictionCount;
+        PollPhase phase;
     }
 
     mapping(uint => Poll) public polls;
@@ -30,6 +34,8 @@ contract Polls is RightToVote, Delegations {
 
     //Ties proposals to polls by pollId
     mapping(uint => Proposal[]) public proposals;
+
+    enum PollPhase {createdPhase, predictionPhase, predictionBetPhase, completedPhase}
 
     // event PollCreated(uint pollId, string title);
 
@@ -57,7 +63,8 @@ contract Polls is RightToVote, Delegations {
                 delegateEndDate: _delegateEndDate,
                 endDate: _endDate,
                 pollId: pollCount, 
-                proposalCount: 0
+                proposalCount: 0,
+                phase: PollPhase.createdPhase
             });
 
             emit PollCreated(newPoll.pollId, newPoll.title);
@@ -74,6 +81,8 @@ contract Polls is RightToVote, Delegations {
     event ProposalAdded(uint indexed pollId, uint proposalId, string description);
 
     function addProposal(uint _pollId, string calldata _description) public {
+        bool rightPhase = polls[_pollId].phase == PollPhase.createdPhase;
+        require(rightPhase, "You can not place proposal right now");
         requirePollToExist(_pollId);
         polls[_pollId].proposalCount++;
         uint _proposalId = polls[_pollId].proposalCount;
@@ -82,7 +91,8 @@ contract Polls is RightToVote, Delegations {
             description: _description,
             voteCount: 0,
             proposalId: _proposalId,
-            predictionCount: 0
+            predictionCount: 0,
+            phase: PollPhase.predictionPhase
         }));
 
         emit ProposalAdded(_pollId, _proposalId, _description);
@@ -203,5 +213,4 @@ contract Polls is RightToVote, Delegations {
         }
         return false;
     }
-    
 }
