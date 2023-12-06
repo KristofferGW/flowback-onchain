@@ -21,6 +21,7 @@ contract Predictions is Polls{
         string prediction;
         uint yesBets;
         uint noBets;
+        //PollPhase phase;    //Phases
     }
 
     struct PredictionBet{
@@ -29,6 +30,7 @@ contract Predictions is Polls{
         uint predictionId;
         bool bet;
         uint likelihood;
+        //PollPhase phase;   //Phases
     }
 
     function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){
@@ -53,7 +55,9 @@ contract Predictions is Polls{
         
         
         ) public{
-            
+            //phases
+            // bool rightPhase = proposals[_pollId][_proposalId -1].phase == PollPhase.predictionPhase;
+            // require(rightPhase, "You can not create a prediction at this time");
             Proposal storage proposal = proposals[_pollId][_proposalId -1]; // Get the proposal from the proposals mapping
             require(requireProposalToExist(_pollId, _proposalId));
 
@@ -70,6 +74,7 @@ contract Predictions is Polls{
                 prediction: _prediction,
                 yesBets:0,
                 noBets:0
+                //phase: PollPhase.predictionBetPhase
                 
             }));
             emit PredictionCreated(_predictionId, _prediction);
@@ -120,6 +125,9 @@ contract Predictions is Polls{
     )  external {
         require(!predictionFinished, "Prediction is finished");
         require(requirePredictionToExist(_pollId, _proposalId, _predictionId), "Prediction does not exist");
+        //phases
+            // bool rightPhase = predicitons[_predictionId.phase == PollPhase.predictionBetPhase;
+            // require(rightPhase, "You can not bet at this time");
             
         predictionBets[_predictionId].push(PredictionBet({
             pollId: _pollId,
@@ -127,6 +135,7 @@ contract Predictions is Polls{
             predictionId: _predictionId,
             likelihood: _likelihood,
             bet: _bet
+            //phase: PollPhase.completedPhase
                 
             }));
 
