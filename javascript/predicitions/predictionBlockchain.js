@@ -1,8 +1,8 @@
 const { ethers } = require('ethers');
 require('dotenv').config({path: '../.env'});
-const contractABI = require('./contractPredictionABI.json');
-const createPoll = require('./pollsBlockchain');
-const createProposal = require('./pollsBlockchain');
+const contractABI = require('../contractPredictionABI.json');
+const createPoll = require('../polls/pollsBlockchain');
+const createProposal = require('../polls/pollsBlockchain');
 // const getProposals = require('./pollsBlockchain');
 
 const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFURA_API_KEY);

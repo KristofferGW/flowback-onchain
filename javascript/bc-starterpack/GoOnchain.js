@@ -1,5 +1,5 @@
 const newWallet = require('./newWallet');
-const giveRightToVote = require('../VoteBlockchain')
+const giveRightToVote = require('../vote/VoteBlockchain')
 
 const GoOnchain = async (user )=>{
     const wallet = newWallet();
