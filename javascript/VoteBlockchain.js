@@ -73,9 +73,9 @@ const checkRightsInGroup = async (group) => {
     else
         console.log("You do not have rights to vote in group", group)
 }
-
-
 //giveRightToVote(2); 
 //removeRightToVote(2); 
 //checkAllRights(); 
 checkRightsInGroup(2);
+module.exports = giveRightToVote, removeRightToVote, checkAllRights, checkRightsInGroup;
+
