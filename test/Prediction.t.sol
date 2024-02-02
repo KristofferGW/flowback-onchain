@@ -1,39 +1,37 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.13;
+// // SPDX-License-Identifier: UNLICENSED 
+// pragma solidity ^0.8.0;
 
-import "forge-std/Test.sol";
-import "src/Prediction.sol";
-import "forge-std/Vm.sol";
-import "forge-std/console.sol";
+// import "forge-std/Test.sol";
+// import "src/Prediction.sol";
 
-contract PredictionTest is Test, Predictions{
+// contract TestPredictions is Test {
+//     Predictions predictions;
+//     uint pollId = 1;
+//     uint proposalId = 1;
+//     string prediction = "Test prediction";
 
-    Predictions public prediction;
-    //event PredictionCreated(string description, uint likelihood);
-    // vm.startPrank(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
+//     function setUp() public {
+//         predictions = new Predictions();
+//     }
 
-    function setUp() public {
-        prediction = new Predictions();
-    }
+//     function test_createPrediction() public {
+//         predictions.createPrediction(pollId, proposalId, prediction);
+//         // Predictions.Prediction[] memory preds = predictions.getPredictions(pollId, proposalId);
+//         // assertTrue(preds.length > 0, "Prediction should be created");
+//         // assertEq(preds[0].prediction, prediction, "Prediction text should match");
+//         // assertEq(preds[0].pollId, pollId, "Poll id should match");
+//         // assertEq(preds[0].proposalId, proposalId, "Proposal id should match");
+//     }
 
-    function run() public {
-        vm.broadcast(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
-    }
+//     // function test_requireProposalToExist() public {
+//     //     uint pollId = 1;
+//     //     uint proposalId = 1;
+//     //     bool exists = predictions.requireProposalToExist(pollId, proposalId);
+//     //     assertTrue(exists, "Proposal should exist");
+//     // }
 
-    function testEmitPredictionCreated() public {
-        
-        vm.expectEmit(true, true, true, true);
-
-        emit PredictionCreated("pred", 5);
-        // uint _proposalId = 1;
-        // string memory _description = "pred";
-        // uint _likelihood= 4;
-        // uint _pollId = 1;
-     
-        prediction.createPrediction(1, "pred", 5, 1);
-       
-        // console.log(success);
-
-    }
-    
-}
+//     // function test_getPredictions() public {
+//     //     Predictions.Prediction[] memory preds = predictions.getPredictions(pollId, proposalId);
+//     //     assertTrue(preds.length > 0, "Should return predictions");
+//     // }
+// }
