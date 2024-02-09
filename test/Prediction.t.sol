@@ -9,7 +9,6 @@ import "forge-std/console.sol";
 contract PredictionTest is Test, Predictions{
 
     Predictions public prediction;
-    //event PredictionCreated(string description, uint likelihood);
     // vm.startPrank(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
 
     function setUp() public {
@@ -22,18 +21,32 @@ contract PredictionTest is Test, Predictions{
 
     function testEmitPredictionCreated() public {
         
-        vm.expectEmit(true, true, true, true);
+         vm.expectEmit();
 
-        emit PredictionCreated("pred", 5);
-        // uint _proposalId = 1;
-        // string memory _description = "pred";
-        // uint _likelihood= 4;
-        // uint _pollId = 1;
-     
-        prediction.createPrediction(1, "pred", 5, 1);
-       
-        // console.log(success);
+        emit PredictionCreated(1, "pred");
+
+        prediction.createPrediction(1, 1, "pred");
+        
+    //         Traces:
+    //       [13117] PredictionTest::testEmitPredictionCreated()
+    // ├─ [0] VM::expectEmit()
+    // │   └─ ← ()
+    // ├─ emit PredictionCreated(predictionId: 1, prediction: "pred")
+    // ├─ [3009] Predictions::createPrediction(1, 1, "pred")
+    // │   └─ ← panic: array out-of-bounds access (0x32)
+    // └─ ← log != expected log   
 
     }
-    
+    function testRequireProposalToExist(uint _pollId, uint _proposalId) public {
+        assertFalse(requireProposalToExist(_pollId, _proposalId));
+
+//         Traces:
+//   [3045419] PredictionTest::setUp()
+//     ├─ [2987689] → new Predictions@0x5615dEB798BB3E4dFa0139dFa1b3D433Cc23b72f
+//     │   └─ ← 14911 bytes of code
+//     └─ ← ()
+
+//   [2794] PredictionTest::testRequireProposalToExist(0, 0)
+//     └─ ← panic: array out-of-bounds access (0x32)
+    }
 }

@@ -804,10 +804,273 @@
         }
       }
     },
-    "script/Delegations.t.sol": {
-      "lastModificationDate": 1700209849634,
-      "contentHash": "5176604c68ed9dff6a2e6a1f1f40ab81",
-      "sourceName": "script/Delegations.t.sol",
+    "script/Delegations.s.sol": {
+      "lastModificationDate": 1707402492331,
+      "contentHash": "a98c91a5a07375b0c2a373e782429795",
+      "sourceName": "script/Delegations.s.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": "^0.8.13",
+      "artifacts": {
+        "Delegations.s": {
+          "0.8.23+commit.f704f362.Windows.msvc": "Delegations.s.sol\\Delegations.s.json"
+        }
+      }
+    },
+    "src/Delegations.sol": {
+      "lastModificationDate": 1705934168427,
+      "contentHash": "09c6c9a23d288a62cd232e8d862935dc",
+      "sourceName": "src/Delegations.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "src\\RightToVote.sol"
+      ],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "Delegations": {
+          "0.8.23+commit.f704f362.Windows.msvc": "Delegations.sol\\Delegations.json"
+        }
+      }
+    },
+    "src/Polls.sol": {
+      "lastModificationDate": 1705934168430,
+      "contentHash": "8353413826020a0d0584af0ddd9e0135",
+      "sourceName": "src/Polls.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "src\\Delegations.sol",
+        "src\\RightToVote.sol"
+      ],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "Polls": {
+          "0.8.23+commit.f704f362.Windows.msvc": "Polls.sol\\Polls.json"
+        }
+      }
+    },
+    "src/Prediction.sol": {
+      "lastModificationDate": 1706107082087,
+      "contentHash": "fa2f0594ca745e2e92269627c078d9c7",
+      "sourceName": "src/Prediction.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "src\\Delegations.sol",
+        "src\\Polls.sol",
+        "src\\RightToVote.sol"
+      ],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "Predictions": {
+          "0.8.23+commit.f704f362.Windows.msvc": "Prediction.sol\\Predictions.json"
+        }
+      }
+    },
+    "src/PredictionBets.sol": {
+      "lastModificationDate": 1707311141828,
+      "contentHash": "7c26540a11260df36954662e53514fed",
+      "sourceName": "src/PredictionBets.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "src\\Delegations.sol",
+        "src\\Polls.sol",
+        "src\\Prediction.sol",
+        "src\\RightToVote.sol"
+      ],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "PredictionBets": {
+          "0.8.23+commit.f704f362.Windows.msvc": "PredictionBets.sol\\PredictionBets.json"
+        },
+        "ReduceBytes": {
+          "0.8.23+commit.f704f362.Windows.msvc": "PredictionBets.sol\\ReduceBytes.json"
+        }
+      }
+    },
+    "src/RightToVote.sol": {
+      "lastModificationDate": 1705934168435,
+      "contentHash": "2328a3253440b84d91922384eed87bd1",
+      "sourceName": "src/RightToVote.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "RightToVote": {
+          "0.8.23+commit.f704f362.Windows.msvc": "RightToVote.sol\\RightToVote.json"
+        }
+      }
+    },
+    "test/Delegations.t.sol": {
+      "lastModificationDate": 1707402331110,
+      "contentHash": "833bcb10a52486b61ad6da04625766e6",
+      "sourceName": "test/Delegations.t.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -859,17 +1122,17 @@
         "src\\Delegations.sol",
         "src\\RightToVote.sol"
       ],
-      "versionRequirement": "^0.8.13",
+      "versionRequirement": "^0.8.23",
       "artifacts": {
         "DelegationsTest": {
           "0.8.23+commit.f704f362.Windows.msvc": "Delegations.t.sol\\DelegationsTest.json"
         }
       }
     },
-    "script/Polls.t.sol": {
-      "lastModificationDate": 1700209921830,
-      "contentHash": "d04c758d82bc944ce341aa0db2e06274",
-      "sourceName": "script/Polls.t.sol",
+    "test/Polls.t.sol": {
+      "lastModificationDate": 1707405973322,
+      "contentHash": "35fda6de9e602db8e11a529d23666607",
+      "sourceName": "test/Polls.t.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -929,10 +1192,10 @@
         }
       }
     },
-    "script/Prediction.t.sol": {
-      "lastModificationDate": 1700644697871,
-      "contentHash": "f80d67106e9d290f021d4bf47d84564d",
-      "sourceName": "script/Prediction.t.sol",
+    "test/Prediction.t.sol": {
+      "lastModificationDate": 1707405562705,
+      "contentHash": "5d2970a83f684a126d4d70bd70ff66c8",
+      "sourceName": "test/Prediction.t.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -993,10 +1256,10 @@
         }
       }
     },
-    "script/RightToVote.t.sol": {
-      "lastModificationDate": 1700574023426,
+    "test/RightToVote.t.sol": {
+      "lastModificationDate": 1705934168444,
       "contentHash": "1429ab1bad1a2f72620768783de85d1e",
-      "sourceName": "script/RightToVote.t.sol",
+      "sourceName": "test/RightToVote.t.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -1051,220 +1314,6 @@
       "artifacts": {
         "RightToVoteTest": {
           "0.8.23+commit.f704f362.Windows.msvc": "RightToVote.t.sol\\RightToVoteTest.json"
-        }
-      }
-    },
-    "src/Delegations.sol": {
-      "lastModificationDate": 1700644149642,
-      "contentHash": "e9217a24f5b2406ab8ac3c08eb27efbe",
-      "sourceName": "src/Delegations.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "useLiteralContent": false,
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "paris",
-          "libraries": {}
-        }
-      },
-      "imports": [
-        "src\\RightToVote.sol"
-      ],
-      "versionRequirement": "^0.8.0",
-      "artifacts": {
-        "Delegations": {
-          "0.8.23+commit.f704f362.Windows.msvc": "Delegations.sol\\Delegations.json"
-        }
-      }
-    },
-    "src/Polls.sol": {
-      "lastModificationDate": 1700140333235,
-      "contentHash": "c0a5295312e3baff1cd14024b5016a3e",
-      "sourceName": "src/Polls.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "useLiteralContent": false,
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "paris",
-          "libraries": {}
-        }
-      },
-      "imports": [
-        "src\\Delegations.sol",
-        "src\\RightToVote.sol"
-      ],
-      "versionRequirement": "^0.8.0",
-      "artifacts": {
-        "Polls": {
-          "0.8.23+commit.f704f362.Windows.msvc": "Polls.sol\\Polls.json"
-        }
-      }
-    },
-    "src/Prediction.sol": {
-      "lastModificationDate": 1700644764621,
-      "contentHash": "594d5a1ca6147fb4fa8e49032c778b8e",
-      "sourceName": "src/Prediction.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "useLiteralContent": false,
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "paris",
-          "libraries": {}
-        }
-      },
-      "imports": [
-        "src\\Delegations.sol",
-        "src\\Polls.sol",
-        "src\\RightToVote.sol"
-      ],
-      "versionRequirement": "^0.8.0",
-      "artifacts": {
-        "Predictions": {
-          "0.8.23+commit.f704f362.Windows.msvc": "Prediction.sol\\Predictions.json"
-        }
-      }
-    },
-    "src/RightToVote.sol": {
-      "lastModificationDate": 1700140333238,
-      "contentHash": "dee8323f74f27b4f23662d0b8d87c7af",
-      "sourceName": "src/RightToVote.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "useLiteralContent": false,
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "paris",
-          "libraries": {}
-        }
-      },
-      "imports": [],
-      "versionRequirement": "^0.8.0",
-      "artifacts": {
-        "RightToVote": {
-          "0.8.23+commit.f704f362.Windows.msvc": "RightToVote.sol\\RightToVote.json"
-        }
-      }
-    },
-    "test/Delegations.t.sol": {
-      "lastModificationDate": 1700159464696,
-      "contentHash": "bdedd63553995927f90c096b683e1779",
-      "sourceName": "test/Delegations.t.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "useLiteralContent": false,
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "paris",
-          "libraries": {}
-        }
-      },
-      "imports": [],
-      "versionRequirement": null,
-      "artifacts": {
-        "Delegations.t": {
-          "0.8.23+commit.f704f362.Windows.msvc": "Delegations.t.sol\\Delegations.t.json"
         }
       }
     }
