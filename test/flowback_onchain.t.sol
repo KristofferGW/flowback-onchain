@@ -12,6 +12,8 @@ contract TestFlowback is Test {
     Delegations delegations;
     Polls polls;
     Predictions predictions;
+    address user = address(0x1);
+    address user1 = address(0x2);
 
     function setUp() public {
         rightToVote = new RightToVote();
@@ -42,6 +44,28 @@ contract TestFlowback is Test {
 
 
     // Delegations
-    
+    function testBecomeDelegate() public {
+        vm.startPrank(user);
+        delegations.becomeDelegate(1);
+        assertEq(delegations.addressIsDelegate(1, user), true);
+    } 
 
+    function testResignAsDelegate() public {
+        vm.startPrank(user);
+        delegations.becomeDelegate(1);
+        delegations.resignAsDelegate(1);
+        assertEq(delegations.addressIsDelegate(1, user), false);
+    }
+
+    // Polls
+    function testCreatePoll() public {
+        polls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
+        assertEq(polls.pollCount(), 1);
+    }
+
+    function testAddProposal() public {
+        polls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
+        polls.addProposal(1, "description");
+        assertEq(polls.getProposalCount(1), 1);
+    }
 }
