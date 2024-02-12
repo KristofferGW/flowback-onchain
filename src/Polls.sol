@@ -3,23 +3,9 @@ pragma solidity ^0.8.0;
 
 import './RightToVote.sol';
 import './Delegations.sol';
+import './PollStructs.sol';
 
-contract Polls is RightToVote, Delegations {
-
-    
-    struct Poll {
-        string title;
-        string tag;
-        uint group;
-        uint pollStartDate;
-        uint proposalEndDate;
-        uint votingStartDate;
-        uint delegateEndDate;
-        uint endDate;
-        uint pollId;
-        uint proposalCount;
-        PollPhase phase;
-    }
+contract Polls is RightToVote, Delegations, PollStructs {
 
     struct Proposal {
         string description;
@@ -29,15 +15,10 @@ contract Polls is RightToVote, Delegations {
         PollPhase phase;
     }
 
-    mapping(uint => Poll) public polls;
     uint public pollCount;
 
     //Ties proposals to polls by pollId
     mapping(uint => Proposal[]) public proposals;
-
-    enum PollPhase {createdPhase, predictionPhase, predictionBetPhase, completedPhase}
-
-    // event PollCreated(uint pollId, string title);
 
     event PollCreated(uint pollId, string title);
 
@@ -70,8 +51,6 @@ contract Polls is RightToVote, Delegations {
             emit PollCreated(newPoll.pollId, newPoll.title);
 
             polls[pollCount] = newPoll;
-
-            // emit PollCreated(pollCount, _title);
         }
 
     function requirePollToExist(uint _pollId) internal view {
