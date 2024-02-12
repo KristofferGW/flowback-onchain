@@ -888,9 +888,50 @@
         }
       }
     },
+    "src/PollStructs.sol": {
+      "lastModificationDate": 1707741729030,
+      "contentHash": "c193add9e3f59660f8373eb200d0f428",
+      "sourceName": "src/PollStructs.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
+        "PollStructs": {
+          "0.8.23+commit.f704f362.Windows.msvc": "PollStructs.sol\\PollStructs.json"
+        }
+      }
+    },
     "src/Polls.sol": {
-      "lastModificationDate": 1705934168430,
-      "contentHash": "8353413826020a0d0584af0ddd9e0135",
+      "lastModificationDate": 1707741729049,
+      "contentHash": "efcd16d88a9a077dd65a7b4c1795138a",
       "sourceName": "src/Polls.sol",
       "solcConfig": {
         "settings": {
@@ -923,6 +964,7 @@
       },
       "imports": [
         "src\\Delegations.sol",
+        "src\\PollStructs.sol",
         "src\\RightToVote.sol"
       ],
       "versionRequirement": "^0.8.0",
@@ -967,6 +1009,7 @@
       },
       "imports": [
         "src\\Delegations.sol",
+        "src\\PollStructs.sol",
         "src\\Polls.sol",
         "src\\RightToVote.sol"
       ],
@@ -1012,6 +1055,7 @@
       },
       "imports": [
         "src\\Delegations.sol",
+        "src\\PollStructs.sol",
         "src\\Polls.sol",
         "src\\Prediction.sol",
         "src\\RightToVote.sol"
@@ -1130,8 +1174,8 @@
       }
     },
     "test/Polls.t.sol": {
-      "lastModificationDate": 1707576862195,
-      "contentHash": "670e9379d5746f9929bbcf0cd5772628",
+      "lastModificationDate": 1707579650512,
+      "contentHash": "7ba216e7b91549b4996eb2fc7a79b44b",
       "sourceName": "test/Polls.t.sol",
       "solcConfig": {
         "settings": {
@@ -1182,6 +1226,7 @@
         "lib/forge-std/src/interfaces/IMulticall3.sol",
         "lib/forge-std/src/safeconsole.sol",
         "src\\Delegations.sol",
+        "src\\PollStructs.sol",
         "src\\Polls.sol",
         "src\\RightToVote.sol"
       ],
@@ -1245,6 +1290,7 @@
         "lib/forge-std/src/interfaces/IMulticall3.sol",
         "lib/forge-std/src/safeconsole.sol",
         "src\\Delegations.sol",
+        "src\\PollStructs.sol",
         "src\\Polls.sol",
         "src\\Prediction.sol",
         "src\\RightToVote.sol"

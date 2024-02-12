@@ -1,0 +1,673 @@
+{
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "name": "polls",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "internalType": "string",
+          "name": "tag",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "group",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pollStartDate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "proposalEndDate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "votingStartDate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "delegateEndDate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "endDate",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "pollId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "proposalCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "enum PollStructs.PollPhase",
+          "name": "phase",
+          "type": "uint8"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    }
+  ],
+  "bytecode": {
+    "object": "0x608060405234801561001057600080fd5b5061032e806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063ac2f007414610030575b600080fd5b61004361003e3660046101cd565b610063565b60405161005a9b9a9998979695949392919061022c565b60405180910390f35b60006020819052908152604090208054819061007e906102be565b80601f01602080910402602001604051908101604052809291908181526020018280546100aa906102be565b80156100f75780601f106100cc576101008083540402835291602001916100f7565b820191906000526020600020905b8154815290600101906020018083116100da57829003601f168201915b50505050509080600101805461010c906102be565b80601f0160208091040260200160405190810160405280929190818152602001828054610138906102be565b80156101855780601f1061015a57610100808354040283529160200191610185565b820191906000526020600020905b81548152906001019060200180831161016857829003601f168201915b50505060028401546003850154600486015460058701546006880154600789015460088a015460098b0154600a909b0154999a96999598509396509194909391929160ff168b565b6000602082840312156101df57600080fd5b5035919050565b6000815180845260005b8181101561020c576020818501810151868301820152016101f0565b506000602082860101526020601f19601f83011685010191505092915050565b60006101608083526102408184018f6101e6565b90508281036020840152610254818e6101e6565b9150508a60408301528960608301528860808301528760a08301528660c08301528560e08301528461010083015283610120830152600483106102a757634e487b7160e01b600052602160045260246000fd5b826101408301529c9b505050505050505050505050565b600181811c908216806102d257607f821691505b6020821081036102f257634e487b7160e01b600052602260045260246000fd5b5091905056fea26469706673582212204247e58e7b9fa999b01580a4e508bcdc3230384958639ff6555166eb1d6d620864736f6c63430008170033",
+    "sourceMap": "64:473:19:-:0;;;;;;;;;;;;;;;;;;;",
+    "linkReferences": {}
+  },
+  "deployedBytecode": {
+    "object": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c8063ac2f007414610030575b600080fd5b61004361003e3660046101cd565b610063565b60405161005a9b9a9998979695949392919061022c565b60405180910390f35b60006020819052908152604090208054819061007e906102be565b80601f01602080910402602001604051908101604052809291908181526020018280546100aa906102be565b80156100f75780601f106100cc576101008083540402835291602001916100f7565b820191906000526020600020905b8154815290600101906020018083116100da57829003601f168201915b50505050509080600101805461010c906102be565b80601f0160208091040260200160405190810160405280929190818152602001828054610138906102be565b80156101855780601f1061015a57610100808354040283529160200191610185565b820191906000526020600020905b81548152906001019060200180831161016857829003601f168201915b50505060028401546003850154600486015460058701546006880154600789015460088a015460098b0154600a909b0154999a96999598509396509194909391929160ff168b565b6000602082840312156101df57600080fd5b5035919050565b6000815180845260005b8181101561020c576020818501810151868301820152016101f0565b506000602082860101526020601f19601f83011685010191505092915050565b60006101608083526102408184018f6101e6565b90508281036020840152610254818e6101e6565b9150508a60408301528960608301528860808301528760a08301528660c08301528560e08301528461010083015283610120830152600483106102a757634e487b7160e01b600052602160045260246000fd5b826101408301529c9b505050505050505050505050565b600181811c908216806102d257607f821691505b6020821081036102f257634e487b7160e01b600052602260045260246000fd5b5091905056fea26469706673582212204247e58e7b9fa999b01580a4e508bcdc3230384958639ff6555166eb1d6d620864736f6c63430008170033",
+    "sourceMap": "64:473:19:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;499:34;;;;;;:::i;:::-;;:::i;:::-;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;499:34:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;499:34:19;;-1:-1:-1;499:34:19;;;;;;;;;;:::o;14:180:26:-;73:6;126:2;114:9;105:7;101:23;97:32;94:52;;;142:1;139;132:12;94:52;-1:-1:-1;165:23:26;;14:180;-1:-1:-1;14:180:26:o;199:423::-;241:3;279:5;273:12;306:6;301:3;294:19;331:1;341:162;355:6;352:1;349:13;341:162;;;417:4;473:13;;;469:22;;463:29;445:11;;;441:20;;434:59;370:12;341:162;;;345:3;548:1;541:4;532:6;527:3;523:16;519:27;512:38;611:4;604:2;600:7;595:2;587:6;583:15;579:29;574:3;570:39;566:50;559:57;;;199:423;;;;:::o;627:1220::-;1053:4;1082:3;1112:2;1101:9;1094:21;1138:45;1179:2;1168:9;1164:18;1156:6;1138:45;:::i;:::-;1124:59;;1231:9;1223:6;1219:22;1214:2;1203:9;1199:18;1192:50;1259:33;1285:6;1277;1259:33;:::i;:::-;1251:41;;;1328:6;1323:2;1312:9;1308:18;1301:34;1371:6;1366:2;1355:9;1351:18;1344:34;1415:6;1409:3;1398:9;1394:19;1387:35;1459:6;1453:3;1442:9;1438:19;1431:35;1503:6;1497:3;1486:9;1482:19;1475:35;1547:6;1541:3;1530:9;1526:19;1519:35;1591:6;1585:3;1574:9;1570:19;1563:35;1635:6;1629:3;1618:9;1614:19;1607:35;1673:1;1664:7;1661:14;1651:145;;1718:10;1713:3;1709:20;1706:1;1699:31;1753:4;1750:1;1743:15;1781:4;1778:1;1771:15;1651:145;1833:7;1827:3;1816:9;1812:19;1805:36;627:1220;;;;;;;;;;;;;;:::o;1852:380::-;1931:1;1927:12;;;;1974;;;1995:61;;2049:4;2041:6;2037:17;2027:27;;1995:61;2102:2;2094:6;2091:14;2071:18;2068:38;2065:161;;2148:10;2143:3;2139:20;2136:1;2129:31;2183:4;2180:1;2173:15;2211:4;2208:1;2201:15;2065:161;;1852:380;;;:::o",
+    "linkReferences": {}
+  },
+  "methodIdentifiers": {
+    "polls(uint256)": "ac2f0074"
+  },
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"polls\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"tag\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"group\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"pollStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"proposalEndDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"votingStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"delegateEndDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"pollId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"proposalCount\",\"type\":\"uint256\"},{\"internalType\":\"enum PollStructs.PollPhase\",\"name\":\"phase\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/PollStructs.sol\":\"PollStructs\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":forge-std/=lib/forge-std/src/\"]},\"sources\":{\"src/PollStructs.sol\":{\"keccak256\":\"0xe3e88e882e957bcabf9c50d38b0fcf94dfa2af543ae80a9c5b39d670b631d21f\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://e0f2fa1e7bd1531e65c4ea1d20c5c0ff2e92b6d75defc2777ba7565dc9a7e850\",\"dweb:/ipfs/QmSZV43xqZRx9Vzd5BUsb3XfyAuAJuQYJ7K9wvFWPQTLkM\"]}},\"version\":1}",
+  "metadata": {
+    "compiler": {
+      "version": "0.8.23+commit.f704f362"
+    },
+    "language": "Solidity",
+    "output": {
+      "abi": [
+        {
+          "inputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "polls",
+          "outputs": [
+            {
+              "internalType": "string",
+              "name": "title",
+              "type": "string"
+            },
+            {
+              "internalType": "string",
+              "name": "tag",
+              "type": "string"
+            },
+            {
+              "internalType": "uint256",
+              "name": "group",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "pollStartDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "proposalEndDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "votingStartDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "delegateEndDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "endDate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "pollId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "proposalCount",
+              "type": "uint256"
+            },
+            {
+              "internalType": "enum PollStructs.PollPhase",
+              "name": "phase",
+              "type": "uint8"
+            }
+          ]
+        }
+      ],
+      "devdoc": {
+        "kind": "dev",
+        "methods": {},
+        "version": 1
+      },
+      "userdoc": {
+        "kind": "user",
+        "methods": {},
+        "version": 1
+      }
+    },
+    "settings": {
+      "remappings": [
+        "ds-test/=lib/forge-std/lib/ds-test/src/",
+        "forge-std/=lib/forge-std/src/"
+      ],
+      "optimizer": {
+        "enabled": true,
+        "runs": 200
+      },
+      "metadata": {
+        "bytecodeHash": "ipfs"
+      },
+      "compilationTarget": {
+        "src/PollStructs.sol": "PollStructs"
+      },
+      "libraries": {}
+    },
+    "sources": {
+      "src/PollStructs.sol": {
+        "keccak256": "0xe3e88e882e957bcabf9c50d38b0fcf94dfa2af543ae80a9c5b39d670b631d21f",
+        "urls": [
+          "bzz-raw://e0f2fa1e7bd1531e65c4ea1d20c5c0ff2e92b6d75defc2777ba7565dc9a7e850",
+          "dweb:/ipfs/QmSZV43xqZRx9Vzd5BUsb3XfyAuAJuQYJ7K9wvFWPQTLkM"
+        ],
+        "license": "GPL-3.0"
+      }
+    },
+    "version": 1
+  },
+  "ast": {
+    "absolutePath": "src/PollStructs.sol",
+    "id": 44222,
+    "exportedSymbols": {
+      "PollStructs": [
+        44221
+      ]
+    },
+    "nodeType": "SourceUnit",
+    "src": "37:502:19",
+    "nodes": [
+      {
+        "id": 44186,
+        "nodeType": "PragmaDirective",
+        "src": "37:23:19",
+        "nodes": [],
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".0"
+        ]
+      },
+      {
+        "id": 44221,
+        "nodeType": "ContractDefinition",
+        "src": "64:473:19",
+        "nodes": [
+          {
+            "id": 44210,
+            "nodeType": "StructDefinition",
+            "src": "94:307:19",
+            "nodes": [],
+            "canonicalName": "PollStructs.Poll",
+            "members": [
+              {
+                "constant": false,
+                "id": 44188,
+                "mutability": "mutable",
+                "name": "title",
+                "nameLocation": "124:5:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "117:12:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 44187,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "117:6:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44190,
+                "mutability": "mutable",
+                "name": "tag",
+                "nameLocation": "147:3:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "140:10:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_string_storage_ptr",
+                  "typeString": "string"
+                },
+                "typeName": {
+                  "id": 44189,
+                  "name": "string",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "140:6:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_string_storage_ptr",
+                    "typeString": "string"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44192,
+                "mutability": "mutable",
+                "name": "group",
+                "nameLocation": "166:5:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "161:10:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 44191,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "161:4:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44194,
+                "mutability": "mutable",
+                "name": "pollStartDate",
+                "nameLocation": "187:13:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "182:18:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 44193,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "182:4:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44196,
+                "mutability": "mutable",
+                "name": "proposalEndDate",
+                "nameLocation": "216:15:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "211:20:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 44195,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "211:4:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44198,
+                "mutability": "mutable",
+                "name": "votingStartDate",
+                "nameLocation": "247:15:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "242:20:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 44197,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "242:4:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44200,
+                "mutability": "mutable",
+                "name": "delegateEndDate",
+                "nameLocation": "278:15:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "273:20:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 44199,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "273:4:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44202,
+                "mutability": "mutable",
+                "name": "endDate",
+                "nameLocation": "309:7:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "304:12:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 44201,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "304:4:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44204,
+                "mutability": "mutable",
+                "name": "pollId",
+                "nameLocation": "332:6:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "327:11:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 44203,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "327:4:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44206,
+                "mutability": "mutable",
+                "name": "proposalCount",
+                "nameLocation": "354:13:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "349:18:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 44205,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "349:4:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 44209,
+                "mutability": "mutable",
+                "name": "phase",
+                "nameLocation": "388:5:19",
+                "nodeType": "VariableDeclaration",
+                "scope": 44210,
+                "src": "378:15:19",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_PollPhase_$44215",
+                  "typeString": "enum PollStructs.PollPhase"
+                },
+                "typeName": {
+                  "id": 44208,
+                  "nodeType": "UserDefinedTypeName",
+                  "pathNode": {
+                    "id": 44207,
+                    "name": "PollPhase",
+                    "nameLocations": [
+                      "378:9:19"
+                    ],
+                    "nodeType": "IdentifierPath",
+                    "referencedDeclaration": 44215,
+                    "src": "378:9:19"
+                  },
+                  "referencedDeclaration": 44215,
+                  "src": "378:9:19",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_PollPhase_$44215",
+                    "typeString": "enum PollStructs.PollPhase"
+                  }
+                },
+                "visibility": "internal"
+              }
+            ],
+            "name": "Poll",
+            "nameLocation": "101:4:19",
+            "scope": 44221,
+            "visibility": "public"
+          },
+          {
+            "id": 44215,
+            "nodeType": "EnumDefinition",
+            "src": "409:82:19",
+            "nodes": [],
+            "canonicalName": "PollStructs.PollPhase",
+            "members": [
+              {
+                "id": 44211,
+                "name": "createdPhase",
+                "nameLocation": "425:12:19",
+                "nodeType": "EnumValue",
+                "src": "425:12:19"
+              },
+              {
+                "id": 44212,
+                "name": "predictionPhase",
+                "nameLocation": "439:15:19",
+                "nodeType": "EnumValue",
+                "src": "439:15:19"
+              },
+              {
+                "id": 44213,
+                "name": "predictionBetPhase",
+                "nameLocation": "456:18:19",
+                "nodeType": "EnumValue",
+                "src": "456:18:19"
+              },
+              {
+                "id": 44214,
+                "name": "completedPhase",
+                "nameLocation": "476:14:19",
+                "nodeType": "EnumValue",
+                "src": "476:14:19"
+              }
+            ],
+            "name": "PollPhase",
+            "nameLocation": "414:9:19"
+          },
+          {
+            "id": 44220,
+            "nodeType": "VariableDeclaration",
+            "src": "499:34:19",
+            "nodes": [],
+            "constant": false,
+            "functionSelector": "ac2f0074",
+            "mutability": "mutable",
+            "name": "polls",
+            "nameLocation": "528:5:19",
+            "scope": 44221,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Poll_$44210_storage_$",
+              "typeString": "mapping(uint256 => struct PollStructs.Poll)"
+            },
+            "typeName": {
+              "id": 44219,
+              "keyName": "",
+              "keyNameLocation": "-1:-1:-1",
+              "keyType": {
+                "id": 44216,
+                "name": "uint",
+                "nodeType": "ElementaryTypeName",
+                "src": "507:4:19",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                }
+              },
+              "nodeType": "Mapping",
+              "src": "499:21:19",
+              "typeDescriptions": {
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Poll_$44210_storage_$",
+                "typeString": "mapping(uint256 => struct PollStructs.Poll)"
+              },
+              "valueName": "",
+              "valueNameLocation": "-1:-1:-1",
+              "valueType": {
+                "id": 44218,
+                "nodeType": "UserDefinedTypeName",
+                "pathNode": {
+                  "id": 44217,
+                  "name": "Poll",
+                  "nameLocations": [
+                    "515:4:19"
+                  ],
+                  "nodeType": "IdentifierPath",
+                  "referencedDeclaration": 44210,
+                  "src": "515:4:19"
+                },
+                "referencedDeclaration": 44210,
+                "src": "515:4:19",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_struct$_Poll_$44210_storage_ptr",
+                  "typeString": "struct PollStructs.Poll"
+                }
+              }
+            },
+            "visibility": "public"
+          }
+        ],
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "PollStructs",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "linearizedBaseContracts": [
+          44221
+        ],
+        "name": "PollStructs",
+        "nameLocation": "73:11:19",
+        "scope": 44222,
+        "usedErrors": [],
+        "usedEvents": []
+      }
+    ],
+    "license": "GPL-3.0"
+  },
+  "id": 19
+}
