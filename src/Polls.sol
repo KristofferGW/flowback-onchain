@@ -239,4 +239,9 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs {
         }
         return false;
     }
+
+    // helper function
+    function getProposalCount(uint _pollId) public view returns(uint) {
+        return polls[_pollId].proposalCount;
+    }
 }
