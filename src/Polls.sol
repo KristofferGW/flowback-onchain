@@ -4,21 +4,11 @@ pragma solidity ^0.8.0;
 import './RightToVote.sol';
 import './Delegations.sol';
 import './PollStructs.sol';
+import './ProposalStructs.sol';
 
-contract Polls is RightToVote, Delegations, PollStructs {
-
-    struct Proposal {
-        string description;
-        uint voteCount;
-        uint proposalId;
-        uint predictionCount;
-        PollPhase phase;
-    }
+contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs {
 
     uint public pollCount;
-
-    //Ties proposals to polls by pollId
-    mapping(uint => Proposal[]) public proposals;
 
     event PollCreated(uint pollId, string title);
 
