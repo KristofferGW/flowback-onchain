@@ -3,8 +3,9 @@ pragma solidity ^0.8.0;
 
 import './RightToVote.sol';
 import './Delegations.sol';
+import './Predictionv2.sol';
 
-contract Polls is RightToVote, Delegations {
+contract Polls is RightToVote, Delegations, Predictionsv2 {
 
     
     struct Poll {
@@ -76,6 +77,21 @@ contract Polls is RightToVote, Delegations {
 
     function requirePollToExist(uint _pollId) internal view {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
+    }
+
+    function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){
+
+        uint predictionsLength= proposals[_pollId].length;
+        for (uint i=0; i <= predictionsLength;){
+           
+            if (proposals[_pollId][i].proposalId==_proposalId) {
+                return true;
+            }
+            unchecked {
+                ++i;
+            }
+        }
+        return false;
     }
 
     event ProposalAdded(uint indexed pollId, uint proposalId, string description);
