@@ -3,52 +3,18 @@ pragma solidity ^0.8.0;
 
 import './RightToVote.sol';
 import './Delegations.sol';
+import './PollStructs.sol';
+import './ProposalStructs.sol';
+
+contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs {
 
 /**
  * @title Polls
  * @dev A contract that manages polls and proposals.
  * @author @EllenLng, @KristofferGW
 */
-contract Polls is RightToVote, Delegations {
+    uint public pollCount; 
 
-    // A struct that represents a poll
-    struct Poll {
-        string title;
-        string tag;
-        uint group;
-        uint pollStartDate;
-        uint proposalEndDate;
-        uint votingStartDate;
-        uint delegateEndDate;
-        uint endDate;
-        uint pollId;
-        uint proposalCount;
-        PollPhase phase;
-    }
-
-    // A struct that represents a proposal
-    struct Proposal {
-        string description;
-        uint voteCount;
-        uint proposalId;
-        uint predictionCount;
-        PollPhase phase;
-    }
-
-    // A mapping that maps a poll ID to a Poll struct.
-    mapping(uint => Poll) public polls;
-    uint public pollCount;
-
-    //Ties proposals to polls by pollId
-    mapping(uint => Proposal[]) public proposals;
-
-    // A mapping that maps a poll ID to an array of addresses that have voted in the poll.
-    mapping(uint => address[]) internal votersForPoll;
-
-    // An enum that represents the different phases of a poll
-    enum PollPhase {createdPhase, predictionPhase, predictionBetPhase, completedPhase}
-
-    // An event that is triggered when a poll is created
     event PollCreated(uint pollId, string title);
     
     // An event that is triggered when a proposal is added
@@ -103,6 +69,7 @@ contract Polls is RightToVote, Delegations {
         * @dev Checks if a poll exists.
         * @param _pollId The poll ID to check.
     */
+
     function requirePollToExist(uint _pollId) internal view {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
     }
