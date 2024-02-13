@@ -1327,8 +1327,8 @@
       }
     },
     "test/Prediction.t.sol": {
-      "lastModificationDate": 1707850587768,
-      "contentHash": "771496ffb2e3b7210f48fee57481ca57",
+      "lastModificationDate": 1707852174242,
+      "contentHash": "aaa57d25789d43e15ca9ee36c86de0e4",
       "sourceName": "test/Prediction.t.sol",
       "solcConfig": {
         "settings": {
