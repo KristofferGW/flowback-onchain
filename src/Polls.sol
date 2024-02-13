@@ -7,7 +7,7 @@ import './PollStructs.sol';
 import './ProposalStructs.sol';
 import './Predictions.sol';
 import './PredictionStructs.sol';
-import './PredictionBet.sol';
+import './PredictionBets.sol';
 
 contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, PredictionStructs, Predictions, PredictionBets {
 

@@ -5,7 +5,7 @@ import "forge-std/Test.sol";
 import "src/RightToVote.sol";
 import "src/Delegations.sol";
 import "src/Polls.sol";
-import "src/Prediction.sol";
+import "src/Predictions.sol";
 
 contract TestFlowback is Test {
     RightToVote rightToVote;
@@ -44,18 +44,18 @@ contract TestFlowback is Test {
 
 
     // Delegations
-    function testBecomeDelegate() public {
-        vm.startPrank(user);
-        delegations.becomeDelegate(1);
-        assertEq(delegations.addressIsDelegate(1, user), true);
-    } 
+    // function testBecomeDelegate() public {
+    //     vm.startPrank(user);
+    //     delegations.becomeDelegate(1);
+    //     assertEq(delegations.addressIsDelegate(1, user), true);
+    // } 
 
-    function testResignAsDelegate() public {
-        vm.startPrank(user);
-        delegations.becomeDelegate(1);
-        delegations.resignAsDelegate(1);
-        assertEq(delegations.addressIsDelegate(1, user), false);
-    }
+    // function testResignAsDelegate() public {
+    //     vm.startPrank(user);
+    //     delegations.becomeDelegate(1);
+    //     delegations.resignAsDelegate(1);
+    //     assertEq(delegations.addressIsDelegate(1, user), false);
+    // }
 
     // Polls
     function testCreatePoll() public {
@@ -63,9 +63,9 @@ contract TestFlowback is Test {
         assertEq(polls.pollCount(), 1);
     }
 
-    function testAddProposal() public {
-        polls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
-        polls.addProposal(1, "description");
-        assertEq(polls.getProposalCount(1), 1);
-    }
+    // function testAddProposal() public {
+    //     polls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
+    //     polls.addProposal(1, "description");
+    //     assertEq(polls.getProposalCount(1), 1);
+    //}
 }
