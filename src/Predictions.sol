@@ -81,4 +81,8 @@ contract Predictions is PollStructs, ProposalStructs {
         }  
         return predictions[_proposalId];
     }
+
+    function predictionIsFinished() internal {
+        predictionFinished = true;
+    }
 }
