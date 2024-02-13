@@ -5,8 +5,9 @@ import './RightToVote.sol';
 import './Delegations.sol';
 import './PollStructs.sol';
 import './ProposalStructs.sol';
+import './Predictions.sol';
 
-contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs {
+contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predictions {
 
 /**
  * @title Polls
