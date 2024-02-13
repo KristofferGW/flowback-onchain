@@ -36,4 +36,36 @@ contract Predictions is PollStructs, ProposalStructs {
         }
         return false;
     }
+
+    function createPrediction(
+        uint _pollId, 
+        uint _proposalId,
+        string memory _prediction
+        
+        
+        ) public{
+            //phases
+            bool rightPhase = proposals[_pollId][_proposalId -1].phase == PollPhase.predictionPhase;
+            require(rightPhase, "You can not create a prediction at this time");
+            Proposal storage proposal = proposals[_pollId][_proposalId -1]; // Get the proposal from the proposals mapping
+            require(requireProposalToExist(_pollId, _proposalId));
+
+            proposal.predictionCount++; //Increment by one
+            uint _predictionId = proposal.predictionCount; // Set prediction id
+
+            proposals[_pollId][_proposalId -1] = proposal; // Update mapping
+   
+
+            predictions[_proposalId].push(Prediction({
+                pollId: _pollId,
+                proposalId: _proposalId,
+                predictionId: _predictionId,
+                prediction: _prediction,
+                yesBets:0,
+                noBets:0,
+                phase: PollPhase.predictionBetPhase
+                
+            }));
+            emit PredictionCreated(_predictionId, _prediction);
+    }
 }
