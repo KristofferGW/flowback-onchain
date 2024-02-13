@@ -3,24 +3,9 @@ pragma solidity ^0.8.0;
 
 import './PollStructs.sol';
 import './ProposalStructs.sol';
+import './PredictionStructs.sol';
 
-contract Predictions is PollStructs, ProposalStructs {
-    bool predictionFinished = false;
-
-    mapping(uint => Prediction[]) public predictions;
-
-    event PredictionCreated(uint predictionId, string prediction);
- 
-
-    struct Prediction{
-        uint pollId;
-        uint proposalId;
-        uint predictionId;
-        string prediction;
-        uint yesBets;
-        uint noBets;
-        PollPhase phase;   
-    }
+contract Predictions is PollStructs, ProposalStructs, PredictionStructs {
 
     function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){
 
@@ -80,9 +65,5 @@ contract Predictions is PollStructs, ProposalStructs {
             }  
         }  
         return predictions[_proposalId];
-    }
-
-    function predictionIsFinished() internal {
-        predictionFinished = true;
     }
 }

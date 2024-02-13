@@ -6,8 +6,10 @@ import './Delegations.sol';
 import './PollStructs.sol';
 import './ProposalStructs.sol';
 import './Predictions.sol';
+import './PredictionStructs.sol';
+import './PredictionBet.sol';
 
-contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predictions {
+contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, PredictionStructs, Predictions, PredictionBets {
 
     uint public pollCount;
 
