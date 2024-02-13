@@ -68,4 +68,17 @@ contract Predictions is PollStructs, ProposalStructs {
             }));
             emit PredictionCreated(_predictionId, _prediction);
     }
+
+    function getPredictions(uint _pollId, uint _proposalId) external view returns(Prediction[] memory) {
+        
+        uint proposalsLength = proposals[_pollId].length;
+        for (uint i=0; i <= proposalsLength;){   
+            if(proposals[_pollId][i].proposalId == _proposalId)
+            return predictions[_proposalId];
+            unchecked {
+                ++i;
+            }  
+        }  
+        return predictions[_proposalId];
+    }
 }
