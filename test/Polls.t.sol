@@ -41,7 +41,7 @@ contract PollsTest is Test, Polls {
 
     // function testRequirePollToExist(uint pollId) public {
 
-    //         vm.prank(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
+    //         //vm.prank(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
     //         vm.expectRevert(bytes("State not set correctly for continuation")); 
     //         testPolls.requirePollToExist(pollId);
     // }
@@ -71,6 +71,9 @@ contract PollsTest is Test, Polls {
 
     //     expectEq(testPolls.proposals, proposals)
     // }
+    // function testGetPollResult(uint pollId) public {
 
+
+    // }
 
 }

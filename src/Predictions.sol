@@ -1,10 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
+import './Polls.sol';
 
-import './PollStructs.sol';
-import './ProposalStructs.sol';
-
-contract Predictions is PollStructs, ProposalStructs {
+contract Predictions is Polls{
+ 
     bool predictionFinished = false;
 
     mapping(uint => Prediction[]) public predictions;
@@ -69,6 +68,8 @@ contract Predictions is PollStructs, ProposalStructs {
             emit PredictionCreated(_predictionId, _prediction);
     }
 
+
+    
     function getPredictions(uint _pollId, uint _proposalId) external view returns(Prediction[] memory) {
         
         uint proposalsLength = proposals[_pollId].length;
@@ -82,7 +83,9 @@ contract Predictions is PollStructs, ProposalStructs {
         return predictions[_proposalId];
     }
 
+
     function predictionIsFinished() internal {
         predictionFinished = true;
     }
+
 }
