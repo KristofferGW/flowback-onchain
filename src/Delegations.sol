@@ -184,7 +184,7 @@ contract Delegations is RightToVote {
      * @param _groupId The group ID of the group to check.
      * @return isDelegate Returns true if the user has delegated in the group, false otherwise.
     */
-    function addressIsDelegate(uint _groupId, address _potentialDelegate) view public returns(bool isDelegate) {
+    function addressIsDelegate(uint _groupId, address _potentialDelegate) view private returns(bool isDelegate) {
         uint arrayLength = groupDelegates[_groupId].length;
         for (uint i; i < arrayLength;) {
             if (groupDelegates[_groupId][i].delegate == _potentialDelegate) {
