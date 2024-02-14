@@ -3,19 +3,11 @@ pragma solidity ^0.8.0;
 import './PollStructs.sol';
 import './ProposalStructs.sol';
 import './PredictionStructs.sol';
+import './PredictionBetStructs.sol';
 
-contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs {
+contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs, PredictionBetStructs {
 
-     struct PredictionBet{
-        uint pollId;
-        uint proposalId;
-        uint predictionId;
-        bool bet;
-        uint likelihood;
-        PollPhase phase;
-    }
 
-    mapping(uint => PredictionBet[]) public predictionBets;
     event PredictionBetCreated(uint indexed predictionId, bool bet, uint likelihood);
 
     function _requireExist(uint _pollId, uint _proposalId, uint _predictionId) private view {
@@ -53,28 +45,35 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs {
     function requirePollPropPredToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool){
         
         //require poll to exist,
-        //require proposal to exist
-        //check if prediction exist
-
-        //checks if prediction exist-----
-        // uint proposalsLength = proposals[_pollId].length;
-        // for (uint a=0; a <= proposalsLength;){
-        //     if (proposals[_pollId][a].proposalId ==_proposalId){
-        //         uint predictionsLength = predictions[_proposalId].length;
-        //         for (uint b=0; b <= predictionsLength;){
-        //             if (predictions[_proposalId][b].predictionId ==_predictionId)
-        //                 return true;
-        //                 unchecked {
-        //                     ++b;
-        //                 }
-        //         }
-        //         return false;
-        //     }
-        //     unchecked {
-        //     ++a;
-        //     }
-        // }
-        // return false;
+        uint pollsLength = pollCount;
+        for (uint a=0; a <= pollsLength;){
+            if(polls[a].pollId==_pollId) {
+                //require proposal to exist
+                uint proposalsLength= proposals[_pollId].length;
+                for (uint b=0; b <= proposalsLength;){
+                    if (proposals[_pollId][b].proposalId==_proposalId) {
+                        //require prediction to exist
+                        uint predictionsLength = predictions[_proposalId].length;
+                        for (uint c=0; c <= predictionsLength;){
+                            if (predictions[_proposalId][c].predictionId ==_predictionId)
+                                return true;
+                                unchecked {
+                                ++c;
+                            }
+                        }
+                        return false;
+                    }
+                    unchecked {
+                        ++b;
+                    }
+                }
+                return false;
+            }
+            unchecked {
+                ++a;
+            }
+        }
+        return false;
     }
 
     function getPredictionBets( 
@@ -101,5 +100,4 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs {
         }
         return predictionBets[_predictionId];
     }
-
 }
