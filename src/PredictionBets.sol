@@ -94,6 +94,6 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs {
                 ++a;
             }
         }
-        return new PredictionBet[](0);
+        return predictionBets[_predictionId];
     }
 }

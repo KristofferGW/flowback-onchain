@@ -10,8 +10,6 @@ contract PredictionStructs is PollStructs, ProposalStructs {
         uint proposalId;
         uint predictionId;
         string prediction;
-        uint yesBets;
-        uint noBets;
         PollPhase phase;   
     }
     

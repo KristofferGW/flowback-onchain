@@ -17,62 +17,35 @@ contract RightToVote {
     // A mapping that maps a voter's address to a Voter struct.
     mapping(address => Voter) internal voters;
 
-    event PermissionToVoteRemoved(uint indexed _group); // Event triggered when permission to vote is removed for a group.
     event PermissionGivenToVote(uint indexed _group); // Event triggered when permission to vote is given for a group.
-
-    /**
-     * @dev Checks if permission doesn't exist for a given group.
-     * @param group The group ID to check.
-     * @return permissionAlreadyExist Returns true if permission doesn't exist, false otherwise.
-     */
-    function permissionDoesntExist (uint group) internal view returns(bool permissionAlreadyExist){
-        uint[] memory groups = voters[msg.sender].groups;
-        for (uint i; i < groups.length;) {
-            if (groups[i] == group) {
-                return false;
-            }
-            unchecked {
-                ++i;
-            }  
-        }
-        return true;
-    }
 
     /**
      * @dev Gives permission to vote in a group.
      * @param _group The group ID to give permission to vote in. 
     */
-    function giveRightToVote (uint _group) public payable {
-        require(permissionDoesntExist(_group), "Permission is already given in group");
+    function becameMemberOfGroup (uint _group) public payable {
+        require(!isUserMemberOfGroup(_group), "You are already member of specified group");
         voters[msg.sender].groups.push(_group);
         emit PermissionGivenToVote(_group);
     }
-
-    /**
-     * @dev Finds the index of a group in an array of groups.
-     * @param groups The array of group IDs to search in.
-     * @param searchFor The group ID to search for.
-     * @return hasDelegated Returns true if the user has delegated in the group, false otherwise.
-    */
-    function indexOfGroup(uint[] memory groups, uint searchFor) internal pure returns (uint256) {
+    
+    function indexOfGroup(uint[] memory groups, uint searchFor) internal pure returns (uint index) {
         for (uint i; i < groups.length;) {
             if (groups[i] == searchFor) {
                 return i;
             }
-
             unchecked {
                 ++i;
             }
         }
-        revert("Not Found");
     }
 
     /**
      * @dev Removes permission to vote in a group.
      * @param _group The group ID to remove permission to vote in.
     */
-    function removeRightToVote (uint _group) public payable {
-        require(!permissionDoesntExist(_group), "Can't find group you are trying to remove");
+    function removeGroupMembership (uint _group) public payable {
+        require(isUserMemberOfGroup(_group), "You are not member of specified group");
         uint index = indexOfGroup(voters[msg.sender].groups, _group);
         require(index < voters[msg.sender].groups.length, "index out of bound");
 
@@ -83,8 +56,6 @@ contract RightToVote {
             }
         }
         voters[msg.sender].groups.pop();
-        emit PermissionToVoteRemoved(_group);
-
     }
     
     /**
@@ -92,7 +63,7 @@ contract RightToVote {
      * @param _group The group ID to check.
      * @return hasRight Returns true if the user has permission to vote in the group, false otherwise.
     */
-    function checkRightsInGroup (uint _group) public view returns (bool hasRight) {
+    function isUserMemberOfGroup(uint _group) public view returns (bool hasRight) {
         for (uint i; i < voters[msg.sender].groups.length;) {
             if (voters[msg.sender].groups[i] == _group) {
                 return true;
@@ -108,7 +79,7 @@ contract RightToVote {
      * @dev Retrieves all groups that the user has permission to vote in. 
      * @return groups Returns an array of group IDs that the user has permission to vote in.
     */
-    function checkAllRights () public view returns (uint[] memory groups) {
-        return  voters[msg.sender].groups; 
+    function getGroupsUserIsMemberIn() public view returns (uint[] memory groups) {
+        return voters[msg.sender].groups; 
     }
 }

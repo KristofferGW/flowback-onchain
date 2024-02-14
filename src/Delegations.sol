@@ -8,6 +8,7 @@ import './RightToVote.sol';
  * @dev A contract that manages delegations for different groups.
  * @author @EllenLng, @KristofferGW
 */
+
 contract Delegations is RightToVote {
 
     //Mapping over who is delegate in which group
@@ -40,6 +41,15 @@ contract Delegations is RightToVote {
     // Event triggered when a delegate resigns.
     event DelegateResignation(address indexed delegate, uint indexed groupId);
     
+   
+    function _requireAddressIsDelegate(uint _groupId, address _potentialDelegate) private view {
+        require(addressIsDelegate(_groupId, _potentialDelegate), "The address is not a delegate in the specified group");
+    }
+
+    modifier requireAddressIsDelegate(uint _groupId, address _potentialDelegate){
+        _requireAddressIsDelegate(_groupId, _potentialDelegate);
+        _;
+    }
     /**
      * @dev Allows a user to become a delegate in a specific group.
      * @param _groupId The group ID of the group the delegate is a delegate in.
@@ -66,9 +76,8 @@ contract Delegations is RightToVote {
      * @param _groupId The group ID of the group the delegate is a delegate in.
      * @param _delegateTo The address of the delegate to delegate to.
     */
-    function delegate(uint _groupId, address _delegateTo) public {
-        require(addressIsDelegate(_groupId, _delegateTo), "The address is not a delegate in the specified group");
-        require(delegaterIsInGroup(_groupId), "You can only delegate in groups you are a member of.");
+    function delegate(uint _groupId, address _delegateTo) public requireAddressIsDelegate(_groupId, _delegateTo) {
+        require(isUserMemberOfGroup(_groupId), "You can only delegate in groups you are a member of.");
         require(!hasDelegatedInGroup(_groupId), "You have an active delegation in this group.");
         require(_delegateTo != msg.sender, "You can not delegate to yourself");
 
@@ -147,9 +156,8 @@ contract Delegations is RightToVote {
      * @dev Allows a user to resign as a delegate in a specific group.
      * @param _groupId The group ID of the group the delegate is a delegate in.
     */
-    function resignAsDelegate(uint _groupId) public {
+    function resignAsDelegate(uint _groupId) public requireAddressIsDelegate(_groupId, msg.sender){
         address[] memory affectedUsers;
-         require(addressIsDelegate(_groupId, msg.sender), "You are not a delegate in requested group");
 
         // remove groupDelegationsByUsers for affected users
         uint arrayLength = groupDelegates[_groupId].length;
@@ -188,25 +196,6 @@ contract Delegations is RightToVote {
         uint arrayLength = groupDelegates[_groupId].length;
         for (uint i; i < arrayLength;) {
             if (groupDelegates[_groupId][i].delegate == _potentialDelegate) {
-                return true;
-            }
-
-            unchecked {
-                ++i;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * @dev Checks if a user is a member of a specific group.
-     * @param _groupId The group ID of the group to check.
-     * @return isInGroup Returns true if the user is a member of the group, false otherwise.
-    */
-    function delegaterIsInGroup(uint _groupId) view private returns(bool isInGroup) {
-        uint arrayLength = voters[msg.sender].groups.length;
-        for (uint i; i < arrayLength;) {
-            if (voters[msg.sender].groups[i] == _groupId) {
                 return true;
             }
 

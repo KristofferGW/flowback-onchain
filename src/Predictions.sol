@@ -46,8 +46,6 @@ contract Predictions is PollStructs, ProposalStructs, PredictionStructs {
                 proposalId: _proposalId,
                 predictionId: _predictionId,
                 prediction: _prediction,
-                yesBets:0,
-                noBets:0,
                 phase: PollPhase.predictionBetPhase
                 
             }));

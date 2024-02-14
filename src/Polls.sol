@@ -9,6 +9,7 @@ import './Predictions.sol';
 import './PredictionStructs.sol';
 import './PredictionBets.sol';
 
+
 contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, PredictionStructs, Predictions, PredictionBets {
 
     uint public pollCount;
@@ -46,20 +47,19 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
             polls[pollCount] = newPoll;
         }
 
-    function requirePollToExist(uint _pollId) internal view {
+    function _requirePollToExist(uint _pollId) internal view {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
     }
-
-    function testRequireProposalToExist(uint _pollId, uint _proposalId) public view returns (bool) {
-        return requireProposalToExist(_pollId, _proposalId);
+    modifier requirePollToExist(uint _pollId){
+        _requirePollToExist(_pollId);
+        _;
     }
 
     event ProposalAdded(uint indexed pollId, uint proposalId, string description);
 
-    function addProposal(uint _pollId, string calldata _description) public {
+    function addProposal(uint _pollId, string calldata _description) public requirePollToExist(_pollId){
         bool rightPhase = polls[_pollId].phase == PollPhase.createdPhase;
         require(rightPhase, "You can not place proposal right now");
-        requirePollToExist(_pollId);
         polls[_pollId].proposalCount++;
         uint _proposalId = polls[_pollId].proposalCount;
 
@@ -74,13 +74,13 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
         emit ProposalAdded(_pollId, _proposalId, _description);
     }
 
-    function getProposals(uint _pollId) external view returns(Proposal[] memory) {
-        requirePollToExist(_pollId);
+    function getProposals(uint _pollId) external view requirePollToExist(_pollId) returns(Proposal[] memory) {
+        // requirePollToExist(_pollId);
         return proposals[_pollId];
     }
 
-    function getPollResults(uint _pollId) public view returns (string[] memory, uint[] memory) {
-        requirePollToExist(_pollId);
+    function getPollResults(uint _pollId) public view requirePollToExist(_pollId) returns (string[] memory, uint[] memory) {
+        // requirePollToExist(_pollId);
 
         Proposal[] memory pollProposals = proposals[_pollId];
 
@@ -110,35 +110,21 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
         return false;
     }
 
-    function userIsMemberOfPollGroup(uint _pollId) internal view returns(bool isInGroup) {
-        uint[] memory userGroups = voters[msg.sender].groups;
-
-        for (uint i; i < userGroups.length;) {
-            if (userGroups[i] == polls[_pollId].group) {
-                return true;
-            }
-            unchecked {
-                ++i;
-            }
-        }
-        return false;
-    }
-
     event VoteSubmitted(uint indexed pollId, address indexed voter, uint votesForProposal);
 
-    function vote(uint _pollId, uint _proposalId) public {
+    function vote(uint _pollId, uint _proposalId) public requirePollToExist(_pollId) {
         uint _pollGroup = polls[_pollId].group;
         uint delegatedVotingPower;
 
-        requirePollToExist(_pollId);
+        // requirePollToExist(_pollId);
 
-        require(userIsMemberOfPollGroup(_pollId), "The user is not a member of poll group");
+        require(isUserMemberOfGroup(_pollId), "The user is not a member of poll group");
 
         // require(block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
         
         require(!hasVoted(_pollId), "Vote has already been cast");
 
-        require(_proposalId > 0 && _proposalId <= polls[_pollId].proposalCount, "Proposal does not exist");
+        require(requireProposalToExist(_pollId, _proposalId));
 
         require(!userHasDelegatedInGroup(_pollGroup), "You have delegated your vote in the polls group.");
 
@@ -171,7 +157,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
                 ++i;
             }
         }
-        revert("There is no such proposal for the specified pollId");
+        return;
     }
 
     mapping(uint => address[]) internal votersForPoll;
