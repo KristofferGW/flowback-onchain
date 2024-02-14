@@ -34,9 +34,6 @@ contract Delegations is RightToVote {
     
     // Event triggered when a new delegation is created.
     event NewDelegation(address indexed from, address indexed to, uint indexed groupId, uint delegatedVotes, address[] delegationsFrom);
-    
-    // Event triggered when a delegation is removed.
-    event DelegationRemoved(address indexed from, address indexed by, uint indexed groupId, uint delegatedVotes);
 
     // Event triggered when a delegate resigns.
     event DelegateResignation(address indexed delegate, uint indexed groupId);
@@ -149,7 +146,6 @@ contract Delegations is RightToVote {
                 ++i;
             }
         }
-        emit DelegationRemoved(_delegate, msg.sender, _groupId, delegatedVotes);
     }
 
     /**

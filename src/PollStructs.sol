@@ -20,4 +20,5 @@ contract PollStructs {
     enum PollPhase {createdPhase, predictionPhase, predictionBetPhase, completedPhase}
 
     mapping(uint => Poll) public polls;
+    uint public pollCount;
 }

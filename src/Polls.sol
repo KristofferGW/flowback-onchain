@@ -7,12 +7,12 @@ import './PollStructs.sol';
 import './ProposalStructs.sol';
 import './Predictions.sol';
 import './PredictionStructs.sol';
+import './PredictionBetStructs.sol';
 import './PredictionBets.sol';
 
 
-contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, PredictionStructs, Predictions, PredictionBets {
 
-    uint public pollCount;
+contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, PredictionStructs, Predictions, PredictionBetStructs, PredictionBets {
 
     event PollCreated(uint pollId, string title);
 
@@ -75,7 +75,6 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
     }
 
     function getProposals(uint _pollId) external view requirePollToExist(_pollId) returns(Proposal[] memory) {
-        // requirePollToExist(_pollId);
         return proposals[_pollId];
     }
 
