@@ -19,7 +19,7 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs {
     event PredictionBetCreated(uint indexed predictionId, bool bet, uint likelihood);
 
     function _requireExist(uint _pollId, uint _proposalId, uint _predictionId) private view {
-        require(requirePredictionToExist(_pollId, _proposalId, _predictionId), "Prediction does not exist");
+        require(requirePollPropPredToExist(_pollId, _proposalId, _predictionId), "Wrong poll, proposal or prediction");
     }
 
     modifier requireExist(uint _pollId, uint _proposalId,uint _predictionId){
@@ -38,7 +38,7 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs {
         bool rightPhase = predictions[_proposalId][_predictionId-1].phase == PollPhase.predictionBetPhase;
         require(rightPhase, "You can not place a bet at this time");
           
-        predictionBets[_predictionId-1].push(PredictionBet({
+        predictionBets[_predictionId].push(PredictionBet({
             pollId: _pollId,
             proposalId: _proposalId,
             predictionId: _predictionId,
@@ -50,26 +50,31 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs {
         emit PredictionBetCreated(_predictionId, _bet, _likelihood);
     }
 
-    function requirePredictionToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool){
+    function requirePollPropPredToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool){
+        
+        //require poll to exist,
+        //require proposal to exist
+        //check if prediction exist
 
-        uint proposalsLength = proposals[_pollId].length;
-        for (uint a=0; a <= proposalsLength;){
-            if (proposals[_pollId][a].proposalId ==_proposalId){
-                uint predictionsLength = predictions[_proposalId].length;
-                for (uint b=0; b <= predictionsLength;){
-                    if (predictions[_proposalId][b].predictionId ==_predictionId)
-                        return true;
-                        unchecked {
-                            ++b;
-                        }
-                }
-                return false;
-            }
-            unchecked {
-            ++a;
-            }
-        }
-        return false;
+        //checks if prediction exist-----
+        // uint proposalsLength = proposals[_pollId].length;
+        // for (uint a=0; a <= proposalsLength;){
+        //     if (proposals[_pollId][a].proposalId ==_proposalId){
+        //         uint predictionsLength = predictions[_proposalId].length;
+        //         for (uint b=0; b <= predictionsLength;){
+        //             if (predictions[_proposalId][b].predictionId ==_predictionId)
+        //                 return true;
+        //                 unchecked {
+        //                     ++b;
+        //                 }
+        //         }
+        //         return false;
+        //     }
+        //     unchecked {
+        //     ++a;
+        //     }
+        // }
+        // return false;
     }
 
     function getPredictionBets( 
@@ -96,4 +101,5 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs {
         }
         return predictionBets[_predictionId];
     }
+
 }
