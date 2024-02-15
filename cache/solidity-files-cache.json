@@ -1334,8 +1334,8 @@
       }
     },
     "test/Prediction.t.sol": {
-      "lastModificationDate": 1708005773241,
-      "contentHash": "0e31a72ccac7574394e486d7e7bac743",
+      "lastModificationDate": 1708005870188,
+      "contentHash": "f63b48925bb198c3b0e7725ed7f20e6a",
       "sourceName": "test/Prediction.t.sol",
       "solcConfig": {
         "settings": {
@@ -1403,8 +1403,8 @@
       }
     },
     "test/RightToVote.t.sol": {
-      "lastModificationDate": 1708004866129,
-      "contentHash": "01109a91c4d60e4fe87d737af60c756d",
+      "lastModificationDate": 1708006830936,
+      "contentHash": "d64573de73a9f030b40eb4804b4b2174",
       "sourceName": "test/RightToVote.t.sol",
       "solcConfig": {
         "settings": {

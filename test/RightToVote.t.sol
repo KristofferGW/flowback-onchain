@@ -8,7 +8,6 @@ import "forge-std/Vm.sol";
 contract RightToVoteTest is Test, RightToVote {
 
     RightToVote public rightToVote;
-    //vm.startPrank(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
     
     function setUp() public {
         rightToVote = new RightToVote();
@@ -18,13 +17,23 @@ contract RightToVoteTest is Test, RightToVote {
        vm.broadcast(); 
     }
 
-    function testGiveRightToVote(uint group) public {
+    function testEmitPredictionCreated() public {
+        vm.expectEmit();
+        emit PermissionGivenToVote(1);
+        rightToVote.becameMemberOfGroup(1);  
+    }
+
+    function testBecameMemberOfGroup(uint group) public {
         rightToVote.becameMemberOfGroup(group);
         assertTrue(rightToVote.isUserMemberOfGroup(group));
     }
 
-    function testRemoveRightToVote(uint group) public {
+    function testRemoveGroupMembership(uint group) public {
         assertEq(rightToVote.isUserMemberOfGroup(group), false);
+    }
+    function testGetGroupsUserIsMemberIn() public {
+        rightToVote.becameMemberOfGroup(4);
+        assertEq(rightToVote.getGroupsUserIsMemberIn()[0], 4);
     }
     
 }
