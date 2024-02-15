@@ -1,0 +1,3 @@
+Use command in terminal to deploy with foundry:
+
+forge create --rpc-url https://mainnet.infura.io --private-key abc123456789 src/Delegations.sol:Delegations
