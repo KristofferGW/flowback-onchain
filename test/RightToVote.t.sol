@@ -19,12 +19,12 @@ contract RightToVoteTest is Test, RightToVote {
     }
 
     function testGiveRightToVote(uint group) public {
-        rightToVote.giveRightToVote(group);
-        assertTrue(rightToVote.checkRightsInGroup(group));
+        rightToVote.becameMemberOfGroup(group);
+        assertTrue(rightToVote.isUserMemberOfGroup(group));
     }
 
     function testRemoveRightToVote(uint group) public {
-        assertEq(rightToVote.checkRightsInGroup(group), false);
+        assertEq(rightToVote.isUserMemberOfGroup(group), false);
     }
     
 }

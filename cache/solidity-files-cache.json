@@ -804,50 +804,9 @@
         }
       }
     },
-    "script/Delegations.s.sol": {
-      "lastModificationDate": 1707402492331,
-      "contentHash": "a98c91a5a07375b0c2a373e782429795",
-      "sourceName": "script/Delegations.s.sol",
-      "solcConfig": {
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "metadata": {
-            "useLiteralContent": false,
-            "bytecodeHash": "ipfs",
-            "appendCBOR": true
-          },
-          "outputSelection": {
-            "*": {
-              "": [
-                "ast"
-              ],
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ]
-            }
-          },
-          "evmVersion": "paris",
-          "libraries": {}
-        }
-      },
-      "imports": [],
-      "versionRequirement": "^0.8.13",
-      "artifacts": {
-        "Delegations.s": {
-          "0.8.23+commit.f704f362.Windows.msvc": "Delegations.s.sol\\Delegations.s.json"
-        }
-      }
-    },
     "src/Delegations.sol": {
-      "lastModificationDate": 1705934168427,
-      "contentHash": "09c6c9a23d288a62cd232e8d862935dc",
+      "lastModificationDate": 1707931356909,
+      "contentHash": "02dfd15613f04993623426a3f5203b20",
       "sourceName": "src/Delegations.sol",
       "solcConfig": {
         "settings": {
@@ -889,8 +848,8 @@
       }
     },
     "src/PollStructs.sol": {
-      "lastModificationDate": 1707741729030,
-      "contentHash": "c193add9e3f59660f8373eb200d0f428",
+      "lastModificationDate": 1707931406611,
+      "contentHash": "f3f4be9889128ec78bffaeda97538413",
       "sourceName": "src/PollStructs.sol",
       "solcConfig": {
         "settings": {
@@ -930,8 +889,8 @@
       }
     },
     "src/Polls.sol": {
-      "lastModificationDate": 1707850694059,
-      "contentHash": "3bd9b7d45438cfa35be1f9b86b56a646",
+      "lastModificationDate": 1707931565129,
+      "contentHash": "06c71f197887c75ab6f714fba9fa8d5a",
       "sourceName": "src/Polls.sol",
       "solcConfig": {
         "settings": {
@@ -965,6 +924,7 @@
       "imports": [
         "src\\Delegations.sol",
         "src\\PollStructs.sol",
+        "src\\PredictionBetStructs.sol",
         "src\\PredictionBets.sol",
         "src\\PredictionStructs.sol",
         "src\\Predictions.sol",
@@ -978,10 +938,10 @@
         }
       }
     },
-    "src/PredictionBets.sol": {
-      "lastModificationDate": 1707850082661,
-      "contentHash": "ab80c84daf3af0919d6904b59012a31e",
-      "sourceName": "src/PredictionBets.sol",
+    "src/PredictionBetStructs.sol": {
+      "lastModificationDate": 1707931470011,
+      "contentHash": "d796a51c31da2b2faeb9d6e982486d91",
+      "sourceName": "src/PredictionBetStructs.sol",
       "solcConfig": {
         "settings": {
           "optimizer": {
@@ -1018,14 +978,60 @@
       ],
       "versionRequirement": "^0.8.0",
       "artifacts": {
+        "PredictionBetStructs": {
+          "0.8.23+commit.f704f362.Windows.msvc": "PredictionBetStructs.sol\\PredictionBetStructs.json"
+        }
+      }
+    },
+    "src/PredictionBets.sol": {
+      "lastModificationDate": 1707931434732,
+      "contentHash": "6015ea852d951ba03b3d3f45df4630b6",
+      "sourceName": "src/PredictionBets.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "src\\PollStructs.sol",
+        "src\\PredictionBetStructs.sol",
+        "src\\PredictionStructs.sol",
+        "src\\ProposalStructs.sol"
+      ],
+      "versionRequirement": "^0.8.0",
+      "artifacts": {
         "PredictionBets": {
           "0.8.23+commit.f704f362.Windows.msvc": "PredictionBets.sol\\PredictionBets.json"
         }
       }
     },
     "src/PredictionStructs.sol": {
-      "lastModificationDate": 1707850018078,
-      "contentHash": "838656f4659815e80624fc18ea183feb",
+      "lastModificationDate": 1707931512837,
+      "contentHash": "d8f9f18357538a82e8759d04828262c1",
       "sourceName": "src/PredictionStructs.sol",
       "solcConfig": {
         "settings": {
@@ -1068,8 +1074,8 @@
       }
     },
     "src/Predictions.sol": {
-      "lastModificationDate": 1707850047262,
-      "contentHash": "990cbf2fdf7f3db1540831de81f7554f",
+      "lastModificationDate": 1707931494254,
+      "contentHash": "c6bad81b677750342fd585cba772c863",
       "sourceName": "src/Predictions.sol",
       "solcConfig": {
         "settings": {
@@ -1156,8 +1162,8 @@
       }
     },
     "src/RightToVote.sol": {
-      "lastModificationDate": 1705934168435,
-      "contentHash": "2328a3253440b84d91922384eed87bd1",
+      "lastModificationDate": 1707931533738,
+      "contentHash": "8dce8ea201eabfcb3212e554de985104",
       "sourceName": "src/RightToVote.sol",
       "solcConfig": {
         "settings": {
@@ -1259,7 +1265,7 @@
       }
     },
     "test/Polls.t.sol": {
-      "lastModificationDate": 1707744811637,
+      "lastModificationDate": 1708004910900,
       "contentHash": "646d665f2149979e6bf6a693f3bdb693",
       "sourceName": "test/Polls.t.sol",
       "solcConfig": {
@@ -1313,6 +1319,7 @@
         "src\\Delegations.sol",
         "src\\PollStructs.sol",
         "src\\Polls.sol",
+        "src\\PredictionBetStructs.sol",
         "src\\PredictionBets.sol",
         "src\\PredictionStructs.sol",
         "src\\Predictions.sol",
@@ -1327,8 +1334,8 @@
       }
     },
     "test/Prediction.t.sol": {
-      "lastModificationDate": 1707852174242,
-      "contentHash": "aaa57d25789d43e15ca9ee36c86de0e4",
+      "lastModificationDate": 1708005773241,
+      "contentHash": "0e31a72ccac7574394e486d7e7bac743",
       "sourceName": "test/Prediction.t.sol",
       "solcConfig": {
         "settings": {
@@ -1378,10 +1385,15 @@
         "lib/forge-std/src/console2.sol",
         "lib/forge-std/src/interfaces/IMulticall3.sol",
         "lib/forge-std/src/safeconsole.sol",
+        "src\\Delegations.sol",
         "src\\PollStructs.sol",
+        "src\\Polls.sol",
+        "src\\PredictionBetStructs.sol",
+        "src\\PredictionBets.sol",
         "src\\PredictionStructs.sol",
         "src\\Predictions.sol",
-        "src\\ProposalStructs.sol"
+        "src\\ProposalStructs.sol",
+        "src\\RightToVote.sol"
       ],
       "versionRequirement": "^0.8.13",
       "artifacts": {
@@ -1391,8 +1403,8 @@
       }
     },
     "test/RightToVote.t.sol": {
-      "lastModificationDate": 1705934168444,
-      "contentHash": "1429ab1bad1a2f72620768783de85d1e",
+      "lastModificationDate": 1708004866129,
+      "contentHash": "01109a91c4d60e4fe87d737af60c756d",
       "sourceName": "test/RightToVote.t.sol",
       "solcConfig": {
         "settings": {
@@ -1452,8 +1464,8 @@
       }
     },
     "test/flowback_onchain.t.sol": {
-      "lastModificationDate": 1707850835290,
-      "contentHash": "def4620d7d532d994c30b9d22fad1f03",
+      "lastModificationDate": 1708004906856,
+      "contentHash": "4dc3e6a832dc26aebc11649d5aae8fb8",
       "sourceName": "test/flowback_onchain.t.sol",
       "solcConfig": {
         "settings": {
@@ -1484,38 +1496,11 @@
           "libraries": {}
         }
       },
-      "imports": [
-        "lib/forge-std/lib/ds-test/src\\test.sol",
-        "lib/forge-std/src/Base.sol",
-        "lib/forge-std/src/StdAssertions.sol",
-        "lib/forge-std/src/StdChains.sol",
-        "lib/forge-std/src/StdCheats.sol",
-        "lib/forge-std/src/StdError.sol",
-        "lib/forge-std/src/StdInvariant.sol",
-        "lib/forge-std/src/StdJson.sol",
-        "lib/forge-std/src/StdMath.sol",
-        "lib/forge-std/src/StdStorage.sol",
-        "lib/forge-std/src/StdStyle.sol",
-        "lib/forge-std/src/StdUtils.sol",
-        "lib/forge-std/src\\Test.sol",
-        "lib/forge-std/src\\Vm.sol",
-        "lib/forge-std/src\\console.sol",
-        "lib/forge-std/src/console2.sol",
-        "lib/forge-std/src/interfaces/IMulticall3.sol",
-        "lib/forge-std/src/safeconsole.sol",
-        "src\\Delegations.sol",
-        "src\\PollStructs.sol",
-        "src\\Polls.sol",
-        "src\\PredictionBets.sol",
-        "src\\PredictionStructs.sol",
-        "src\\Predictions.sol",
-        "src\\ProposalStructs.sol",
-        "src\\RightToVote.sol"
-      ],
-      "versionRequirement": "^0.8.13",
+      "imports": [],
+      "versionRequirement": null,
       "artifacts": {
-        "TestFlowback": {
-          "0.8.23+commit.f704f362.Windows.msvc": "flowback_onchain.t.sol\\TestFlowback.json"
+        "flowback_onchain.t": {
+          "0.8.23+commit.f704f362.Windows.msvc": "flowback_onchain.t.sol\\flowback_onchain.t.json"
         }
       }
     }

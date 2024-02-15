@@ -1,6 +1,19 @@
 {
   "abi": [
     {
+      "inputs": [],
+      "name": "pollCount",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
       "inputs": [
         {
           "internalType": "uint256",
@@ -71,19 +84,20 @@
     }
   ],
   "bytecode": {
-    "object": "0x608060405234801561001057600080fd5b5061032e806100206000396000f3fe608060405234801561001057600080fd5b506004361061002b5760003560e01c8063ac2f007414610030575b600080fd5b61004361003e3660046101cd565b610063565b60405161005a9b9a9998979695949392919061022c565b60405180910390f35b60006020819052908152604090208054819061007e906102be565b80601f01602080910402602001604051908101604052809291908181526020018280546100aa906102be565b80156100f75780601f106100cc576101008083540402835291602001916100f7565b820191906000526020600020905b8154815290600101906020018083116100da57829003601f168201915b50505050509080600101805461010c906102be565b80601f0160208091040260200160405190810160405280929190818152602001828054610138906102be565b80156101855780601f1061015a57610100808354040283529160200191610185565b820191906000526020600020905b81548152906001019060200180831161016857829003601f168201915b50505060028401546003850154600486015460058701546006880154600789015460088a015460098b0154600a909b0154999a96999598509396509194909391929160ff168b565b6000602082840312156101df57600080fd5b5035919050565b6000815180845260005b8181101561020c576020818501810151868301820152016101f0565b506000602082860101526020601f19601f83011685010191505092915050565b60006101608083526102408184018f6101e6565b90508281036020840152610254818e6101e6565b9150508a60408301528960608301528860808301528760a08301528660c08301528560e08301528461010083015283610120830152600483106102a757634e487b7160e01b600052602160045260246000fd5b826101408301529c9b505050505050505050505050565b600181811c908216806102d257607f821691505b6020821081036102f257634e487b7160e01b600052602260045260246000fd5b5091905056fea26469706673582212204247e58e7b9fa999b01580a4e508bcdc3230384958639ff6555166eb1d6d620864736f6c63430008170033",
-    "sourceMap": "64:473:19:-:0;;;;;;;;;;;;;;;;;;;",
+    "object": "0x608060405234801561001057600080fd5b5061034c806100206000396000f3fe608060405234801561001057600080fd5b50600436106100365760003560e01c80639207891d1461003b578063ac2f007414610057575b600080fd5b61004460015481565b6040519081526020015b60405180910390f35b61006a6100653660046101eb565b610081565b60405161004e9b9a9998979695949392919061024a565b60006020819052908152604090208054819061009c906102dc565b80601f01602080910402602001604051908101604052809291908181526020018280546100c8906102dc565b80156101155780601f106100ea57610100808354040283529160200191610115565b820191906000526020600020905b8154815290600101906020018083116100f857829003601f168201915b50505050509080600101805461012a906102dc565b80601f0160208091040260200160405190810160405280929190818152602001828054610156906102dc565b80156101a35780601f10610178576101008083540402835291602001916101a3565b820191906000526020600020905b81548152906001019060200180831161018657829003601f168201915b50505060028401546003850154600486015460058701546006880154600789015460088a015460098b0154600a909b0154999a96999598509396509194909391929160ff168b565b6000602082840312156101fd57600080fd5b5035919050565b6000815180845260005b8181101561022a5760208185018101518683018201520161020e565b506000602082860101526020601f19601f83011685010191505092915050565b600061016080835261025e8184018f610204565b90508281036020840152610272818e610204565b9150508a60408301528960608301528860808301528760a08301528660c08301528560e08301528461010083015283610120830152600483106102c557634e487b7160e01b600052602160045260246000fd5b826101408301529c9b505050505050505050505050565b600181811c908216806102f057607f821691505b60208210810361031057634e487b7160e01b600052602260045260246000fd5b5091905056fea264697066735822122025e41bd29e82477f39e4c3a1143cba7b7219946e3a533ebf2679403d192c6b1664736f6c63430008170033",
+    "sourceMap": "64:501:19:-:0;;;;;;;;;;;;;;;;;;;",
     "linkReferences": {}
   },
   "deployedBytecode": {
-    "object": "0x608060405234801561001057600080fd5b506004361061002b5760003560e01c8063ac2f007414610030575b600080fd5b61004361003e3660046101cd565b610063565b60405161005a9b9a9998979695949392919061022c565b60405180910390f35b60006020819052908152604090208054819061007e906102be565b80601f01602080910402602001604051908101604052809291908181526020018280546100aa906102be565b80156100f75780601f106100cc576101008083540402835291602001916100f7565b820191906000526020600020905b8154815290600101906020018083116100da57829003601f168201915b50505050509080600101805461010c906102be565b80601f0160208091040260200160405190810160405280929190818152602001828054610138906102be565b80156101855780601f1061015a57610100808354040283529160200191610185565b820191906000526020600020905b81548152906001019060200180831161016857829003601f168201915b50505060028401546003850154600486015460058701546006880154600789015460088a015460098b0154600a909b0154999a96999598509396509194909391929160ff168b565b6000602082840312156101df57600080fd5b5035919050565b6000815180845260005b8181101561020c576020818501810151868301820152016101f0565b506000602082860101526020601f19601f83011685010191505092915050565b60006101608083526102408184018f6101e6565b90508281036020840152610254818e6101e6565b9150508a60408301528960608301528860808301528760a08301528660c08301528560e08301528461010083015283610120830152600483106102a757634e487b7160e01b600052602160045260246000fd5b826101408301529c9b505050505050505050505050565b600181811c908216806102d257607f821691505b6020821081036102f257634e487b7160e01b600052602260045260246000fd5b5091905056fea26469706673582212204247e58e7b9fa999b01580a4e508bcdc3230384958639ff6555166eb1d6d620864736f6c63430008170033",
-    "sourceMap": "64:473:19:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;499:34;;;;;;:::i;:::-;;:::i;:::-;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;499:34:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;499:34:19;;-1:-1:-1;499:34:19;;;;;;;;;;:::o;14:180:26:-;73:6;126:2;114:9;105:7;101:23;97:32;94:52;;;142:1;139;132:12;94:52;-1:-1:-1;165:23:26;;14:180;-1:-1:-1;14:180:26:o;199:423::-;241:3;279:5;273:12;306:6;301:3;294:19;331:1;341:162;355:6;352:1;349:13;341:162;;;417:4;473:13;;;469:22;;463:29;445:11;;;441:20;;434:59;370:12;341:162;;;345:3;548:1;541:4;532:6;527:3;523:16;519:27;512:38;611:4;604:2;600:7;595:2;587:6;583:15;579:29;574:3;570:39;566:50;559:57;;;199:423;;;;:::o;627:1220::-;1053:4;1082:3;1112:2;1101:9;1094:21;1138:45;1179:2;1168:9;1164:18;1156:6;1138:45;:::i;:::-;1124:59;;1231:9;1223:6;1219:22;1214:2;1203:9;1199:18;1192:50;1259:33;1285:6;1277;1259:33;:::i;:::-;1251:41;;;1328:6;1323:2;1312:9;1308:18;1301:34;1371:6;1366:2;1355:9;1351:18;1344:34;1415:6;1409:3;1398:9;1394:19;1387:35;1459:6;1453:3;1442:9;1438:19;1431:35;1503:6;1497:3;1486:9;1482:19;1475:35;1547:6;1541:3;1530:9;1526:19;1519:35;1591:6;1585:3;1574:9;1570:19;1563:35;1635:6;1629:3;1618:9;1614:19;1607:35;1673:1;1664:7;1661:14;1651:145;;1718:10;1713:3;1709:20;1706:1;1699:31;1753:4;1750:1;1743:15;1781:4;1778:1;1771:15;1651:145;1833:7;1827:3;1816:9;1812:19;1805:36;627:1220;;;;;;;;;;;;;;:::o;1852:380::-;1931:1;1927:12;;;;1974;;;1995:61;;2049:4;2041:6;2037:17;2027:27;;1995:61;2102:2;2094:6;2091:14;2071:18;2068:38;2065:161;;2148:10;2143:3;2139:20;2136:1;2129:31;2183:4;2180:1;2173:15;2211:4;2208:1;2201:15;2065:161;;1852:380;;;:::o",
+    "object": "0x608060405234801561001057600080fd5b50600436106100365760003560e01c80639207891d1461003b578063ac2f007414610057575b600080fd5b61004460015481565b6040519081526020015b60405180910390f35b61006a6100653660046101eb565b610081565b60405161004e9b9a9998979695949392919061024a565b60006020819052908152604090208054819061009c906102dc565b80601f01602080910402602001604051908101604052809291908181526020018280546100c8906102dc565b80156101155780601f106100ea57610100808354040283529160200191610115565b820191906000526020600020905b8154815290600101906020018083116100f857829003601f168201915b50505050509080600101805461012a906102dc565b80601f0160208091040260200160405190810160405280929190818152602001828054610156906102dc565b80156101a35780601f10610178576101008083540402835291602001916101a3565b820191906000526020600020905b81548152906001019060200180831161018657829003601f168201915b50505060028401546003850154600486015460058701546006880154600789015460088a015460098b0154600a909b0154999a96999598509396509194909391929160ff168b565b6000602082840312156101fd57600080fd5b5035919050565b6000815180845260005b8181101561022a5760208185018101518683018201520161020e565b506000602082860101526020601f19601f83011685010191505092915050565b600061016080835261025e8184018f610204565b90508281036020840152610272818e610204565b9150508a60408301528960608301528860808301528760a08301528660c08301528560e08301528461010083015283610120830152600483106102c557634e487b7160e01b600052602160045260246000fd5b826101408301529c9b505050505050505050505050565b600181811c908216806102f057607f821691505b60208210810361031057634e487b7160e01b600052602260045260246000fd5b5091905056fea264697066735822122025e41bd29e82477f39e4c3a1143cba7b7219946e3a533ebf2679403d192c6b1664736f6c63430008170033",
+    "sourceMap": "64:501:19:-:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;540:21;;;;;;;;;160:25:32;;;148:2;133:18;540:21:19;;;;;;;;499:34;;;;;;:::i;:::-;;:::i;:::-;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;;;499:34:19;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;-1:-1:-1;499:34:19;;-1:-1:-1;499:34:19;;;;;;;;;;:::o;196:180:32:-;255:6;308:2;296:9;287:7;283:23;279:32;276:52;;;324:1;321;314:12;276:52;-1:-1:-1;347:23:32;;196:180;-1:-1:-1;196:180:32:o;381:423::-;423:3;461:5;455:12;488:6;483:3;476:19;513:1;523:162;537:6;534:1;531:13;523:162;;;599:4;655:13;;;651:22;;645:29;627:11;;;623:20;;616:59;552:12;523:162;;;527:3;730:1;723:4;714:6;709:3;705:16;701:27;694:38;793:4;786:2;782:7;777:2;769:6;765:15;761:29;756:3;752:39;748:50;741:57;;;381:423;;;;:::o;809:1220::-;1235:4;1264:3;1294:2;1283:9;1276:21;1320:45;1361:2;1350:9;1346:18;1338:6;1320:45;:::i;:::-;1306:59;;1413:9;1405:6;1401:22;1396:2;1385:9;1381:18;1374:50;1441:33;1467:6;1459;1441:33;:::i;:::-;1433:41;;;1510:6;1505:2;1494:9;1490:18;1483:34;1553:6;1548:2;1537:9;1533:18;1526:34;1597:6;1591:3;1580:9;1576:19;1569:35;1641:6;1635:3;1624:9;1620:19;1613:35;1685:6;1679:3;1668:9;1664:19;1657:35;1729:6;1723:3;1712:9;1708:19;1701:35;1773:6;1767:3;1756:9;1752:19;1745:35;1817:6;1811:3;1800:9;1796:19;1789:35;1855:1;1846:7;1843:14;1833:145;;1900:10;1895:3;1891:20;1888:1;1881:31;1935:4;1932:1;1925:15;1963:4;1960:1;1953:15;1833:145;2015:7;2009:3;1998:9;1994:19;1987:36;809:1220;;;;;;;;;;;;;;:::o;2034:380::-;2113:1;2109:12;;;;2156;;;2177:61;;2231:4;2223:6;2219:17;2209:27;;2177:61;2284:2;2276:6;2273:14;2253:18;2250:38;2247:161;;2330:10;2325:3;2321:20;2318:1;2311:31;2365:4;2362:1;2355:15;2393:4;2390:1;2383:15;2247:161;;2034:380;;;:::o",
     "linkReferences": {}
   },
   "methodIdentifiers": {
+    "pollCount()": "9207891d",
     "polls(uint256)": "ac2f0074"
   },
-  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"polls\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"tag\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"group\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"pollStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"proposalEndDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"votingStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"delegateEndDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"pollId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"proposalCount\",\"type\":\"uint256\"},{\"internalType\":\"enum PollStructs.PollPhase\",\"name\":\"phase\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/PollStructs.sol\":\"PollStructs\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":forge-std/=lib/forge-std/src/\"]},\"sources\":{\"src/PollStructs.sol\":{\"keccak256\":\"0xe3e88e882e957bcabf9c50d38b0fcf94dfa2af543ae80a9c5b39d670b631d21f\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://e0f2fa1e7bd1531e65c4ea1d20c5c0ff2e92b6d75defc2777ba7565dc9a7e850\",\"dweb:/ipfs/QmSZV43xqZRx9Vzd5BUsb3XfyAuAJuQYJ7K9wvFWPQTLkM\"]}},\"version\":1}",
+  "rawMetadata": "{\"compiler\":{\"version\":\"0.8.23+commit.f704f362\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[],\"name\":\"pollCount\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"name\":\"polls\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"title\",\"type\":\"string\"},{\"internalType\":\"string\",\"name\":\"tag\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"group\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"pollStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"proposalEndDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"votingStartDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"delegateEndDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endDate\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"pollId\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"proposalCount\",\"type\":\"uint256\"},{\"internalType\":\"enum PollStructs.PollPhase\",\"name\":\"phase\",\"type\":\"uint8\"}],\"stateMutability\":\"view\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/PollStructs.sol\":\"PollStructs\"},\"evmVersion\":\"paris\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[\":ds-test/=lib/forge-std/lib/ds-test/src/\",\":forge-std/=lib/forge-std/src/\"]},\"sources\":{\"src/PollStructs.sol\":{\"keccak256\":\"0xf36749a2152050a0ffefbeee7b9c59269cf68e13c42500a5285f3f106dc344e2\",\"license\":\"GPL-3.0\",\"urls\":[\"bzz-raw://cb6aa17b1eef1c16e921f5d4bfc717b674b302ce48f5bac0cd7906c684a0f0d0\",\"dweb:/ipfs/QmVtkVg2onkAc6ZoAiSo74jNWinCjaqxGgSuurz3ZMM9GV\"]}},\"version\":1}",
   "metadata": {
     "compiler": {
       "version": "0.8.23+commit.f704f362"
@@ -91,6 +105,19 @@
     "language": "Solidity",
     "output": {
       "abi": [
+        {
+          "inputs": [],
+          "stateMutability": "view",
+          "type": "function",
+          "name": "pollCount",
+          "outputs": [
+            {
+              "internalType": "uint256",
+              "name": "",
+              "type": "uint256"
+            }
+          ]
+        },
         {
           "inputs": [
             {
@@ -191,10 +218,10 @@
     },
     "sources": {
       "src/PollStructs.sol": {
-        "keccak256": "0xe3e88e882e957bcabf9c50d38b0fcf94dfa2af543ae80a9c5b39d670b631d21f",
+        "keccak256": "0xf36749a2152050a0ffefbeee7b9c59269cf68e13c42500a5285f3f106dc344e2",
         "urls": [
-          "bzz-raw://e0f2fa1e7bd1531e65c4ea1d20c5c0ff2e92b6d75defc2777ba7565dc9a7e850",
-          "dweb:/ipfs/QmSZV43xqZRx9Vzd5BUsb3XfyAuAJuQYJ7K9wvFWPQTLkM"
+          "bzz-raw://cb6aa17b1eef1c16e921f5d4bfc717b674b302ce48f5bac0cd7906c684a0f0d0",
+          "dweb:/ipfs/QmVtkVg2onkAc6ZoAiSo74jNWinCjaqxGgSuurz3ZMM9GV"
         ],
         "license": "GPL-3.0"
       }
@@ -203,17 +230,17 @@
   },
   "ast": {
     "absolutePath": "src/PollStructs.sol",
-    "id": 44222,
+    "id": 44182,
     "exportedSymbols": {
       "PollStructs": [
-        44221
+        44181
       ]
     },
     "nodeType": "SourceUnit",
-    "src": "37:502:19",
+    "src": "37:528:19",
     "nodes": [
       {
-        "id": 44186,
+        "id": 44144,
         "nodeType": "PragmaDirective",
         "src": "37:23:19",
         "nodes": [],
@@ -225,12 +252,12 @@
         ]
       },
       {
-        "id": 44221,
+        "id": 44181,
         "nodeType": "ContractDefinition",
-        "src": "64:473:19",
+        "src": "64:501:19",
         "nodes": [
           {
-            "id": 44210,
+            "id": 44168,
             "nodeType": "StructDefinition",
             "src": "94:307:19",
             "nodes": [],
@@ -238,12 +265,12 @@
             "members": [
               {
                 "constant": false,
-                "id": 44188,
+                "id": 44146,
                 "mutability": "mutable",
                 "name": "title",
                 "nameLocation": "124:5:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "117:12:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -252,7 +279,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 44187,
+                  "id": 44145,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "117:6:19",
@@ -265,12 +292,12 @@
               },
               {
                 "constant": false,
-                "id": 44190,
+                "id": 44148,
                 "mutability": "mutable",
                 "name": "tag",
                 "nameLocation": "147:3:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "140:10:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -279,7 +306,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 44189,
+                  "id": 44147,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "140:6:19",
@@ -292,12 +319,12 @@
               },
               {
                 "constant": false,
-                "id": 44192,
+                "id": 44150,
                 "mutability": "mutable",
                 "name": "group",
                 "nameLocation": "166:5:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "161:10:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -306,7 +333,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 44191,
+                  "id": 44149,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "161:4:19",
@@ -319,12 +346,12 @@
               },
               {
                 "constant": false,
-                "id": 44194,
+                "id": 44152,
                 "mutability": "mutable",
                 "name": "pollStartDate",
                 "nameLocation": "187:13:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "182:18:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -333,7 +360,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 44193,
+                  "id": 44151,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "182:4:19",
@@ -346,12 +373,12 @@
               },
               {
                 "constant": false,
-                "id": 44196,
+                "id": 44154,
                 "mutability": "mutable",
                 "name": "proposalEndDate",
                 "nameLocation": "216:15:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "211:20:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -360,7 +387,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 44195,
+                  "id": 44153,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "211:4:19",
@@ -373,12 +400,12 @@
               },
               {
                 "constant": false,
-                "id": 44198,
+                "id": 44156,
                 "mutability": "mutable",
                 "name": "votingStartDate",
                 "nameLocation": "247:15:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "242:20:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -387,7 +414,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 44197,
+                  "id": 44155,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "242:4:19",
@@ -400,12 +427,12 @@
               },
               {
                 "constant": false,
-                "id": 44200,
+                "id": 44158,
                 "mutability": "mutable",
                 "name": "delegateEndDate",
                 "nameLocation": "278:15:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "273:20:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -414,7 +441,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 44199,
+                  "id": 44157,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "273:4:19",
@@ -427,12 +454,12 @@
               },
               {
                 "constant": false,
-                "id": 44202,
+                "id": 44160,
                 "mutability": "mutable",
                 "name": "endDate",
                 "nameLocation": "309:7:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "304:12:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -441,7 +468,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 44201,
+                  "id": 44159,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "304:4:19",
@@ -454,12 +481,12 @@
               },
               {
                 "constant": false,
-                "id": 44204,
+                "id": 44162,
                 "mutability": "mutable",
                 "name": "pollId",
                 "nameLocation": "332:6:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "327:11:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -468,7 +495,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 44203,
+                  "id": 44161,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "327:4:19",
@@ -481,12 +508,12 @@
               },
               {
                 "constant": false,
-                "id": 44206,
+                "id": 44164,
                 "mutability": "mutable",
                 "name": "proposalCount",
                 "nameLocation": "354:13:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "349:18:19",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -495,7 +522,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 44205,
+                  "id": 44163,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
                   "src": "349:4:19",
@@ -508,36 +535,36 @@
               },
               {
                 "constant": false,
-                "id": 44209,
+                "id": 44167,
                 "mutability": "mutable",
                 "name": "phase",
                 "nameLocation": "388:5:19",
                 "nodeType": "VariableDeclaration",
-                "scope": 44210,
+                "scope": 44168,
                 "src": "378:15:19",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_enum$_PollPhase_$44215",
+                  "typeIdentifier": "t_enum$_PollPhase_$44173",
                   "typeString": "enum PollStructs.PollPhase"
                 },
                 "typeName": {
-                  "id": 44208,
+                  "id": 44166,
                   "nodeType": "UserDefinedTypeName",
                   "pathNode": {
-                    "id": 44207,
+                    "id": 44165,
                     "name": "PollPhase",
                     "nameLocations": [
                       "378:9:19"
                     ],
                     "nodeType": "IdentifierPath",
-                    "referencedDeclaration": 44215,
+                    "referencedDeclaration": 44173,
                     "src": "378:9:19"
                   },
-                  "referencedDeclaration": 44215,
+                  "referencedDeclaration": 44173,
                   "src": "378:9:19",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_enum$_PollPhase_$44215",
+                    "typeIdentifier": "t_enum$_PollPhase_$44173",
                     "typeString": "enum PollStructs.PollPhase"
                   }
                 },
@@ -546,39 +573,39 @@
             ],
             "name": "Poll",
             "nameLocation": "101:4:19",
-            "scope": 44221,
+            "scope": 44181,
             "visibility": "public"
           },
           {
-            "id": 44215,
+            "id": 44173,
             "nodeType": "EnumDefinition",
             "src": "409:82:19",
             "nodes": [],
             "canonicalName": "PollStructs.PollPhase",
             "members": [
               {
-                "id": 44211,
+                "id": 44169,
                 "name": "createdPhase",
                 "nameLocation": "425:12:19",
                 "nodeType": "EnumValue",
                 "src": "425:12:19"
               },
               {
-                "id": 44212,
+                "id": 44170,
                 "name": "predictionPhase",
                 "nameLocation": "439:15:19",
                 "nodeType": "EnumValue",
                 "src": "439:15:19"
               },
               {
-                "id": 44213,
+                "id": 44171,
                 "name": "predictionBetPhase",
                 "nameLocation": "456:18:19",
                 "nodeType": "EnumValue",
                 "src": "456:18:19"
               },
               {
-                "id": 44214,
+                "id": 44172,
                 "name": "completedPhase",
                 "nameLocation": "476:14:19",
                 "nodeType": "EnumValue",
@@ -589,7 +616,7 @@
             "nameLocation": "414:9:19"
           },
           {
-            "id": 44220,
+            "id": 44178,
             "nodeType": "VariableDeclaration",
             "src": "499:34:19",
             "nodes": [],
@@ -598,19 +625,19 @@
             "mutability": "mutable",
             "name": "polls",
             "nameLocation": "528:5:19",
-            "scope": 44221,
+            "scope": 44181,
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Poll_$44210_storage_$",
+              "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Poll_$44168_storage_$",
               "typeString": "mapping(uint256 => struct PollStructs.Poll)"
             },
             "typeName": {
-              "id": 44219,
+              "id": 44177,
               "keyName": "",
               "keyNameLocation": "-1:-1:-1",
               "keyType": {
-                "id": 44216,
+                "id": 44174,
                 "name": "uint",
                 "nodeType": "ElementaryTypeName",
                 "src": "507:4:19",
@@ -622,30 +649,59 @@
               "nodeType": "Mapping",
               "src": "499:21:19",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Poll_$44210_storage_$",
+                "typeIdentifier": "t_mapping$_t_uint256_$_t_struct$_Poll_$44168_storage_$",
                 "typeString": "mapping(uint256 => struct PollStructs.Poll)"
               },
               "valueName": "",
               "valueNameLocation": "-1:-1:-1",
               "valueType": {
-                "id": 44218,
+                "id": 44176,
                 "nodeType": "UserDefinedTypeName",
                 "pathNode": {
-                  "id": 44217,
+                  "id": 44175,
                   "name": "Poll",
                   "nameLocations": [
                     "515:4:19"
                   ],
                   "nodeType": "IdentifierPath",
-                  "referencedDeclaration": 44210,
+                  "referencedDeclaration": 44168,
                   "src": "515:4:19"
                 },
-                "referencedDeclaration": 44210,
+                "referencedDeclaration": 44168,
                 "src": "515:4:19",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Poll_$44210_storage_ptr",
+                  "typeIdentifier": "t_struct$_Poll_$44168_storage_ptr",
                   "typeString": "struct PollStructs.Poll"
                 }
+              }
+            },
+            "visibility": "public"
+          },
+          {
+            "id": 44180,
+            "nodeType": "VariableDeclaration",
+            "src": "540:21:19",
+            "nodes": [],
+            "constant": false,
+            "functionSelector": "9207891d",
+            "mutability": "mutable",
+            "name": "pollCount",
+            "nameLocation": "552:9:19",
+            "scope": 44181,
+            "stateVariable": true,
+            "storageLocation": "default",
+            "typeDescriptions": {
+              "typeIdentifier": "t_uint256",
+              "typeString": "uint256"
+            },
+            "typeName": {
+              "id": 44179,
+              "name": "uint",
+              "nodeType": "ElementaryTypeName",
+              "src": "540:4:19",
+              "typeDescriptions": {
+                "typeIdentifier": "t_uint256",
+                "typeString": "uint256"
               }
             },
             "visibility": "public"
@@ -658,11 +714,11 @@
         "contractKind": "contract",
         "fullyImplemented": true,
         "linearizedBaseContracts": [
-          44221
+          44181
         ],
         "name": "PollStructs",
         "nameLocation": "73:11:19",
-        "scope": 44222,
+        "scope": 44182,
         "usedErrors": [],
         "usedEvents": []
       }
