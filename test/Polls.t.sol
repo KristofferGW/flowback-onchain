@@ -22,28 +22,9 @@ contract PollsTest is Test, Polls {
         testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
     }
 
-    // function testCreatePoll() public {
-    //     testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
-    //     // testPolls.polls[] pollss = [
-    //     //     {
-    //     //         title: "new poll", 
-    //     //         tag: "tag", 
-    //     //         group: 1, 
-    //     //         pollStartDate:1, 
-    //     //         proposalEndDate: 1, 
-    //     //         votingStartDate:1, 
-    //     //         delegateEndDate: 1, 
-    //     //         endDate: 1
-    //     //     }];
-    //     assertEq(pollss, testPolls.polls);
-        
-    // }
-
     // function testRequirePollToExist(uint pollId) public {
-
-    //         //vm.prank(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
-    //         vm.expectRevert(bytes("State not set correctly for continuation")); 
-    //         testPolls.requirePollToExist(pollId);
+    //         assertFalse(testPolls.requireProposalToExist(_pollId, _proposalId));
+    // -----   internal function  -----
     // }
 
     function testEmitAddProposal() public {
@@ -53,24 +34,25 @@ contract PollsTest is Test, Polls {
         testPolls.addProposal(1, "new proposal");
     }
 
-    // function testAddProposal() public {
-    //     testPolls.addProposal(1,"new proposal");
-    // }
 
-    // function testGetProposals(uint pollId) public {
-    //     testPolls.AddProposal(1, "new proposal");
-    //     testPolls.proposals [] proposals = [
-    //         {
-    //             description: "new proposal",
-    //             voteCount: 0,
-    //             proposalId: 1,
-    //             predictionCount: 0,
-    //             phase: PollPhase.predictionPhase
-    //         }
-    //     ]
+    function testCreatePoll() public {
+        testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
+        assertEq(testPolls.pollCount(), 1);
+    }
 
-    //     expectEq(testPolls.proposals, proposals)
-    // }
+    function testAddProposal() public {
+        testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
+        testPolls.addProposal(1, "description");
+        Polls.Proposal[] memory propos = testPolls.getProposals(1);
+        assertEq(propos.length, 1);
+    }
+
+    function testGetProposals() public {
+        testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
+        testPolls.addProposal(1, "description");
+        // Polls.Proposal[] memory propos = testPolls.getProposals(1);
+        // assertEq(testPolls.proposals, propos);
+    }
     // function testGetPollResult(uint pollId) public {
 
 
