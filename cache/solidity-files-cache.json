@@ -1203,8 +1203,8 @@
       }
     },
     "test/Delegations.t.sol": {
-      "lastModificationDate": 1707402331110,
-      "contentHash": "833bcb10a52486b61ad6da04625766e6",
+      "lastModificationDate": 1708364969960,
+      "contentHash": "d657c06397e9e231b6ffffaa6006ea01",
       "sourceName": "test/Delegations.t.sol",
       "solcConfig": {
         "settings": {
@@ -1255,6 +1255,13 @@
         "lib/forge-std/src/interfaces/IMulticall3.sol",
         "lib/forge-std/src/safeconsole.sol",
         "src\\Delegations.sol",
+        "src\\PollStructs.sol",
+        "src\\Polls.sol",
+        "src\\PredictionBetStructs.sol",
+        "src\\PredictionBets.sol",
+        "src\\PredictionStructs.sol",
+        "src\\Predictions.sol",
+        "src\\ProposalStructs.sol",
         "src\\RightToVote.sol"
       ],
       "versionRequirement": "^0.8.23",
@@ -1464,8 +1471,8 @@
       }
     },
     "test/flowback_onchain.t.sol": {
-      "lastModificationDate": 1708007493729,
-      "contentHash": "22a00393195fbf6d8add9646cac29a37",
+      "lastModificationDate": 1708008097163,
+      "contentHash": "4dc3e6a832dc26aebc11649d5aae8fb8",
       "sourceName": "test/flowback_onchain.t.sol",
       "solcConfig": {
         "settings": {
