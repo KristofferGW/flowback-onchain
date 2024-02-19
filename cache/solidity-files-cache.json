@@ -805,8 +805,8 @@
       }
     },
     "src/Delegations.sol": {
-      "lastModificationDate": 1707931356909,
-      "contentHash": "02dfd15613f04993623426a3f5203b20",
+      "lastModificationDate": 1708372297875,
+      "contentHash": "a362c378d17e20e116039bd39a7eeedb",
       "sourceName": "src/Delegations.sol",
       "solcConfig": {
         "settings": {
@@ -889,7 +889,7 @@
       }
     },
     "src/Polls.sol": {
-      "lastModificationDate": 1707931565129,
+      "lastModificationDate": 1708007485830,
       "contentHash": "06c71f197887c75ab6f714fba9fa8d5a",
       "sourceName": "src/Polls.sol",
       "solcConfig": {
@@ -1203,8 +1203,8 @@
       }
     },
     "test/Delegations.t.sol": {
-      "lastModificationDate": 1708364969960,
-      "contentHash": "d657c06397e9e231b6ffffaa6006ea01",
+      "lastModificationDate": 1708373190019,
+      "contentHash": "33bc6f6e93caf97d768c8a5295229310",
       "sourceName": "test/Delegations.t.sol",
       "solcConfig": {
         "settings": {
@@ -1341,7 +1341,7 @@
       }
     },
     "test/Prediction.t.sol": {
-      "lastModificationDate": 1708005870188,
+      "lastModificationDate": 1708008149790,
       "contentHash": "f63b48925bb198c3b0e7725ed7f20e6a",
       "sourceName": "test/Prediction.t.sol",
       "solcConfig": {
