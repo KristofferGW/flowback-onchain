@@ -1,12 +1,12 @@
 const {ethers} = require('ethers');
 require('dotenv').config({path: '../.env'});
-const contractABI = require('./contractDelegationsABI.json');
+const contractABI = require('./contractABI.json');
 
 const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFURA_API_KEY);
 const wallet = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY, provider);
 
 
-const contractAddress = '0x10bc596f432c182a7f4bbbd85febf33c23edb91e';
+const contractAddress = '0xA58c7359fFd9DCC380a95C8092487F28AC5039DF';
 
 const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
