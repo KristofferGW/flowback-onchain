@@ -1,6 +1,6 @@
 const { ethers } = require('ethers');
 require('dotenv').config({path: '../.env'});
-const contractABI = require('../contractPredictionABI.json');
+const contractABI = require('../contractABI.json');
 const createPoll = require('../polls/pollsBlockchain');
 const createProposal = require('../polls/pollsBlockchain');
 // const getProposals = require('./pollsBlockchain');
@@ -9,7 +9,7 @@ const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFU
 const wallet = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY, provider);
 
 
-const contractAddress = '0x9c43b553f53be6281ea9a72d08a607c0e5e1a1b1';
+const contractAddress = '0xA58c7359fFd9DCC380a95C8092487F28AC5039DF';
 
 const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
