@@ -23,7 +23,7 @@ contract RightToVote {
      * @dev Gives permission to vote in a group.
      * @param _group The group ID to give permission to vote in. 
     */
-    function becameMemberOfGroup (uint _group) public payable {
+    function becomeMemberOfGroup (uint _group) public payable {
         require(!isUserMemberOfGroup(_group), "You are already member of specified group");
         voters[msg.sender].groups.push(_group);
         emit PermissionGivenToVote(_group);

@@ -26,7 +26,7 @@
 
 //     // RightToVote
 //     function testCheckRightsInGroup() public {
-//         rightToVote.becameMemberOfGroup(1);
+//         rightToVote.becomeMemberOfGroup(1);
 //         assertTrue(rightToVote.checkRightsInGroup(1));
 //     }
 

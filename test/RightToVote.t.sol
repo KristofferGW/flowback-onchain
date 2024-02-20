@@ -20,11 +20,11 @@ contract RightToVoteTest is Test, RightToVote {
     function testEmitPredictionCreated() public {
         vm.expectEmit();
         emit PermissionGivenToVote(1);
-        rightToVote.becameMemberOfGroup(1);  
+        rightToVote.becomeMemberOfGroup(1);  
     }
 
-    function testBecameMemberOfGroup(uint group) public {
-        rightToVote.becameMemberOfGroup(group);
+    function testbecomeMemberOfGroup(uint group) public {
+        rightToVote.becomeMemberOfGroup(group);
         assertTrue(rightToVote.isUserMemberOfGroup(group));
     }
 
@@ -32,7 +32,7 @@ contract RightToVoteTest is Test, RightToVote {
         assertEq(rightToVote.isUserMemberOfGroup(group), false);
     }
     function testGetGroupsUserIsMemberIn() public {
-        rightToVote.becameMemberOfGroup(4);
+        rightToVote.becomeMemberOfGroup(4);
         assertEq(rightToVote.getGroupsUserIsMemberIn()[0], 4);
     }
     
