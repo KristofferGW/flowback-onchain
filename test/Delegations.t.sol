@@ -74,7 +74,8 @@ contract DelegationsTest is Test, Polls {
     //     testPolls.delegate(1, user2); 
     //     assertEq(groupDelegates[_groupId][0].delegatedVotes, 1);
     // }
-    //     function testRemoveDelegation() public {
+
+    //function testRemoveDelegation() public {
     //     vm.startPrank(user1);
     //     testPolls.becameMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
@@ -87,6 +88,19 @@ contract DelegationsTest is Test, Polls {
     //     vm.startPrank(user1);
     //     testPolls.removeDelegation(groupDelegates[_groupId][0].delegate, _groupId);
     //     //assertEq ---
+    // }
+
+    // function testHasDelegatedToDelegateInGroup() public {
+    //     vm.startPrank(user1);
+    //     testPolls.becameMemberOfGroup(_groupId);
+    //     vm.startPrank(user1);
+    //     testPolls.becomeDelegate(_groupId);
+    //     vm.startPrank(user2);
+    //     testPolls.becomeDelegate(_groupId);
+    //     vm.startPrank(user1);
+    //     testPolls.delegate(1, user2); 
+    //     assertEq(groupDelegates[_groupId][0].delegatedVotes, 1);
+    //     assertTrue(testPolls.hasDelegatedToDelegateInGroup(_groupId, user1));
     // }
 
     //private functions (passed testing) ------------------------------------------------------------
