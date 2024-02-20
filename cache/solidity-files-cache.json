@@ -805,7 +805,7 @@
       }
     },
     "src/Delegations.sol": {
-      "lastModificationDate": 1707931356909,
+      "lastModificationDate": 1708373296655,
       "contentHash": "02dfd15613f04993623426a3f5203b20",
       "sourceName": "src/Delegations.sol",
       "solcConfig": {
@@ -889,7 +889,7 @@
       }
     },
     "src/Polls.sol": {
-      "lastModificationDate": 1707931565129,
+      "lastModificationDate": 1708007485830,
       "contentHash": "06c71f197887c75ab6f714fba9fa8d5a",
       "sourceName": "src/Polls.sol",
       "solcConfig": {
@@ -1203,8 +1203,8 @@
       }
     },
     "test/Delegations.t.sol": {
-      "lastModificationDate": 1707402331110,
-      "contentHash": "833bcb10a52486b61ad6da04625766e6",
+      "lastModificationDate": 1708457010799,
+      "contentHash": "3cd6ed329307ee974266fb74abb96e66",
       "sourceName": "test/Delegations.t.sol",
       "solcConfig": {
         "settings": {
@@ -1255,6 +1255,13 @@
         "lib/forge-std/src/interfaces/IMulticall3.sol",
         "lib/forge-std/src/safeconsole.sol",
         "src\\Delegations.sol",
+        "src\\PollStructs.sol",
+        "src\\Polls.sol",
+        "src\\PredictionBetStructs.sol",
+        "src\\PredictionBets.sol",
+        "src\\PredictionStructs.sol",
+        "src\\Predictions.sol",
+        "src\\ProposalStructs.sol",
         "src\\RightToVote.sol"
       ],
       "versionRequirement": "^0.8.23",
@@ -1334,7 +1341,7 @@
       }
     },
     "test/Prediction.t.sol": {
-      "lastModificationDate": 1708005870188,
+      "lastModificationDate": 1708008149790,
       "contentHash": "f63b48925bb198c3b0e7725ed7f20e6a",
       "sourceName": "test/Prediction.t.sol",
       "solcConfig": {
@@ -1464,8 +1471,8 @@
       }
     },
     "test/flowback_onchain.t.sol": {
-      "lastModificationDate": 1708007493729,
-      "contentHash": "22a00393195fbf6d8add9646cac29a37",
+      "lastModificationDate": 1708008097163,
+      "contentHash": "4dc3e6a832dc26aebc11649d5aae8fb8",
       "sourceName": "test/flowback_onchain.t.sol",
       "solcConfig": {
         "settings": {
