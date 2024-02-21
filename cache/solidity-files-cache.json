@@ -984,8 +984,8 @@
       }
     },
     "src/PredictionBets.sol": {
-      "lastModificationDate": 1707931434732,
-      "contentHash": "6015ea852d951ba03b3d3f45df4630b6",
+      "lastModificationDate": 1708527188610,
+      "contentHash": "c21904ea6b8a7a13091567ac1b922513",
       "sourceName": "src/PredictionBets.sol",
       "solcConfig": {
         "settings": {
@@ -1162,8 +1162,8 @@
       }
     },
     "src/RightToVote.sol": {
-      "lastModificationDate": 1707931533738,
-      "contentHash": "8dce8ea201eabfcb3212e554de985104",
+      "lastModificationDate": 1708459028864,
+      "contentHash": "64878d6497442dfa49a00772ba81cb29",
       "sourceName": "src/RightToVote.sol",
       "solcConfig": {
         "settings": {
@@ -1203,8 +1203,8 @@
       }
     },
     "test/Delegations.t.sol": {
-      "lastModificationDate": 1708457010799,
-      "contentHash": "3cd6ed329307ee974266fb74abb96e66",
+      "lastModificationDate": 1708525663504,
+      "contentHash": "3aa7a5c8b9de82187b53a5b85a93b3d2",
       "sourceName": "test/Delegations.t.sol",
       "solcConfig": {
         "settings": {
@@ -1409,9 +1409,78 @@
         }
       }
     },
+    "test/PredictionBet.t.sol": {
+      "lastModificationDate": 1708527049278,
+      "contentHash": "bb55f8d2f7f83221e7e305f1771ef12c",
+      "sourceName": "test/PredictionBet.t.sol",
+      "solcConfig": {
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "metadata": {
+            "useLiteralContent": false,
+            "bytecodeHash": "ipfs",
+            "appendCBOR": true
+          },
+          "outputSelection": {
+            "*": {
+              "": [
+                "ast"
+              ],
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ]
+            }
+          },
+          "evmVersion": "paris",
+          "libraries": {}
+        }
+      },
+      "imports": [
+        "lib/forge-std/lib/ds-test/src\\test.sol",
+        "lib/forge-std/src/Base.sol",
+        "lib/forge-std/src/StdAssertions.sol",
+        "lib/forge-std/src/StdChains.sol",
+        "lib/forge-std/src/StdCheats.sol",
+        "lib/forge-std/src/StdError.sol",
+        "lib/forge-std/src/StdInvariant.sol",
+        "lib/forge-std/src/StdJson.sol",
+        "lib/forge-std/src/StdMath.sol",
+        "lib/forge-std/src/StdStorage.sol",
+        "lib/forge-std/src/StdStyle.sol",
+        "lib/forge-std/src/StdUtils.sol",
+        "lib/forge-std/src\\Test.sol",
+        "lib/forge-std/src\\Vm.sol",
+        "lib/forge-std/src\\console.sol",
+        "lib/forge-std/src/console2.sol",
+        "lib/forge-std/src/interfaces/IMulticall3.sol",
+        "lib/forge-std/src/safeconsole.sol",
+        "src\\Delegations.sol",
+        "src\\PollStructs.sol",
+        "src\\Polls.sol",
+        "src\\PredictionBetStructs.sol",
+        "src\\PredictionBets.sol",
+        "src\\PredictionStructs.sol",
+        "src\\Predictions.sol",
+        "src\\ProposalStructs.sol",
+        "src\\RightToVote.sol"
+      ],
+      "versionRequirement": "^0.8.13",
+      "artifacts": {
+        "PredictionBetTest": {
+          "0.8.23+commit.f704f362.Windows.msvc": "PredictionBet.t.sol\\PredictionBetTest.json"
+        }
+      }
+    },
     "test/RightToVote.t.sol": {
-      "lastModificationDate": 1708006875719,
-      "contentHash": "48eaf346202b6e3788b7e0f6c2344cd0",
+      "lastModificationDate": 1708459028878,
+      "contentHash": "6ec13c9909b239c150e2b3fca321265e",
       "sourceName": "test/RightToVote.t.sol",
       "solcConfig": {
         "settings": {
@@ -1471,8 +1540,8 @@
       }
     },
     "test/flowback_onchain.t.sol": {
-      "lastModificationDate": 1708008097163,
-      "contentHash": "4dc3e6a832dc26aebc11649d5aae8fb8",
+      "lastModificationDate": 1708525711293,
+      "contentHash": "850b6d42d77d2fd3b864334ec45bc7a2",
       "sourceName": "test/flowback_onchain.t.sol",
       "solcConfig": {
         "settings": {

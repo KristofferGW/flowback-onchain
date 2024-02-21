@@ -30,7 +30,7 @@ contract DelegationsTest is Test, Polls {
 
     function testEmitDelegateResignation() public {
         vm.startPrank(user1);
-        testPolls.becameMemberOfGroup(_groupId);
+        testPolls.becomeMemberOfGroup(_groupId);
         vm.startPrank(user1);
         testPolls.becomeDelegate(_groupId);
         // vm.stopPrank();
