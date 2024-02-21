@@ -30,7 +30,7 @@ contract DelegationsTest is Test, Polls {
 
     function testEmitDelegateResignation() public {
         vm.startPrank(user1);
-        testPolls.becameMemberOfGroup(_groupId);
+        testPolls.becomeMemberOfGroup(_groupId);
         vm.startPrank(user1);
         testPolls.becomeDelegate(_groupId);
         // vm.stopPrank();
@@ -47,12 +47,12 @@ contract DelegationsTest is Test, Polls {
     //     address addr = 0x0000000000000000000000000000000000000003;
     //     addresses[1] = addr;
     //     vm.startPrank(user2);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user2);
     //     testPolls.becomeDelegate(_groupId);
     // //   vm.stopPrank();
     //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
     //     testPolls.becomeDelegate(_groupId);
     //     vm.expectEmit();
@@ -65,7 +65,7 @@ contract DelegationsTest is Test, Polls {
     // function testDelegate() public {
     //     //    addresses[0] = addr;
     //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
     //     testPolls.becomeDelegate(_groupId);
     //     vm.startPrank(user2);
@@ -77,7 +77,7 @@ contract DelegationsTest is Test, Polls {
 
     //function testRemoveDelegation() public {
     //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
     //     testPolls.becomeDelegate(_groupId);
     //     vm.startPrank(user2);
@@ -92,7 +92,7 @@ contract DelegationsTest is Test, Polls {
 
     // function testHasDelegatedToDelegateInGroup() public {
     //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
     //     testPolls.becomeDelegate(_groupId);
     //     vm.startPrank(user2);
@@ -113,7 +113,7 @@ contract DelegationsTest is Test, Polls {
 
     // function testResignAsDelegate() public {
     //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
     //     testPolls.becomeDelegate(_groupId);
     //     assertEq(testPolls.addressIsDelegate(1, user1), true);
