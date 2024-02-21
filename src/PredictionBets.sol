@@ -7,7 +7,6 @@ import './PredictionBetStructs.sol';
 
 contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs, PredictionBetStructs {
 
-
     event PredictionBetCreated(uint indexed predictionId, bool bet, uint likelihood);
 
     function _requireExist(uint _pollId, uint _proposalId, uint _predictionId) private view {
@@ -42,22 +41,25 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs, Pred
         emit PredictionBetCreated(_predictionId, _bet, _likelihood);
     }
 
-    function requirePollPropPredToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool){
-        
-        //require poll to exist,
+    function requirePollPropPredToExist(uint _pollId, uint _proposalId, uint _predictionId) public view returns (bool exists){
+
+        //require poll to exist
         uint pollsLength = pollCount;
-        for (uint a=0; a <= pollsLength;){
+        for (uint a; a <= pollsLength;){
             if(polls[a].pollId==_pollId) {
                 //require proposal to exist
                 uint proposalsLength= proposals[_pollId].length;
-                for (uint b=0; b <= proposalsLength;){
+                // if(proposalsLength==0)return false;
+                for (uint b; b <= proposalsLength;){
                     if (proposals[_pollId][b].proposalId==_proposalId) {
                         //require prediction to exist
                         uint predictionsLength = predictions[_proposalId].length;
-                        for (uint c=0; c <= predictionsLength;){
-                            if (predictions[_proposalId][c].predictionId ==_predictionId)
-                                return true;
-                                unchecked {
+                        // if(predictionsLength==0)return false;
+                        for (uint c; c <= predictionsLength;){
+                            if (predictions[_proposalId][c].predictionId ==_predictionId){
+                                return true; 
+                            }
+                            unchecked {
                                 ++c;
                             }
                         }
@@ -71,7 +73,7 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs, Pred
             }
             unchecked {
                 ++a;
-            }
+            } 
         }
         return false;
     }
