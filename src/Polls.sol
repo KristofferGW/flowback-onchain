@@ -14,7 +14,7 @@ import './PredictionBets.sol';
 
 contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, PredictionStructs, Predictions, PredictionBetStructs, PredictionBets {
 
-    event PollCreated(uint pollId, string title, uint );
+    event PollCreated(uint pollId, string title);
 
     function createPoll(
         string calldata _title,
