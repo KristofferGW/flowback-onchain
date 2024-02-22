@@ -21,6 +21,31 @@ contract PredictionBetTest is Test, Polls{
         testPolls.placePredictionBet(1, 1, 1, 9, true);  
     }
 
+    function testPlacePredictionBet() public {
+        testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
+        testPolls.addProposal(1, "new proposal");
+        testPolls.createPrediction(1, 1, "pred");  
+        testPolls.placePredictionBet(1, 1, 1, 9, true);
+        testPolls.placePredictionBet(1, 1, 1, 9, true);  
+        PredictionBets.PredictionBet[] memory predictionbets = testPolls.getPredictionBets(1,1,1);
+        assertEq(predictionbets.length, 2);
+
+        // will work once requirePollPropPredToExist-bug is fixed -------------------------
+        // vm.expectRevert(bytes("Wrong poll, proposal or prediction"));
+        // 
+        // (bool revertsAsExpected, ) = testPolls.placePredictionBet(2, 1, 1, 9, true);
+        // assertTrue(revertsAsExpected, "expectRevert: call did not revert");
+    }
+    function testGetPredictionBets() public {
+        testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
+        testPolls.addProposal(1, "new proposal");
+        testPolls.createPrediction(1, 1, "pred");  
+        testPolls.placePredictionBet(1, 1, 1, 9, true);
+        PredictionBets.PredictionBet[] memory predictionbets = testPolls.getPredictionBets(1,1,1);
+        assertTrue(predictionbets.length > 0, "Should return predictionbets");
+    }
+
+
 //private/internal functions  ------------------------------------------------------------
 
     // function testRequirePollPropPredToExist() public{
@@ -30,7 +55,7 @@ contract PredictionBetTest is Test, Polls{
     //     testPolls.createPrediction(1, 1, "pred");
     //     assertTrue(testPolls.requirePollPropPredToExist(1,1,1));
 
-    //     // ---- Does not return false, as it should--------------------------
+    //     // ---- Does not return false, as it should-------------------------- ISSUE ON GITHUB
     //     assertFalse(testPolls.requirePollPropPredToExist(1,1,2)); 
     //     assertFalse(testPolls.requirePollPropPredToExist(1,2,1));
     //     assertFalse(testPolls.requirePollPropPredToExist(2,1,1));
