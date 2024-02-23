@@ -78,6 +78,10 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
         return proposals[_pollId];
     }
 
+    function getPoll(uint _pollId) public view returns (Poll memory) {
+        return polls[_pollId];
+    }
+
     function getPollResults(uint _pollId) public view requirePollToExist(_pollId) returns (string[] memory, uint[] memory) {
         // requirePollToExist(_pollId);
 

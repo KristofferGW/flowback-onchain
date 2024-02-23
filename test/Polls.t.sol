@@ -12,14 +12,30 @@ contract PollsTest is Test, Polls {
         testPolls = new Polls();
     }
 
-    function run() public {
-        vm.broadcast(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
-    }
-
-    function testEmitPollCreated() public {
+    function testCreatePoll() public {
         vm.expectEmit();
-        emit PollCreated(1, "new poll");
-        testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
+        emit PollCreated(1, "Sample poll");
+        uint initialPollCount = testPolls.pollCount();
+        string memory expectedTitle = "Sample poll";
+        string memory expectedTag = "test";
+        uint expectedGroup = 1; // why not memory?
+        uint expectedPollStartDate = 1708672110;
+        uint expectedProposalEndDate = 1708672110 + 1 days;
+        uint expectedVotingStartDate = 1708672110 + 2 days;
+        uint expectedDelegateEndDate = 1708672110 + 3 days;
+        uint expectedEndDate = 1708672110 + 4 days;
+        testPolls.createPoll(expectedTitle, expectedTag, expectedGroup, expectedPollStartDate, expectedProposalEndDate, expectedVotingStartDate, expectedDelegateEndDate, expectedEndDate);
+        uint finalPollCount = testPolls.pollCount();
+        Poll memory createdPoll = testPolls.getPoll(initialPollCount + 1);
+        assertEq(finalPollCount, initialPollCount + 1);
+        assertEq(createdPoll.title, expectedTitle);
+        assertEq(createdPoll.tag, expectedTag);
+        assertEq(createdPoll.group, expectedGroup);
+        assertEq(createdPoll.pollStartDate, expectedPollStartDate);
+        assertEq(createdPoll.proposalEndDate, expectedProposalEndDate);
+        assertEq(createdPoll.votingStartDate, expectedVotingStartDate);
+        assertEq(createdPoll.delegateEndDate, expectedDelegateEndDate);
+        assertEq(createdPoll.endDate, expectedEndDate);
     }
 
     // function testRequirePollToExist(uint pollId) public {
@@ -35,10 +51,10 @@ contract PollsTest is Test, Polls {
     }
 
 
-    function testCreatePoll() public {
-        testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
-        assertEq(testPolls.pollCount(), 1);
-    }
+    // function testCreatePoll() public {
+    //     testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
+    //     assertEq(testPolls.pollCount(), 1);
+    // }
 
     function testAddProposal() public {
         testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
