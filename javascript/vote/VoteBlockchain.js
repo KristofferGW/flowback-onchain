@@ -1,8 +1,9 @@
-const { ethers } = require('ethers');
-require('dotenv').config({path: '../.env'});
-const contractABI = require('./contractABI.json');
+const ethers = require('ethers');
+require('dotenv').config({path: '../../.env'});
+const contractABI = require('../ABI/contractABI.json');
 
-const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFURA_API_KEY);
+
+const provider = new ethers.providers.InfuraProvider(process.env.ETHEREUM_NETWORK, process.env.INFURA_API_KEY);
 const wallet = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY, provider);
 
 
@@ -10,10 +11,10 @@ const contractAddress = '0xA58c7359fFd9DCC380a95C8092487F28AC5039DF';
 
 const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
-const giveRightToVote = async(group)=> {
+const becomeMemberOfGroup = async(group)=> {
 
     try {
-        const tx = await contract.giveRightToVote(group);
+        const tx = await contract.becameMemberOfGroup(group);
         const txReceipt = await tx.wait();
         if (txReceipt.status === 1) {
             console.log('Transaction successful');
@@ -29,53 +30,51 @@ const giveRightToVote = async(group)=> {
             }
         }
     } catch (error) {
-        console.log(error.error.reason)
+        console.log(error.error)
     }
         
 }
 
-const removeRightToVote = async (group) => {
+const removeGroupMembership = async (group) => {
 
     try {
-        const tx = await contract.removeRightToVote(group);
+        const tx = await contract.removeGroupMembership(group);
         const txReceipt = await tx.wait();
         if (txReceipt.status === 1) {
             console.log('Transaction successful');
-            const logs = txReceipt.logs;
-            const parsedLogs = logs.map(log => contract.interface.parseLog(log));
-    
-            const permissionGivenEvent = parsedLogs.find(log => log.name === 'PermissionToVoteRemoved');
-            if (permissionGivenEvent) {
-                const group = parseInt(permissionGivenEvent.args._group)
-                console.log("Successfully removed right to vote in group:", group)
-            }
+            console.log("Successfully removed membership in group:", group);
         }
     } catch (error) {
-        console.log(error.error.reason)
+        console.log(error.error)
     }
 }
 
-const checkAllRights = async () => {
-    const tx = await contract.checkAllRights();
+const getGroupsUserIsMemberIn = async () => {
+    const tx = await contract.getGroupsUserIsMemberIn();
     if(tx==""){
         console.log("No groups found")
     }else{
+        console.log("You are member in following groups:");
         tx.map(group => {
-            console.log("You have rights in following groups:", parseInt(group._hex));
+            console.log(parseInt(group._hex));
         })
+        
     }   
 }
 
-const checkRightsInGroup = async (group) => {
-    const tx = await contract.checkRightsInGroup(group);
+const isUserMemberOfGroup = async (group) => {
+    const tx = await contract.isUserMemberOfGroup(group);
     if(tx)
-        console.log("You have right to vote in group", group)
+        console.log("You have right to vote in group", group);
     else
         console.log("You do not have rights to vote in group", group)
 }
-//giveRightToVote(2); 
-//removeRightToVote(2); 
-//checkAllRights(); 
-checkRightsInGroup(2);
-module.exports = giveRightToVote, removeRightToVote, checkAllRights, checkRightsInGroup;
+// getGroupsUserIsMemberIn();
+// becomeMemberOfGroup(1)
+// isUserMemberOfGroup(1);
+// removeGroupMembership(1);
+
+
+
+module.exports = getGroupsUserIsMemberIn, isUserMemberOfGroup, becomeMemberOfGroup, removeGroupMembership;
 

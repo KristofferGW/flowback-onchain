@@ -12,7 +12,7 @@
   "dependencies": {
     "crypto-js": "^4.2.0",
     "dotenv": "^16.3.1",
-    "ethers": "^5.7.2",
+    "ethers": "^5.4.0",
     "web3": "^4.2.1"
   }
 }
