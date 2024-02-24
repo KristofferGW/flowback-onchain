@@ -984,8 +984,8 @@
       }
     },
     "src/PredictionBets.sol": {
-      "lastModificationDate": 1708543347303,
-      "contentHash": "d9f9d4fd3354eca1692552790f2a8d05",
+      "lastModificationDate": 1708776923615,
+      "contentHash": "2fae053c2e025c6c727db7ea1f4ddf9d",
       "sourceName": "src/PredictionBets.sol",
       "solcConfig": {
         "settings": {
@@ -1410,8 +1410,8 @@
       }
     },
     "test/PredictionBet.t.sol": {
-      "lastModificationDate": 1708611454764,
-      "contentHash": "a5c8e6d47794da02ff33b940f484f174",
+      "lastModificationDate": 1708776961822,
+      "contentHash": "965247cf090274677939b3b6cfe2b87a",
       "sourceName": "test/PredictionBet.t.sol",
       "solcConfig": {
         "settings": {

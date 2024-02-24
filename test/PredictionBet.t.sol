@@ -29,13 +29,8 @@ contract PredictionBetTest is Test, Polls{
         testPolls.placePredictionBet(1, 1, 1, 9, true);  
         PredictionBets.PredictionBet[] memory predictionbets = testPolls.getPredictionBets(1,1,1);
         assertEq(predictionbets.length, 2);
-
-        // will work once requirePollPropPredToExist-bug is fixed -------------------------
-        // vm.expectRevert(bytes("Wrong poll, proposal or prediction"));
-        // 
-        // (bool revertsAsExpected, ) = testPolls.placePredictionBet(2, 1, 1, 9, true);
-        // assertTrue(revertsAsExpected, "expectRevert: call did not revert");
     }
+
     function testGetPredictionBets() public {
         testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
         testPolls.addProposal(1, "new proposal");
@@ -46,7 +41,7 @@ contract PredictionBetTest is Test, Polls{
     }
 
 
-//private/internal functions  ------------------------------------------------------------
+//private/internal functions (passed testing) ------------------------------------------------------------
 
     // function testRequirePollPropPredToExist() public{
     //     assertFalse(testPolls.requirePollPropPredToExist(1,1,1));
@@ -54,8 +49,6 @@ contract PredictionBetTest is Test, Polls{
     //     testPolls.addProposal(1, "new proposal");
     //     testPolls.createPrediction(1, 1, "pred");
     //     assertTrue(testPolls.requirePollPropPredToExist(1,1,1));
-
-    //     // ---- Does not return false, as it should-------------------------- ISSUE ON GITHUB
     //     assertFalse(testPolls.requirePollPropPredToExist(1,1,2)); 
     //     assertFalse(testPolls.requirePollPropPredToExist(1,2,1));
     //     assertFalse(testPolls.requirePollPropPredToExist(2,1,1));
