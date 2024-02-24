@@ -41,7 +41,7 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs, Pred
         emit PredictionBetCreated(_predictionId, _bet, _likelihood);
     }
 
-    function requirePollPropPredToExist(uint _pollId, uint _proposalId, uint _predictionId) public view returns (bool exists){
+    function requirePollPropPredToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool exists){
 
         //require poll to exist
         uint pollsLength = pollCount;
@@ -50,12 +50,12 @@ contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs, Pred
                 //require proposal to exist
                 uint proposalsLength= proposals[_pollId].length;
                 // if(proposalsLength==0)return false;
-                for (uint b; b <= proposalsLength;){
+                for (uint b; b < proposalsLength;){
                     if (proposals[_pollId][b].proposalId==_proposalId) {
                         //require prediction to exist
                         uint predictionsLength = predictions[_proposalId].length;
                         // if(predictionsLength==0)return false;
-                        for (uint c; c <= predictionsLength;){
+                        for (uint c; c < predictionsLength;){
                             if (predictions[_proposalId][c].predictionId ==_predictionId){
                                 return true; 
                             }
