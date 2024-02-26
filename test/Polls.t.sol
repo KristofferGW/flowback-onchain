@@ -18,7 +18,7 @@ contract PollsTest is Test, Polls {
         uint initialPollCount = testPolls.pollCount();
         string memory expectedTitle = "Sample poll";
         string memory expectedTag = "test";
-        uint expectedGroup = 1; // why not memory?
+        uint expectedGroup = 1;
         uint expectedPollStartDate = 1708672110;
         uint expectedProposalEndDate = 1708672110 + 1 days;
         uint expectedVotingStartDate = 1708672110 + 2 days;
@@ -43,12 +43,12 @@ contract PollsTest is Test, Polls {
     // -----   internal function  -----
     // }
 
-    function testEmitAddProposal() public {
-        testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
-        vm.expectEmit();
-        emit ProposalAdded(1, 1, "new proposal");
-        testPolls.addProposal(1, "new proposal");
-    }
+    // function testEmitAddProposal() public {
+    //     testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
+    //     vm.expectEmit();
+    //     emit ProposalAdded(1, 1, "new proposal");
+    //     testPolls.addProposal(1, "new proposal");
+    // }
 
 
     // function testCreatePoll() public {
@@ -57,10 +57,18 @@ contract PollsTest is Test, Polls {
     // }
 
     function testAddProposal() public {
-        testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
-        testPolls.addProposal(1, "description");
-        Polls.Proposal[] memory propos = testPolls.getProposals(1);
-        assertEq(propos.length, 1);
+        testPolls.createPoll("Sample poll", "Sample tag", 1, 1708672110, 1708672110 + 1 days, 1708672110 + 2 days, 1708672110 + 3 days, 1708672110 + 4 days);
+        vm.expectEmit();
+        string memory expectedDescription = "Test proposal";
+        emit ProposalAdded(1, 1, "Test proposal");
+        testPolls.addProposal(1, expectedDescription);
+        Poll memory pollNumberOne = testPolls.getPoll(1);
+        Proposal[] memory proposalsPollOne = testPolls.getProposals(1);
+        assertEq(pollNumberOne.proposalCount, 1);
+        assertEq(proposalsPollOne[0].description, expectedDescription);
+        assertEq(proposalsPollOne[0].voteCount, 0);
+        assertEq(proposalsPollOne[0].proposalId, 1);
+        assertEq(proposalsPollOne[0].predictionCount, 0);
     }
 
     function testGetProposals() public {

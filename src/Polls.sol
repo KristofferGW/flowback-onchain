@@ -58,8 +58,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
     event ProposalAdded(uint indexed pollId, uint proposalId, string description);
 
     function addProposal(uint _pollId, string calldata _description) public requirePollToExist(_pollId){
-        bool rightPhase = polls[_pollId].phase == PollPhase.createdPhase;
-        require(rightPhase, "You can not place proposal right now");
+        require(polls[_pollId].phase == PollPhase.createdPhase, "You can not place proposal right now");
         polls[_pollId].proposalCount++;
         uint _proposalId = polls[_pollId].proposalCount;
 
