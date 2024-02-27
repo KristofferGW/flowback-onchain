@@ -38,24 +38,6 @@ contract PollsTest is Test, Polls {
         assertEq(createdPoll.endDate, expectedEndDate);
     }
 
-    // function testRequirePollToExist(uint pollId) public {
-    //         assertFalse(testPolls.requireProposalToExist(_pollId, _proposalId));
-    // -----   internal function  -----
-    // }
-
-    // function testEmitAddProposal() public {
-    //     testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
-    //     vm.expectEmit();
-    //     emit ProposalAdded(1, 1, "new proposal");
-    //     testPolls.addProposal(1, "new proposal");
-    // }
-
-
-    // function testCreatePoll() public {
-    //     testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
-    //     assertEq(testPolls.pollCount(), 1);
-    // }
-
     function testAddProposal() public {
         testPolls.createPoll("Sample poll", "Sample tag", 1, 1708672110, 1708672110 + 1 days, 1708672110 + 2 days, 1708672110 + 3 days, 1708672110 + 4 days);
         vm.expectEmit();
@@ -71,15 +53,19 @@ contract PollsTest is Test, Polls {
         assertEq(proposalsPollOne[0].predictionCount, 0);
     }
 
-    function testGetProposals() public {
-        testPolls.createPoll("title", "tag", 1, 1, 1, 1, 1, 1);
-        testPolls.addProposal(1, "description");
-        // Polls.Proposal[] memory propos = testPolls.getProposals(1);
-        // assertEq(testPolls.proposals, propos);
+    function testGetPollResults() public {
+        string memory expectedDescriptionOne = "Test proposal";
+        string memory expectedDescriptionTwo = "Test proposal 2";
+        testPolls.createPoll("Sample poll", "Sample tag", 1, 1708672110, 1708672110 + 1 days, 1708672110 + 2 days, 1708672110 + 3 days, 1708672110 + 4 days);
+        testPolls.addProposal(1, expectedDescriptionOne);
+        testPolls.addProposal(1, expectedDescriptionTwo);
+        testPolls.becomeMemberOfGroup(1);
+        testPolls.vote(1, 2);
+        (string[] memory proposalDescriptions, uint[] memory voteCounts) = testPolls.getPollResults(1);
+        assertEq(proposalDescriptions[0], expectedDescriptionOne);
+        assertEq(proposalDescriptions[1], expectedDescriptionTwo);
+        assertEq(voteCounts[0], 0);
+        assertEq(voteCounts[1], 1);
     }
-    // function testGetPollResult(uint pollId) public {
-
-
-    // }
 
 }

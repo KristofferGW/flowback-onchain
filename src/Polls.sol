@@ -50,6 +50,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
     function _requirePollToExist(uint _pollId) internal view {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
     }
+    
     modifier requirePollToExist(uint _pollId){
         _requirePollToExist(_pollId);
         _;
