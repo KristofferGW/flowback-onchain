@@ -1,7 +1,7 @@
 
 const { ethers } = require('ethers');
-require('dotenv').config({path: '../.env'});
-const contractABI = require('../contractABI.json');
+require('dotenv').config({path: '../../.env'});
+const contractABI = require('../ABI/contractABI.json');
 
 const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFURA_API_KEY);
 const wallet = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY, provider);
@@ -84,11 +84,11 @@ const vote= async(pollId,proposalId)=> {
         console.log(error.error.reason);
     }
 }
-//createProposal(1,"proposal");
 //createPoll("Poll", "poll", 1,1,1,1,1,1);
+//createProposal(2,"proposal");
+
 //getProposals(1);
-//*****getPollResults(1);
-//*****vote(1,1);
+
 
 
 module.exports = createPoll, createProposal, getProposals;
