@@ -49,7 +49,7 @@ contract Predictions is PollStructs, ProposalStructs, PredictionStructs {
                 phase: PollPhase.predictionBetPhase
                 
             }));
-            emit PredictionCreated(_predictionId, _prediction);
+            emit PredictionCreated(_pollId, _proposalId, _predictionId, _prediction);
     }
 
     function getPredictions(uint _pollId, uint _proposalId) external view returns(Prediction[] memory) {
