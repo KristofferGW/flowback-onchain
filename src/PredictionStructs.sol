@@ -13,7 +13,7 @@ contract PredictionStructs is PollStructs, ProposalStructs {
         PollPhase phase;   
     }
     
-    event PredictionCreated(uint predictionId, string prediction);
+    event PredictionCreated(uint pollId, uint proposalId, uint predictionId, string prediction);
 
     mapping(uint => Prediction[]) public predictions;
 }
