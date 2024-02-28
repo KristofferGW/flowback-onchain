@@ -119,7 +119,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
         require(isUserMemberOfGroup(_pollId), "The user is not a member of poll group");
 
-        // require(block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        require(block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
         
         require(!hasVoted(_pollId), "Vote has already been cast");
 
@@ -173,5 +173,9 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
             }
         }
         return false;
+    }
+
+    function getPoll(uint _pollId) public view returns (Poll memory) {
+        return polls[_pollId];
     }
 }
