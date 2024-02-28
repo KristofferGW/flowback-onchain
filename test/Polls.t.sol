@@ -68,4 +68,41 @@ contract PollsTest is Test, Polls {
         assertEq(voteCounts[1], 1);
     }
 
+    function testVote() public {
+        testPolls.createPoll("Sample poll", "Sample tag", 1, 1708672110, 1708672110 + 1 days, 1708672110 + 2 days, 1708672110 + 3 days, 1708672110 + 4 days);
+        testPolls.addProposal(1, "Test proposal");
+        testPolls.addProposal(1, "Test proposal 2");
+        testPolls.becomeMemberOfGroup(1);
+        vm.warp(1708675110);
+        testPolls.vote(1, 2);
+        (string[] memory proposalDescriptions, uint[] memory voteCounts) = testPolls.getPollResults(1);
+        assertEq(voteCounts[1], 1);
+        vm.startPrank(address(0x1));
+        vm.warp(1708672110 + 5 days);
+        testPolls.becomeMemberOfGroup(1);
+        vm.expectRevert(bytes("Voting is not allowed at this time"));
+        testPolls.vote(1, 2);
+        vm.stopPrank();
+        vm.startPrank(address(0x2));
+        vm.expectRevert(bytes("The user is not a member of poll group"));
+        testPolls.vote(1, 1);
+        vm.stopPrank();
+        vm.warp(1708675110);
+        vm.expectRevert(bytes("Vote has already been cast"));
+        testPolls.vote(1, 2);
+        vm.startPrank(address(0x1));
+        testPolls.becomeDelegate(1);
+        vm.stopPrank();
+        vm.startPrank(address(0x2));
+        testPolls.becomeMemberOfGroup(1);
+        testPolls.delegate(1, address(0x1));
+        vm.expectRevert(bytes("You have delegated your vote in the polls group."));
+        testPolls.vote(1, 1);
+        vm.stopPrank();
+        vm.startPrank(address(0x1));
+        testPolls.vote(1, 2);
+        (string[] memory proposalDescriptionsTwo, uint[] memory voteCountsTwo) = testPolls.getPollResults(1);
+        assertEq(voteCountsTwo[1], 3);
+    }
+
 }

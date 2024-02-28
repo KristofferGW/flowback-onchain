@@ -99,7 +99,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
     }
 
-    function userHasDelegatedInGroup(uint _pollGroup) private view returns(bool) {
+    function userHasDelegatedInGroup(uint _pollGroup) internal view returns(bool) {
         uint[] memory delegatedGroups = groupDelegationsByUser[msg.sender];
 
         for (uint i; i < delegatedGroups.length;) {
@@ -123,7 +123,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
         require(isUserMemberOfGroup(_pollId), "The user is not a member of poll group");
 
-        // require(block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        require(block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
         
         require(!hasVoted(_pollId), "Vote has already been cast");
 
