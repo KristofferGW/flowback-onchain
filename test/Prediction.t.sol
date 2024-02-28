@@ -40,7 +40,7 @@ contract PredictionTest is Test, Polls{
         testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
         testPolls.addProposal(1, "new proposal");
         vm.expectEmit();
-        emit PredictionCreated(1, "pred");
+        emit PredictionCreated(1,1,1, "pred");
         testPolls.createPrediction(1, 1, "pred");  
     }
 
