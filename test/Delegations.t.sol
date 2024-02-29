@@ -47,12 +47,12 @@ contract DelegationsTest is Test, Polls {
     //     address addr = 0x0000000000000000000000000000000000000003;
     //     addresses[1] = addr;
     //     vm.startPrank(user2);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user2);
     //     testPolls.becomeDelegate(_groupId);
     // //   vm.stopPrank();
     //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
     //     testPolls.becomeDelegate(_groupId);
     //     vm.expectEmit();
@@ -62,22 +62,27 @@ contract DelegationsTest is Test, Polls {
         
     // }
 
-    // function testDelegate() public {
-    //     //    addresses[0] = addr;
-    //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
-    //     vm.startPrank(user1);
-    //     testPolls.becomeDelegate(_groupId);
-    //     vm.startPrank(user2);
-    //     testPolls.becomeDelegate(_groupId);
-    //     vm.startPrank(user1);
-    //     testPolls.delegate(1, user2); 
-    //     assertEq(groupDelegates[_groupId][0].delegatedVotes, 1);
-    // }
+    function testDelegate() public {
+        vm.startPrank(user1);
+        testPolls.becomeMemberOfGroup(_groupId);
+        vm.startPrank(user1);
+        testPolls.becomeDelegate(_groupId);
+        vm.startPrank(user2);
+        testPolls.becomeDelegate(_groupId);
+        Polls.GroupDelegate[] memory delegates = groupDelegates[_groupId];
+        for (uint i = 0; i < delegates.length; i++) {
+            assertEq(delegates[i].delegatedVotes, 0);
+        }
+        vm.startPrank(user1);
+        testPolls.delegate(1, user2);
+        // assertEq(delegates[0].delegatedVotes, 1) ;
+        //  assertEq(groupDelegates[_groupId][0].delegatedVotes, 1);
+       
+    }
 
-    //function testRemoveDelegation() public {
+    // function testRemoveDelegation() public {
     //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
     //     testPolls.becomeDelegate(_groupId);
     //     vm.startPrank(user2);
@@ -87,12 +92,12 @@ contract DelegationsTest is Test, Polls {
     //     assertEq(groupDelegates[_groupId][0].delegatedVotes, 1);
     //     vm.startPrank(user1);
     //     testPolls.removeDelegation(groupDelegates[_groupId][0].delegate, _groupId);
-    //     //assertEq ---
+    //     assertEq(groupDelegates[_groupId][0].delegatedVotes, 0);
     // }
 
     // function testHasDelegatedToDelegateInGroup() public {
     //     vm.startPrank(user1);
-    //     testPolls.becameMemberOfGroup(_groupId);
+    //     testPolls.becomeMemberOfGroup(_groupId);
     //     vm.startPrank(user1);
     //     testPolls.becomeDelegate(_groupId);
     //     vm.startPrank(user2);
@@ -103,7 +108,7 @@ contract DelegationsTest is Test, Polls {
     //     assertTrue(testPolls.hasDelegatedToDelegateInGroup(_groupId, user1));
     // }
 
-    //private functions (passed testing) ------------------------------------------------------------
+    // private functions (passed testing) ------------------------------------------------------------
 
     // function testBecomeDelegate() public{
     //     vm.startPrank(user1);
@@ -119,7 +124,7 @@ contract DelegationsTest is Test, Polls {
     //     assertEq(testPolls.addressIsDelegate(1, user1), true);
     //     vm.startPrank(user1);
     //     testPolls.resignAsDelegate(_groupId);
-    //     // vm.stopPrank();
+    //     vm.stopPrank();
     //     assertEq(testPolls.addressIsDelegate(1, user1), false);
     // }
 
