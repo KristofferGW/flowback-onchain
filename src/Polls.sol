@@ -10,7 +10,7 @@ import './PredictionStructs.sol';
 import './PredictionBetStructs.sol';
 import './PredictionBets.sol';
 
-
+// Contract needs to be deployed with the optimizer
 
 contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, PredictionStructs, Predictions, PredictionBetStructs, PredictionBets {
 
@@ -47,17 +47,14 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
             polls[pollCount] = newPoll;
         }
 
-    function _requirePollToExist(uint _pollId) internal view {
+    function requirePollToExist(uint _pollId) internal view {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
-    }
-    modifier requirePollToExist(uint _pollId){
-        _requirePollToExist(_pollId);
-        _;
     }
 
     event ProposalAdded(uint indexed pollId, uint proposalId, string description);
 
-    function addProposal(uint _pollId, string calldata _description) public requirePollToExist(_pollId){
+    function addProposal(uint _pollId, string calldata _description) public {
+        requirePollToExist(_pollId);
         bool rightPhase = polls[_pollId].phase == PollPhase.createdPhase;
         require(rightPhase, "You can not place proposal right now");
         polls[_pollId].proposalCount++;
@@ -74,12 +71,13 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
         emit ProposalAdded(_pollId, _proposalId, _description);
     }
 
-    function getProposals(uint _pollId) external view requirePollToExist(_pollId) returns(Proposal[] memory) {
+    function getProposals(uint _pollId) external view returns(Proposal[] memory) {
+        requirePollToExist(_pollId);
         return proposals[_pollId];
     }
 
-    function getPollResults(uint _pollId) public view requirePollToExist(_pollId) returns (string[] memory, uint[] memory) {
-        // requirePollToExist(_pollId);
+    function getPollResults(uint _pollId) public view returns (string[] memory, uint[] memory) {
+        requirePollToExist(_pollId);
 
         Proposal[] memory pollProposals = proposals[_pollId];
 
@@ -111,11 +109,11 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
     event VoteSubmitted(uint indexed pollId, address indexed voter, uint votesForProposal);
 
-    function vote(uint _pollId, uint _proposalId) public requirePollToExist(_pollId) {
+    function vote(uint _pollId, uint _proposalId) public {
         uint _pollGroup = polls[_pollId].group;
         uint delegatedVotingPower;
 
-        // requirePollToExist(_pollId);
+        requirePollToExist(_pollId);
 
         require(isUserMemberOfGroup(_pollId), "The user is not a member of poll group");
 
