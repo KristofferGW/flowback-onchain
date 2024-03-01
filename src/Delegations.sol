@@ -84,10 +84,10 @@ contract Delegations is RightToVote {
         require(_delegateTo != msg.sender, "You can not delegate to yourself");
 
         // add the group to the user's groupDelegationsByUser array
-        GroupDelegation memory newGroupDelegation {
-            groupId = _groupId;
-            timeOfDelegation = block.timestamp;
-        }
+        GroupDelegation memory newGroupDelegation = GroupDelegation({
+            groupId: _groupId,
+            timeOfDelegation: block.timestamp
+        });
 
         groupDelegationsByUser[msg.sender].push(newGroupDelegation);
 
@@ -218,9 +218,8 @@ contract Delegations is RightToVote {
      * @return hasDelegated Returns true if the user has delegated in the group, false otherwise.
     */
     function hasDelegatedInGroup(uint _groupId) public view returns (bool) {
-        uint[] memory userDelegatedGroups = groupDelegationsByUser[msg.sender];
-        for (uint i; i < userDelegatedGroups.length;) {
-            if (userDelegatedGroups[i].groupId == _groupId) {
+        for (uint i = 0; i < groupDelegationsByUser[msg.sender].length;) {
+            if (groupDelegationsByUser[msg.sender][i].groupId == _groupId) {
                 return true;
             }
 
@@ -228,6 +227,7 @@ contract Delegations is RightToVote {
                 ++i;
             }
         }
+        
         return false;
     }
 

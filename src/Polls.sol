@@ -94,20 +94,6 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
     }
 
-    function userHasDelegatedInGroup(uint _pollGroup) private view returns(bool) {
-        uint[] memory delegatedGroups = groupDelegationsByUser[msg.sender];
-
-        for (uint i; i < delegatedGroups.length;) {
-            if (delegatedGroups[i] == _pollGroup) {
-                return true;
-            }
-            unchecked {
-                ++i;
-            }
-        }
-        return false;
-    }
-
     event VoteSubmitted(uint indexed pollId, address indexed voter, uint votesForProposal);
 
     function vote(uint _pollId, uint _proposalId) public {
@@ -124,7 +110,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
         require(requireProposalToExist(_pollId, _proposalId));
 
-        require(!userHasDelegatedInGroup(_pollGroup), "You have delegated your vote in the polls group.");
+        require(!hasDelegatedInGroup(_pollGroup), "You have delegated your vote in the polls group.");
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
