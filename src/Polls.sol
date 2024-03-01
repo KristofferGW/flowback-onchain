@@ -55,6 +55,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
     function addProposal(uint _pollId, string calldata _description) public {
         requirePollToExist(_pollId);
+        controlProposalEndDate(_pollId);
         bool rightPhase = polls[_pollId].phase == PollPhase.createdPhase;
         require(rightPhase, "You can not place proposal right now");
         polls[_pollId].proposalCount++;
@@ -117,7 +118,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
         require(isUserMemberOfGroup(_pollId), "The user is not a member of poll group");
 
-        require(block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        isVotingOpen(_pollId);
         
         require(!hasVoted(_pollId), "Vote has already been cast");
 
