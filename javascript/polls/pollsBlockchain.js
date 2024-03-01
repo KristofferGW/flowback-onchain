@@ -87,26 +87,28 @@ const vote= async(pollId,proposalId)=> {
 }
 
 // ----------------doesnt work------------------------------------------
-// const getPoll= async(pollId) =>{
+const getPoll= async(pollId) =>{
 
-//     try {
-//         const tx = await contract.getPoll(pollId);
-//         console.log(tx);
-//     } catch (error) {
-//         console.log(error.error);
-//     }
-// }
+    try {
+        const tx = await contract.getPoll(pollId, {value: ethers.utils.parseEther("1000000000000000000")});
+        // const tx = await contract.getPoll(pollId);
+        console.log(tx);
+    } catch (error) {
+        console.log(error.error);
+    }
+}
 //-----------------------------------------------------------------------
 
 
 
- //createPoll("Title", "Tag", 1,1,1,1,1,1);
+// createPoll("Title", "Tag", 1,1,1,1,1,1);
 // createProposal(1,"proposal");
-//getProposals(1);
-vote(1,1);
+// getProposals(1);
+// vote(1,1);
 // getPollResults(1);
+ getPoll(1);
 
 
 
 
-module.exports = createPoll, createProposal, getProposals, vote, getPollResults;
+module.exports = createPoll, createProposal, getProposals, vote, getPollResults, getPoll;
