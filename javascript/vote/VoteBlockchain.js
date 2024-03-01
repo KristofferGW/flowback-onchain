@@ -14,7 +14,7 @@ const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 const becomeMemberOfGroup = async(group)=> {
 
     try {
-        const tx = await contract.becameMemberOfGroup(group);
+        const tx = await contract.becomeMemberOfGroup(group);
         const txReceipt = await tx.wait();
         if (txReceipt.status === 1) {
             console.log('Transaction successful');

@@ -21,19 +21,6 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_group",
-				"type": "uint256"
-			}
-		],
-		"name": "becameMemberOfGroup",
-		"outputs": [],
-		"stateMutability": "payable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
 				"name": "_groupId",
 				"type": "uint256"
 			}
@@ -41,6 +28,19 @@
 		"name": "becomeDelegate",
 		"outputs": [],
 		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_group",
+				"type": "uint256"
+			}
+		],
+		"name": "becomeMemberOfGroup",
+		"outputs": [],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -321,6 +321,18 @@
 			{
 				"indexed": false,
 				"internalType": "uint256",
+				"name": "pollId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
+				"name": "proposalId",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "uint256",
 				"name": "predictionId",
 				"type": "uint256"
 			},
@@ -454,6 +466,82 @@
 				"internalType": "uint256[]",
 				"name": "groups",
 				"type": "uint256[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_pollId",
+				"type": "uint256"
+			}
+		],
+		"name": "getPoll",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "title",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "tag",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "group",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "pollStartDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "proposalEndDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "votingStartDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "delegateEndDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "endDate",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "pollId",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "proposalCount",
+						"type": "uint256"
+					},
+					{
+						"internalType": "enum PollStructs.PollPhase",
+						"name": "phase",
+						"type": "uint8"
+					}
+				],
+				"internalType": "struct PollStructs.Poll",
+				"name": "",
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",

@@ -60,6 +60,7 @@ const getProposals = async(pollId)=> {
 
     try {
         const tx = await contract.getProposals(pollId);
+        console.log(`proposals on pollid ${pollId}:`)
         tx.map(info => console.log(parseInt(info.proposalId), info.description));
         return tx.args;
         
@@ -70,8 +71,8 @@ const getProposals = async(pollId)=> {
 
 const getPollResults= async(pollId)=> {
     try {
-        const tx = await contract.getProposals(pollId);
-        console.log(tx);
+        const tx = await contract.getPollResults(pollId);
+        tx.map(info => console.log(info));
     } catch (error) {
         console.log(error)
     }
@@ -84,11 +85,28 @@ const vote= async(pollId,proposalId)=> {
         console.log(error.error.reason);
     }
 }
-//createPoll("Poll", "poll", 1,1,1,1,1,1);
-//createProposal(2,"proposal");
 
+// ----------------doesnt work------------------------------------------
+// const getPoll= async(pollId) =>{
+
+//     try {
+//         const tx = await contract.getPoll(pollId);
+//         console.log(tx);
+//     } catch (error) {
+//         console.log(error.error);
+//     }
+// }
+//-----------------------------------------------------------------------
+
+
+
+ //createPoll("Title", "Tag", 1,1,1,1,1,1);
+// createProposal(1,"proposal");
 //getProposals(1);
+vote(1,1);
+// getPollResults(1);
 
 
 
-module.exports = createPoll, createProposal, getProposals;
+
+module.exports = createPoll, createProposal, getProposals, vote, getPollResults;

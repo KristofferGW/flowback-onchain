@@ -1,6 +1,6 @@
 const {ethers} = require('ethers');
-require('dotenv').config({path: '../.env'});
-const contractABI = require('./contractABI.json');
+require('dotenv').config({path: '../../.env'});
+const contractABI = require('../ABI/contractABI.json');
 
 const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFURA_API_KEY);
 const wallet = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY, provider);
@@ -68,6 +68,6 @@ const resignAsDelegate = async(group)=> {
 
 
 
-becomeDelegate(1);
-//*delegate(1,"0x04cf74ef3c25718e11556c48e8c563cc8d3f4a692aa18ffcacda2f8fbbfcd27702f1b110c734bcd51e920eeec1747f8d98cd28246d27c47cf7d09a956d00f104a6");
-//resignAsDelegate(1); 
+// becomeDelegate(1);
+// resignAsDelegate(1); 
+module.exports = becomeDelegate, delegate, resignAsDelegate;
