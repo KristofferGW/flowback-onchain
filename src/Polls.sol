@@ -3,16 +3,16 @@ pragma solidity ^0.8.0;
 
 import {RightToVote} from './RightToVote.sol';
 import {Delegations} from './Delegations.sol';
-import {PollStructs} from './PollStructs.sol';
-import {ProposalStructs} from './ProposalStructs.sol';
+import {PollHelpers} from './PollHelpers.sol';
+import {ProposalHelpers} from './ProposalHelpers.sol';
 import {Predictions} from './Predictions.sol';
-import {PredictionStructs} from './PredictionStructs.sol';
-import {PredictionBetStructs} from './PredictionBetStructs.sol';
+import {PredictionHelpers} from './PredictionHelpers.sol';
+import {PredictionBetHelpers} from './PredictionBetHelpers.sol';
 import {PredictionBets} from './PredictionBets.sol';
 
 // Contract needs to be deployed with the optimizer
 
-contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, PredictionStructs, Predictions, PredictionBetStructs, PredictionBets {
+contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, PredictionHelpers, Predictions, PredictionBetHelpers, PredictionBets {
 
     event PollCreated(uint pollId, string title);
 

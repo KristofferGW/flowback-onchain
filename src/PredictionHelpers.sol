@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
-import {PollStructs} from './PollStructs.sol';
-import {ProposalStructs} from './ProposalStructs.sol'; 
+import {PollHelpers} from './PollHelpers.sol';
+import {ProposalHelpers} from './ProposalHelpers.sol'; 
 
-contract PredictionStructs is PollStructs, ProposalStructs {
+contract PredictionHelpers is PollHelpers, ProposalHelpers {
    
     struct Prediction{
         uint pollId;

@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
-import {PollStructs} from './PollStructs.sol';
-import {ProposalStructs} from './ProposalStructs.sol';
-import {PredictionStructs} from './PredictionStructs.sol';
-import {PredictionBetStructs} from './PredictionBetStructs.sol';
+import {PollHelpers} from './PollHelpers.sol';
+import {ProposalHelpers} from './ProposalHelpers.sol';
+import {PredictionHelpers} from './PredictionHelpers.sol';
+import {PredictionBetHelpers} from './PredictionBetHelpers.sol';
 
-contract PredictionBets is PollStructs, ProposalStructs, PredictionStructs, PredictionBetStructs {
+contract PredictionBets is PollHelpers, ProposalHelpers, PredictionHelpers, PredictionBetHelpers {
 
     event PredictionBetCreated(uint indexed predictionId, bool bet, uint likelihood);
 
