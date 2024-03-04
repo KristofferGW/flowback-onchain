@@ -21,4 +21,13 @@ contract PollStructs {
 
     mapping(uint => Poll) public polls;
     uint public pollCount;
+
+    function controlProposalEndDate(uint _pollId) internal view {
+        require(polls[_pollId].proposalEndDate > block.timestamp, "The proposal phase has ended.");
+    }
+
+    function isVotingOpen(uint _pollId) internal view {
+        require(polls[_pollId].votingStartDate < block.timestamp && polls[_pollId].endDate > block.timestamp, "Voting is not allowed at this time");
+    }
+
 }
