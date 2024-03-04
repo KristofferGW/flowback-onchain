@@ -889,8 +889,8 @@
       }
     },
     "src/Polls.sol": {
-      "lastModificationDate": 1709133571674,
-      "contentHash": "af2b3de4e48bf56a620a02ce13f19b57",
+      "lastModificationDate": 1709297125489,
+      "contentHash": "62b0c3eaaeedd44a4e34b815cfb0c6e9",
       "sourceName": "src/Polls.sol",
       "solcConfig": {
         "settings": {
@@ -1074,8 +1074,8 @@
       }
     },
     "src/Predictions.sol": {
-      "lastModificationDate": 1709132160628,
-      "contentHash": "0b251b03395b390e83c636fa538c3c2a",
+      "lastModificationDate": 1709554113916,
+      "contentHash": "b51f3dc09a9dd8e40b23d752d58719b0",
       "sourceName": "src/Predictions.sol",
       "solcConfig": {
         "settings": {
@@ -1203,8 +1203,8 @@
       }
     },
     "test/Delegations.t.sol": {
-      "lastModificationDate": 1709204811989,
-      "contentHash": "e02e3fd4c64bd5c987c6cc777959949b",
+      "lastModificationDate": 1709205302526,
+      "contentHash": "aaa2bdec75b9cedc51d48d639a12f452",
       "sourceName": "test/Delegations.t.sol",
       "solcConfig": {
         "settings": {
@@ -1341,8 +1341,8 @@
       }
     },
     "test/Prediction.t.sol": {
-      "lastModificationDate": 1709133714034,
-      "contentHash": "f3521cd5ffa9a438425469f6f4c4bca9",
+      "lastModificationDate": 1709553903497,
+      "contentHash": "aa3aa03e1ad8983271a1b6196c38235b",
       "sourceName": "test/Prediction.t.sol",
       "solcConfig": {
         "settings": {

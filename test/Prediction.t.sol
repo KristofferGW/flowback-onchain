@@ -20,19 +20,36 @@ contract PredictionTest is Test, Polls{
 
     function testCreatePrediction() public {
         testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
+        vm.expectRevert(bytes("Proposal does not exist"));
+        testPolls.createPrediction(1, 1, "pred");
+        vm.stopPrank();
         testPolls.addProposal(1, "new proposal");
-        testPolls.createPrediction(1, 1, "pred"); 
-        testPolls.createPrediction(1, 1, "pred"); 
+        testPolls.createPrediction(1, 1, "predone"); 
+        testPolls.createPrediction(1, 1, "predtwo"); 
         Predictions.Prediction[] memory preds = testPolls.getPredictions(1, 1);
+        assertEq(preds[0].prediction, "predone");
+        assertEq(preds[1].prediction, "predtwo");
+        assertEq(preds[0].predictionId, 1);
+        assertEq(preds[1].predictionId, 2);
         assertEq(preds.length, 2);
+
     }
 
     function testGetPredictions() public {
+        vm.expectRevert(bytes("Proposal does not exist"));
+        testPolls.getPredictions(1, 1);
+        vm.stopPrank();
         testPolls.createPoll("new poll", "tag", 1, 1, 1, 1, 1, 1);
         testPolls.addProposal(1, "new proposal");
-        testPolls.createPrediction(1, 1, "pred");  
+        testPolls.createPrediction(1, 1, "predone"); 
+        testPolls.createPrediction(1, 1, "predtwo");  
         Predictions.Prediction[] memory preds = testPolls.getPredictions(1, 1);
+        assertEq(preds[0].predictionId, 1);
+        assertEq(preds[1].predictionId, 2);
+        assertEq(preds[0].prediction, "predone");
+        assertEq(preds[1].prediction, "predtwo");
         assertTrue(preds.length > 0, "Should return predictions");
+
     }
 
 
