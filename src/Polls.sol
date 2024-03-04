@@ -99,6 +99,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
     function vote(uint _pollId, uint _proposalId) public {
         uint _pollGroup = polls[_pollId].group;
         uint delegatedVotingPower;
+        address[] memory delegatingAddresses;
 
         requirePollToExist(_pollId);
 
@@ -119,11 +120,25 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
         for (uint i; i < pollGroupLength;) {
             if (groupDelegates[_pollGroup][i].delegate == msg.sender) {
                 delegatedVotingPower = groupDelegates[_pollGroup][i].delegatedVotes;
+                delegatingAddresses = groupDelegates[_pollGroup][i]. delegationsFrom;
             }
             unchecked {
                 ++i;
             }
-        } 
+        }
+
+        for (uint i; i < delegatingAddresses.length; i++) {
+            uint pollDelegateEndDate = polls[_pollId].delegateEndDate;
+
+            for (uint j = 0; j < groupDelegationsByUser[delegatingAddresses[i]].length; j++) {
+                if (groupDelegationsByUser[delegatingAddresses[i]][j].groupId == _pollGroup) {
+                    if (groupDelegationsByUser[delegatingAddresses[i]][j].timeOfDelegation > pollDelegateEndDate) {
+                        delegatedVotingPower = delegatedVotingPower > 0 ? delegatedVotingPower - 1: 0;
+                    }
+                    break;
+                }
+            }
+        }
 
         uint proposalsLength = pollProposals.length;
 

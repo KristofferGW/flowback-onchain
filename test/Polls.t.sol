@@ -106,4 +106,23 @@ contract PollsTest is Test, Polls {
         assertEq(voteCountsTwo[1], 3);
     }
 
+    function testDelegatedVoteTooLate() public {
+        testPolls.createPoll("Sample poll", "Sample tag", 1, 1708672110, 1708672110 + 1 days, 1708672110, 1708672110 + 3 days, 1708672110 + 5 days);
+        testPolls.addProposal(1, "Test proposal");
+        testPolls.addProposal(1, "Test proposal 2");
+        vm.startPrank(address(0x1));
+        testPolls.becomeMemberOfGroup(1);
+        testPolls.becomeDelegate(1);
+        vm.stopPrank();
+        vm.startPrank(address(0x2));
+        testPolls.becomeMemberOfGroup(1);
+        vm.warp(1708672110 + 4 days);
+        testPolls.delegate(1, address(0x1));
+        vm.stopPrank();
+        vm.startPrank(address(0x1));
+        testPolls.vote(1, 1);
+        (string[] memory proposalDescriptions, uint[] memory voteCounts) = testPolls.getPollResults(1);
+        assertEq(voteCounts[0], 1);
+    }
+
 }
