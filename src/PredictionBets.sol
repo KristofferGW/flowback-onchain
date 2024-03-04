@@ -26,16 +26,13 @@ contract PredictionBets is PollHelpers, ProposalHelpers, PredictionHelpers, Pred
     )  external requireExist(_pollId, _proposalId, _predictionId){
       
         require(_likelihood > 0 , "Value needs to be higher than 0");
-        bool rightPhase = predictions[_proposalId][_predictionId-1].phase == PollPhase.predictionBetPhase;
-        require(rightPhase, "You can not place a bet at this time");
           
         predictionBets[_predictionId].push(PredictionBet({
             pollId: _pollId,
             proposalId: _proposalId,
             predictionId: _predictionId,
             likelihood: _likelihood,
-            bet: _bet,
-            phase: PollPhase.completedPhase
+            bet: _bet
         }));
             
         emit PredictionBetCreated(_predictionId, _bet, _likelihood);

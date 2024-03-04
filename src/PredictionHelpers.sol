@@ -10,7 +10,6 @@ contract PredictionHelpers is PollHelpers, ProposalHelpers {
         uint proposalId;
         uint predictionId;
         string prediction;
-        PollPhase phase;   
     }
     
     event PredictionCreated(uint pollId, uint proposalId, uint predictionId, string prediction);
