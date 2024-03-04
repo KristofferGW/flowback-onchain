@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
-import './PollStructs.sol';
+import {PollStructs} from './PollStructs.sol';
 
 contract ProposalStructs is PollStructs {
 

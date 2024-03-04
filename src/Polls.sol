@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity ^0.8.0;
 
-import './RightToVote.sol';
-import './Delegations.sol';
-import './PollStructs.sol';
-import './ProposalStructs.sol';
-import './Predictions.sol';
-import './PredictionStructs.sol';
-import './PredictionBetStructs.sol';
-import './PredictionBets.sol';
+import {RightToVote} from './RightToVote.sol';
+import {Delegations} from './Delegations.sol';
+import {PollStructs} from './PollStructs.sol';
+import {ProposalStructs} from './ProposalStructs.sol';
+import {Predictions} from './Predictions.sol';
+import {PredictionStructs} from './PredictionStructs.sol';
+import {PredictionBetStructs} from './PredictionBetStructs.sol';
+import {PredictionBets} from './PredictionBets.sol';
 
 // Contract needs to be deployed with the optimizer
 
