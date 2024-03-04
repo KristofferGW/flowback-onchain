@@ -12,7 +12,6 @@ contract PredictionBetHelpers is PollHelpers, ProposalHelpers, PredictionHelpers
         uint predictionId;
         bool bet;
         uint likelihood;
-        PollPhase phase;
     }
 
     mapping(uint => PredictionBet[]) public predictionBets;

@@ -38,8 +38,7 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
                 delegateEndDate: _delegateEndDate,
                 endDate: _endDate,
                 pollId: pollCount, 
-                proposalCount: 0,
-                phase: PollPhase.createdPhase
+                proposalCount: 0
             });
 
             emit PollCreated(newPoll.pollId, newPoll.title);
@@ -56,8 +55,6 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
     function addProposal(uint _pollId, string calldata _description) public {
         requirePollToExist(_pollId);
         controlProposalEndDate(_pollId);
-        bool rightPhase = polls[_pollId].phase == PollPhase.createdPhase;
-        require(rightPhase, "You can not place proposal right now");
         polls[_pollId].proposalCount++;
         uint _proposalId = polls[_pollId].proposalCount;
 
@@ -65,8 +62,7 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
             description: _description,
             voteCount: 0,
             proposalId: _proposalId,
-            predictionCount: 0,
-            phase: PollPhase.predictionPhase
+            predictionCount: 0
         }));
 
         emit ProposalAdded(_pollId, _proposalId, _description);

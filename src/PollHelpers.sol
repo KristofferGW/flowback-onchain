@@ -14,10 +14,7 @@ contract PollHelpers {
         uint endDate;
         uint pollId;
         uint proposalCount;
-        PollPhase phase;
     }
-
-    enum PollPhase {createdPhase, predictionPhase, predictionBetPhase, completedPhase}
 
     mapping(uint => Poll) public polls;
     uint public pollCount;

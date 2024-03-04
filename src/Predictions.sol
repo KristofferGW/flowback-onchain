@@ -30,8 +30,6 @@ contract Predictions is PollHelpers, ProposalHelpers, PredictionHelpers {
         ) public{
              require(requireProposalToExist(_pollId, _proposalId), "Proposal does not exist");
             //phases
-            bool rightPhase = proposals[_pollId][_proposalId -1].phase == PollPhase.predictionPhase;
-            require(rightPhase, "You can not create a prediction at this time");
             Proposal storage proposal = proposals[_pollId][_proposalId -1]; // Get the proposal from the proposals mapping
             require(requireProposalToExist(_pollId, _proposalId), "Proposal does not exist");
 
@@ -45,8 +43,7 @@ contract Predictions is PollHelpers, ProposalHelpers, PredictionHelpers {
                 pollId: _pollId,
                 proposalId: _proposalId,
                 predictionId: _predictionId,
-                prediction: _prediction,
-                phase: PollPhase.predictionBetPhase
+                prediction: _prediction
                 
             }));
             emit PredictionCreated(_pollId, _proposalId, _predictionId, _prediction);
