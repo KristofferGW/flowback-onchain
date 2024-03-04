@@ -55,6 +55,7 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
     function addProposal(uint _pollId, string calldata _description) public {
         requirePollToExist(_pollId);
+        controlProposalEndDate(_pollId);
         bool rightPhase = polls[_pollId].phase == PollPhase.createdPhase;
         require(rightPhase, "You can not place proposal right now");
         polls[_pollId].proposalCount++;
@@ -93,37 +94,24 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
 
     }
 
-    function userHasDelegatedInGroup(uint _pollGroup) private view returns(bool) {
-        uint[] memory delegatedGroups = groupDelegationsByUser[msg.sender];
-
-        for (uint i; i < delegatedGroups.length;) {
-            if (delegatedGroups[i] == _pollGroup) {
-                return true;
-            }
-            unchecked {
-                ++i;
-            }
-        }
-        return false;
-    }
-
     event VoteSubmitted(uint indexed pollId, address indexed voter, uint votesForProposal);
 
     function vote(uint _pollId, uint _proposalId) public {
         uint _pollGroup = polls[_pollId].group;
         uint delegatedVotingPower;
+        address[] memory delegatingAddresses;
 
         requirePollToExist(_pollId);
 
         require(isUserMemberOfGroup(_pollId), "The user is not a member of poll group");
 
-        require(block.timestamp <= polls[_pollId].endDate, "Voting is not allowed at this time");
+        isVotingOpen(_pollId);
         
         require(!hasVoted(_pollId), "Vote has already been cast");
 
         require(requireProposalToExist(_pollId, _proposalId));
 
-        require(!userHasDelegatedInGroup(_pollGroup), "You have delegated your vote in the polls group.");
+        require(!hasDelegatedInGroup(_pollGroup), "You have delegated your vote in the polls group.");
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
@@ -132,11 +120,25 @@ contract Polls is RightToVote, Delegations, PollStructs, ProposalStructs, Predic
         for (uint i; i < pollGroupLength;) {
             if (groupDelegates[_pollGroup][i].delegate == msg.sender) {
                 delegatedVotingPower = groupDelegates[_pollGroup][i].delegatedVotes;
+                delegatingAddresses = groupDelegates[_pollGroup][i]. delegationsFrom;
             }
             unchecked {
                 ++i;
             }
-        } 
+        }
+
+        for (uint i; i < delegatingAddresses.length; i++) {
+            uint pollDelegateEndDate = polls[_pollId].delegateEndDate;
+
+            for (uint j = 0; j < groupDelegationsByUser[delegatingAddresses[i]].length; j++) {
+                if (groupDelegationsByUser[delegatingAddresses[i]][j].groupId == _pollGroup) {
+                    if (groupDelegationsByUser[delegatingAddresses[i]][j].timeOfDelegation > pollDelegateEndDate) {
+                        delegatedVotingPower = delegatedVotingPower > 0 ? delegatedVotingPower - 1: 0;
+                    }
+                    break;
+                }
+            }
+        }
 
         uint proposalsLength = pollProposals.length;
 
