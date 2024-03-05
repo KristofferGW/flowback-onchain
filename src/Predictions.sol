@@ -21,6 +21,7 @@ contract Predictions is PollHelpers, ProposalHelpers, PredictionHelpers {
         return false;
     }
 
+    event PredictionCreated(uint pollId, uint proposalId, uint predictionId, string prediction);
     function createPrediction(
         uint _pollId, 
         uint _proposalId,
@@ -28,10 +29,8 @@ contract Predictions is PollHelpers, ProposalHelpers, PredictionHelpers {
         
         
         ) public{
-             require(requireProposalToExist(_pollId, _proposalId), "Proposal does not exist");
-            //phases
-            Proposal storage proposal = proposals[_pollId][_proposalId -1]; // Get the proposal from the proposals mapping
             require(requireProposalToExist(_pollId, _proposalId), "Proposal does not exist");
+            Proposal storage proposal = proposals[_pollId][_proposalId -1]; // Get the proposal from the proposals mapping
 
             proposal.predictionCount++; //Increment by one
             uint _predictionId = proposal.predictionCount; // Set prediction id

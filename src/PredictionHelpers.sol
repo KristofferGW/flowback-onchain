@@ -12,7 +12,7 @@ contract PredictionHelpers is PollHelpers, ProposalHelpers {
         string prediction;
     }
     
-    event PredictionCreated(uint pollId, uint proposalId, uint predictionId, string prediction);
+   
 
     mapping(uint => Prediction[]) public predictions;
 }
