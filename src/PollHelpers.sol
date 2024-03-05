@@ -27,4 +27,8 @@ contract PollHelpers {
         require(polls[_pollId].votingStartDate < block.timestamp && polls[_pollId].endDate > block.timestamp, "Voting is not allowed at this time");
     }
 
+    function requirePollToExist(uint _pollId) internal view {
+        require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
+    }
+
 }

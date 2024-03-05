@@ -46,10 +46,6 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
             polls[pollCount] = newPoll;
         }
 
-    function requirePollToExist(uint _pollId) internal view {
-        require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
-    }
-
     event ProposalAdded(uint indexed pollId, uint proposalId, string description);
 
     function addProposal(uint _pollId, string calldata _description) public {
