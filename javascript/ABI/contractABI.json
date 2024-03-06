@@ -532,14 +532,9 @@
 						"internalType": "uint256",
 						"name": "proposalCount",
 						"type": "uint256"
-					},
-					{
-						"internalType": "enum PollStructs.PollPhase",
-						"name": "phase",
-						"type": "uint8"
 					}
 				],
-				"internalType": "struct PollStructs.Poll",
+				"internalType": "struct PollHelpers.Poll",
 				"name": "",
 				"type": "tuple"
 			}
@@ -617,14 +612,9 @@
 						"internalType": "uint256",
 						"name": "likelihood",
 						"type": "uint256"
-					},
-					{
-						"internalType": "enum PollStructs.PollPhase",
-						"name": "phase",
-						"type": "uint8"
 					}
 				],
-				"internalType": "struct PredictionBetStructs.PredictionBet[]",
+				"internalType": "struct PredictionBetHelpers.PredictionBet[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -668,14 +658,9 @@
 						"internalType": "string",
 						"name": "prediction",
 						"type": "string"
-					},
-					{
-						"internalType": "enum PollStructs.PollPhase",
-						"name": "phase",
-						"type": "uint8"
 					}
 				],
-				"internalType": "struct PredictionStructs.Prediction[]",
+				"internalType": "struct PredictionHelpers.Prediction[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -714,14 +699,9 @@
 						"internalType": "uint256",
 						"name": "predictionCount",
 						"type": "uint256"
-					},
-					{
-						"internalType": "enum PollStructs.PollPhase",
-						"name": "phase",
-						"type": "uint8"
 					}
 				],
-				"internalType": "struct ProposalStructs.Proposal[]",
+				"internalType": "struct ProposalHelpers.Proposal[]",
 				"name": "",
 				"type": "tuple[]"
 			}
@@ -902,11 +882,6 @@
 				"internalType": "uint256",
 				"name": "proposalCount",
 				"type": "uint256"
-			},
-			{
-				"internalType": "enum PollStructs.PollPhase",
-				"name": "phase",
-				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -951,11 +926,6 @@
 				"internalType": "uint256",
 				"name": "likelihood",
 				"type": "uint256"
-			},
-			{
-				"internalType": "enum PollStructs.PollPhase",
-				"name": "phase",
-				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -995,11 +965,6 @@
 				"internalType": "string",
 				"name": "prediction",
 				"type": "string"
-			},
-			{
-				"internalType": "enum PollStructs.PollPhase",
-				"name": "phase",
-				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",
@@ -1039,11 +1004,6 @@
 				"internalType": "uint256",
 				"name": "predictionCount",
 				"type": "uint256"
-			},
-			{
-				"internalType": "enum PollStructs.PollPhase",
-				"name": "phase",
-				"type": "uint8"
 			}
 		],
 		"stateMutability": "view",

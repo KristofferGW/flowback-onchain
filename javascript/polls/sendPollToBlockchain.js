@@ -5,7 +5,7 @@ const contractABI = require('../contractABI.json');
 const provider = new ethers.providers.InfuraProvider('sepolia', process.env.INFURA_API_KEY);
 const wallet = new ethers.Wallet(process.env.SIGNER_PRIVATE_KEY, provider);
 
-const contractAddress = '0xA58c7359fFd9DCC380a95C8092487F28AC5039DF';
+const contractAddress = '0xf43205cD2E7Ab7416D73cCcFC30cD5d980c9A31a';
 
 const contract = new ethers.Contract(contractAddress, contractABI, wallet);
 
