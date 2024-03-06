@@ -7,20 +7,29 @@ import "src/Polls.sol";
 contract PollsTest is Test, Polls {
 
     Polls public testPolls;
+    string public pollTitle;
+    string public tag;
+    uint public group;
+    uint public pollStartDate;
+    uint public proposalEndDate;
+    uint public votingStartDate;
+    uint public delegateEndDate;
+    uint public endDate;
 
     function setUp() public {
         testPolls = new Polls();
+        pollTitle = "Test title";
+        tag = "Test tag";
+        group = 1;
+        pollStartDate = 1709712019;
+        proposalEndDate = 1709712019 + 3 days;
+        votingStartDate = 1709712019;
+        delegateEndDate = 1709712019 + 3 days;
+        endDate = 1709712019 + 5 days;
     }
 
     function testCreatePoll() public {
-        string memory pollTitle = "Test title";
-        string memory tag = "Test tag";
-        uint group = 1;
-        uint pollStartDate = 1709712019;
-        uint proposalEndDate = 1709712019 + 3 days;
-        uint votingStartDate = 1709712019;
-        uint delegateEndDate = 1709712019 + 3 days;
-        uint endDate = 1709712019 + 5 days;
+        
         vm.expectEmit();
         emit PollCreated(1, pollTitle);
         testPolls.createPoll(pollTitle, tag, group, pollStartDate, proposalEndDate, votingStartDate, delegateEndDate, endDate);
@@ -31,5 +40,9 @@ contract PollsTest is Test, Polls {
         assertEq(createdPoll.votingStartDate, votingStartDate);
         assertEq(createdPoll.delegateEndDate, delegateEndDate);
         assertEq(createdPoll.endDate, endDate);
+    }
+
+    function testAddProposalHappyTrail() public {
+        
     }
 }
