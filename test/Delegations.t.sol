@@ -68,6 +68,7 @@ contract DelegationsTest is Test, Polls {
         vm.startPrank(user1);
         testPolls.becomeDelegate(_groupId);
         vm.startPrank(user2);
+        testPolls.becomeMemberOfGroup(_groupId);
         testPolls.becomeDelegate(_groupId);
         Polls.GroupDelegate[] memory delegates = groupDelegates[_groupId];
         for (uint i = 0; i < delegates.length; i++) {
