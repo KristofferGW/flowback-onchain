@@ -58,6 +58,7 @@ contract Delegations is RightToVote {
     */
     function becomeDelegate(uint _groupId) public {
         require(!addressIsDelegate(_groupId, msg.sender), "You are already a delegate in specific group");
+        require(isUserMemberOfGroup(_groupId), "You need to be a member of the group to become a delegate");
         groupDelegateCount[_groupId]++;
 
         GroupDelegate memory newGroupDelegate = GroupDelegate({
