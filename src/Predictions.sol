@@ -34,10 +34,7 @@ contract Predictions is PollHelpers, ProposalHelpers, PredictionHelpers {
 
             proposal.predictionCount++; //Increment by one
             uint _predictionId = proposal.predictionCount; // Set prediction id
-
-            proposals[_pollId][_proposalId -1] = proposal; // Update mapping
    
-
             predictions[_proposalId].push(Prediction({
                 pollId: _pollId,
                 proposalId: _proposalId,
@@ -48,16 +45,9 @@ contract Predictions is PollHelpers, ProposalHelpers, PredictionHelpers {
             emit PredictionCreated(_pollId, _proposalId, _predictionId, _prediction);
     }
 
-    function getPredictions(uint _pollId, uint _proposalId) external view returns(Prediction[] memory) {
+    function getPredictions(uint _pollId, uint _proposalId) external view returns (Prediction[] memory) {
         require(requireProposalToExist(_pollId, _proposalId), "Proposal does not exist");
-        uint proposalsLength = proposals[_pollId].length;
-        for (uint i=0; i <= proposalsLength;){   
-            if(proposals[_pollId][i].proposalId == _proposalId)
-            return predictions[_proposalId];
-            unchecked {
-                ++i;
-            }  
-        }  
         return predictions[_proposalId];
     }
+
 }
