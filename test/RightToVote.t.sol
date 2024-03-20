@@ -21,7 +21,7 @@ contract RightToVoteTest is Test, Polls {
 
     function testEmitPredictionCreated() public {
         vm.expectEmit();
-        emit PermissionGivenToVote(1);
+        emit GroupMembershipChanged(msg.sender, 1, true);
         testPolls.becomeMemberOfGroup(1);  
     }
 
