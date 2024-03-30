@@ -10,8 +10,6 @@ import {PredictionHelpers} from './PredictionHelpers.sol';
 import {PredictionBetHelpers} from './PredictionBetHelpers.sol';
 import {PredictionBets} from './PredictionBets.sol';
 
-// Contract needs to be deployed with the optimizer
-
 contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, PredictionHelpers, Predictions, PredictionBetHelpers, PredictionBets {
 
     event PollCreated(uint pollId, string title);
