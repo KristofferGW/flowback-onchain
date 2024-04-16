@@ -40,7 +40,7 @@
 		],
 		"name": "becomeMemberOfGroup",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -157,6 +157,31 @@
 			{
 				"indexed": true,
 				"internalType": "address",
+				"name": "user",
+				"type": "address"
+			},
+			{
+				"indexed": true,
+				"internalType": "uint256",
+				"name": "group",
+				"type": "uint256"
+			},
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "isMember",
+				"type": "bool"
+			}
+		],
+		"name": "GroupMembershipChanged",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
 				"name": "delegate",
 				"type": "address"
 			},
@@ -223,19 +248,6 @@
 			}
 		],
 		"name": "NewDelegation",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": true,
-				"internalType": "uint256",
-				"name": "_group",
-				"type": "uint256"
-			}
-		],
-		"name": "PermissionGivenToVote",
 		"type": "event"
 	},
 	{
@@ -399,7 +411,7 @@
 		],
 		"name": "removeGroupMembership",
 		"outputs": [],
-		"stateMutability": "payable",
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -464,7 +476,7 @@
 		"outputs": [
 			{
 				"internalType": "uint256[]",
-				"name": "groups",
+				"name": "",
 				"type": "uint256[]"
 			}
 		],
@@ -803,7 +815,7 @@
 		"outputs": [
 			{
 				"internalType": "bool",
-				"name": "hasRight",
+				"name": "isMember",
 				"type": "bool"
 			}
 		],
