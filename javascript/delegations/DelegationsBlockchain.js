@@ -69,5 +69,7 @@ const resignAsDelegate = async(group)=> {
 
 
 // becomeDelegate(1);
-// resignAsDelegate(1); 
+// resignAsDelegate(1);
+// becomeMemberOfGroup(1);
+// delegate(1, "0xb958d74A9BEe5b75f24404A41083cD62Fd285F88"); 
 module.exports = becomeDelegate, delegate, resignAsDelegate;
