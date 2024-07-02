@@ -12,6 +12,7 @@ contract PollHelpers {
         uint votingStartDate;
         uint delegateEndDate;
         uint endDate;
+        uint8 maxVoteScore;
         uint pollId;
         uint proposalCount;
     }
@@ -29,6 +30,10 @@ contract PollHelpers {
 
     function requirePollToExist(uint _pollId) internal view {
         require(_pollId > 0 && _pollId <= pollCount, "Poll ID does not exist");
+    }
+
+    function requireMaxVoteScoreToBeBetweenZeroAndOneHundred(uint8 maxVoteScore) internal view {
+        require(maxVoteScore <= 100, "Max vote score must be betweeen 0 and 100");
     }
 
 }

@@ -22,8 +22,10 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
         uint _proposalEndDate,
         uint _votingStartDate, 
         uint _delegateEndDate,
-        uint _endDate
+        uint _endDate,
+        uint8 _maxVoteScore
         ) public {
+            requireMaxVoteScoreToBeBetweenZeroAndOneHundred(_maxVoteScore);
             pollCount++;
 
             Poll memory newPoll = Poll({
@@ -35,6 +37,7 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
                 votingStartDate: _votingStartDate,
                 delegateEndDate: _delegateEndDate,
                 endDate: _endDate,
+                maxVoteScore: _maxVoteScore,
                 pollId: pollCount, 
                 proposalCount: 0
             });
