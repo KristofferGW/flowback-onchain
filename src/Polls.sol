@@ -25,7 +25,7 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
         uint _endDate,
         uint8 _maxVoteScore
         ) public {
-            requireMaxVoteScoreToBeBetweenZeroAndOneHundred(_maxVoteScore);
+            requireMaxVoteScoreWithinRange(_maxVoteScore);
             pollCount++;
 
             Poll memory newPoll = Poll({
@@ -59,7 +59,8 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
             description: _description,
             voteCount: 0,
             proposalId: _proposalId,
-            predictionCount: 0
+            predictionCount: 0,
+            score: 0
         }));
 
         emit ProposalAdded(_pollId, _proposalId, _description);
@@ -89,7 +90,7 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
 
     event VoteSubmitted(uint indexed pollId, address indexed voter, uint votesForProposal);
 
-    function vote(uint _pollId, uint _proposalId) public {
+    function vote(uint _pollId, uint _proposalId, uint8 _score) public {
         uint _pollGroup = polls[_pollId].group;
         uint delegatedVotingPower;
         address[] memory delegatingAddresses;
@@ -105,6 +106,8 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
         require(requireProposalToExist(_pollId, _proposalId));
 
         require(!hasDelegatedInGroup(_pollGroup), "You have delegated your vote in the polls group.");
+
+        requireVoterScoreWithinRange(_score, _pollId);
 
         Proposal[] storage pollProposals = proposals[_pollId];
 
@@ -140,6 +143,7 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
         for (uint i; i < proposalsLength;) {
             if (pollProposals[i].proposalId == _proposalId) {
                 pollProposals[i].voteCount += delegatedVotingPower + 1;
+                pollProposals[i].score += _score;
                 _votesForProposal = pollProposals[i].voteCount;
                 votersForPoll[_pollId].push(msg.sender);
                 emit VoteSubmitted(_pollId, msg.sender, _votesForProposal);

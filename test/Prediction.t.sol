@@ -34,7 +34,8 @@ contract PredictionTest is Test, Polls{
             proposalEndDate , 
             votingStartDate, 
             delegateEndDate, 
-            endDate
+            endDate,
+            0
             );
         vm.expectRevert(bytes("Proposal does not exist"));
         testPolls.createPrediction(1, 1, "pred");

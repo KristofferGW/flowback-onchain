@@ -10,6 +10,7 @@ contract ProposalHelpers is PollHelpers {
         uint voteCount;
         uint proposalId;
         uint predictionCount;
+        uint score;
     }
 
     //Ties proposals to polls by pollId
