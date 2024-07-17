@@ -65,8 +65,8 @@ contract DelegationsTest is Test, Polls {
     function testDelegate() public {
         vm.startPrank(user1);
         testPolls.becomeMemberOfGroup(_groupId);
-        vm.startPrank(user1);
         testPolls.becomeDelegate(_groupId);
+        vm.stopPrank();
         vm.startPrank(user2);
         testPolls.becomeDelegate(_groupId);
         Polls.GroupDelegate[] memory delegates = groupDelegates[_groupId];

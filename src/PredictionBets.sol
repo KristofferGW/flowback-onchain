@@ -10,6 +10,7 @@ contract PredictionBets is PollHelpers, ProposalHelpers, PredictionHelpers, Pred
 
     event PredictionBetCreated(uint indexed predictionId, bool bet, uint likelihood);
 
+    // Break this function out to individual functions
     function requirePollPropPredToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool) {
         uint pollsLength = pollCount;
         for (uint i = 0; i < pollsLength; i++) {

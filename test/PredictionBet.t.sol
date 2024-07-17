@@ -17,8 +17,8 @@ contract PredictionBetTest is Test, Polls{
         testPolls = new Polls();
     }
 
-    function testEmitPlacePredictionBet() public {
-           testPolls.createPoll(
+    function createPoll() private {
+        testPolls.createPoll(
             "new poll", 
             "tag", 
             1, 
@@ -26,8 +26,13 @@ contract PredictionBetTest is Test, Polls{
             proposalEndDate , 
             votingStartDate, 
             delegateEndDate, 
-            endDate
-            );
+            endDate,
+            0
+        );
+    }
+
+    function testEmitPlacePredictionBet() public {
+        createPoll();
         testPolls.addProposal(1, "new proposal");
         testPolls.createPrediction(1, 1, "pred");  
         vm.expectEmit();
@@ -36,16 +41,7 @@ contract PredictionBetTest is Test, Polls{
     }
 
     function testPlacePredictionBet() public {
-           testPolls.createPoll(
-            "new poll", 
-            "tag", 
-            1, 
-            pollStartDate, 
-            proposalEndDate , 
-            votingStartDate, 
-            delegateEndDate, 
-            endDate
-            );
+        createPoll();
         testPolls.addProposal(1, "new proposal");
         testPolls.createPrediction(1, 1, "pred");  
         testPolls.placePredictionBet(1, 1, 1, 9, true);
@@ -55,16 +51,7 @@ contract PredictionBetTest is Test, Polls{
     }
 
     function testGetPredictionBets() public {
-           testPolls.createPoll(
-            "new poll", 
-            "tag", 
-            1, 
-            pollStartDate, 
-            proposalEndDate , 
-            votingStartDate, 
-            delegateEndDate, 
-            endDate
-            );
+        createPoll();
         testPolls.addProposal(1, "new proposal");
         testPolls.createPrediction(1, 1, "pred");  
         testPolls.placePredictionBet(1, 1, 1, 9, true);

@@ -39,8 +39,50 @@ contract TestPolls is Test {
         _;
     }
 
+    modifier createPollWithOneHundredMaxScore() {
+        polls.createPoll(
+            BASIC_POLL_TITLE,
+            BASIC_POLL_TAG,
+            BASIC_POLL_GROUP,
+            BASIC_POLL_START_DATE,
+            BASIC_POLL_PROPOSAL_END_DATE,
+            BASIC_POLL_VOTING_START_DARTE,
+            BASIC_POLL_DELEGATE_END_DATE,
+            BASIC_POLL_END_DATE,
+            100
+            );
+        _;
+    }
+
+    modifier createPollWithInvalidMaxScore() {
+        polls.createPoll(
+            BASIC_POLL_TITLE,
+            BASIC_POLL_TAG,
+            BASIC_POLL_GROUP,
+            BASIC_POLL_START_DATE,
+            BASIC_POLL_PROPOSAL_END_DATE,
+            BASIC_POLL_VOTING_START_DARTE,
+            BASIC_POLL_DELEGATE_END_DATE,
+            BASIC_POLL_END_DATE,
+            101
+            );
+        _;
+    }
+
     function testCreatePollWithZeroScore() public createPollWithZeroMaxScore {
         PollHelpers.Poll memory currentPoll = polls.getPoll(BASIC_POLL_GROUP);
         assertEq(currentPoll.maxVoteScore, 0);
+    }
+
+    function testCreatePollWithOneHundredMaxScore() public createPollWithOneHundredMaxScore {
+        PollHelpers.Poll memory currentPoll = polls.getPoll(BASIC_POLL_GROUP);
+        assertEq(currentPoll.maxVoteScore, 100);
+    }
+
+    function testVotingWithScore() public createPollWithOneHundredMaxScore {
+        vm.warp(block.timestamp + 1 days);
+        polls.addProposal( {_pollId: 1, _description: "Pizza"} );
+        polls.becomeMemberOfGroup({ _group: 1 });
+        polls.vote({ _pollId: 1, _proposalId: 1, _score: 50 });
     }
 }
