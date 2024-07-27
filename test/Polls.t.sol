@@ -7,8 +7,8 @@ import {Polls} from '../src/Polls.sol';
 import {DeployPolls} from '../script/DeployPolls.s.sol';
 import {PollHelpers} from '../src/PollHelpers.sol';
 
-contract TestPolls is Test {
-    Polls polls;
+contract TestPolls is Test, Polls {
+    Polls testPolls;
 
     string BASIC_POLL_TITLE = "What should we have for dinner?";
     string BASIC_POLL_TAG = "Food choices";
@@ -21,11 +21,11 @@ contract TestPolls is Test {
 
     function setUp() external {
         DeployPolls deployPolls = new DeployPolls();
-        polls = deployPolls.run();
+        testPolls = deployPolls.run();
     }
 
     modifier createPollWithZeroMaxScore() {
-        polls.createPoll(
+        testPolls.createPoll(
             BASIC_POLL_TITLE,
             BASIC_POLL_TAG,
             BASIC_POLL_GROUP,
@@ -40,7 +40,7 @@ contract TestPolls is Test {
     }
 
     modifier createPollWithOneHundredMaxScore() {
-        polls.createPoll(
+        testPolls.createPoll(
             BASIC_POLL_TITLE,
             BASIC_POLL_TAG,
             BASIC_POLL_GROUP,
@@ -54,35 +54,44 @@ contract TestPolls is Test {
         _;
     }
 
-    modifier createPollWithInvalidMaxScore() {
-        polls.createPoll(
-            BASIC_POLL_TITLE,
-            BASIC_POLL_TAG,
-            BASIC_POLL_GROUP,
-            BASIC_POLL_START_DATE,
-            BASIC_POLL_PROPOSAL_END_DATE,
-            BASIC_POLL_VOTING_START_DARTE,
-            BASIC_POLL_DELEGATE_END_DATE,
-            BASIC_POLL_END_DATE,
-            101
-            );
+    modifier addProposalAndBecomeMemberOfGroup() {
+        vm.warp(block.timestamp + 1 days);
+        testPolls.addProposal( {_pollId: 1, _description: "Pizza"} );
+        testPolls.becomeMemberOfGroup({ _group: 1 });
         _;
     }
 
-    function testCreatePollWithZeroScore() public createPollWithZeroMaxScore {
-        PollHelpers.Poll memory currentPoll = polls.getPoll(BASIC_POLL_GROUP);
-        assertEq(currentPoll.maxVoteScore, 0);
+    function voteWithZeroScore() internal {
+        testPolls.vote({ _pollId: 1, _proposalId: 1, _score: 0 });
     }
 
     function testCreatePollWithOneHundredMaxScore() public createPollWithOneHundredMaxScore {
-        PollHelpers.Poll memory currentPoll = polls.getPoll(BASIC_POLL_GROUP);
+        PollHelpers.Poll memory currentPoll = testPolls.getPoll(BASIC_POLL_GROUP);
         assertEq(currentPoll.maxVoteScore, 100);
     }
 
-    function testVotingWithScore() public createPollWithOneHundredMaxScore {
-        vm.warp(block.timestamp + 1 days);
-        polls.addProposal( {_pollId: 1, _description: "Pizza"} );
-        polls.becomeMemberOfGroup({ _group: 1 });
-        polls.vote({ _pollId: 1, _proposalId: 1, _score: 50 });
+    function testCreatePollWithZeroScore() public createPollWithZeroMaxScore {
+        PollHelpers.Poll memory currentPoll = testPolls.getPoll(BASIC_POLL_GROUP);
+        assertEq(currentPoll.maxVoteScore, 0);
+    }
+
+    function testDoubleVoting() public createPollWithZeroMaxScore addProposalAndBecomeMemberOfGroup {
+        voteWithZeroScore();
+        vm.expectRevert();
+        voteWithZeroScore();
+    }
+
+    function testVotingWithScore() public createPollWithOneHundredMaxScore addProposalAndBecomeMemberOfGroup {
+        testPolls.vote({ _pollId: 1, _proposalId: 1, _score: 50 });
+        Proposal[] memory pollProposals = testPolls.getProposals(1);
+        uint scoreOfProposal = pollProposals[0].score;
+        assertEq(scoreOfProposal, 50);
+    }
+
+    function testVotingWithZeroScore() public createPollWithZeroMaxScore addProposalAndBecomeMemberOfGroup {
+        voteWithZeroScore();
+        Proposal[] memory pollProposals = testPolls.getProposals(1);
+        uint scoreOfProposal = pollProposals[0].score;
+        assertEq(scoreOfProposal, 0);
     }
 }

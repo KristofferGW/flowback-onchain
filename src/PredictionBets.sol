@@ -11,7 +11,9 @@ contract PredictionBets is PollHelpers, ProposalHelpers, PredictionHelpers, Pred
     event PredictionBetCreated(uint indexed predictionId, bool bet, uint likelihood);
 
     modifier requireExist(uint _pollId, uint _proposalId, uint _predictionId) {
-        require(requirePollPropPredToExist(_pollId, _proposalId, _predictionId), "Wrong poll, proposal or prediction");
+        requirePollToExist(_pollId);
+        requireProposalToExist (_pollId, _proposalId);
+        requirePredictionToExist(_proposalId, _predictionId);
         _;
     }
 
