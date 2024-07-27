@@ -7,7 +7,7 @@ import {PredictionHelpers} from './PredictionHelpers.sol';
 
 contract Predictions is PollHelpers, ProposalHelpers, PredictionHelpers {
 
-    function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){  
+    function requireProposalToExist(uint _pollId, uint _proposalId) internal view override returns (bool){  
         uint predictionsLength= proposals[_pollId].length;
         for (uint i=0; i < predictionsLength;){
            
