@@ -156,22 +156,6 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
         return;
     }
 
-    mapping(uint => address[]) internal votersForPoll;
-
-    function hasVoted(uint _pollId) internal view returns(bool voted) {
-        address[] memory addresses = votersForPoll[_pollId];
-
-        for (uint i; i < addresses.length;) {
-            if (addresses[i] == msg.sender) {
-                return true;
-            }
-            unchecked {
-                ++i;
-            }
-        }
-        return false;
-    }
-
     function getPoll(uint _pollId) public view returns (Poll memory) {
         requirePollToExist(_pollId);
         return polls[_pollId];
