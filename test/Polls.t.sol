@@ -3,11 +3,12 @@
 pragma solidity ^0.8.18;
 
 import {Test, console} from 'forge-std/Test.sol';
+import {Delegations} from '../src/Delegations.sol';
 import {Polls} from '../src/Polls.sol';
 import {DeployPolls} from '../script/DeployPolls.s.sol';
 import {PollHelpers} from '../src/PollHelpers.sol';
 
-contract TestPolls is Test, Polls {
+contract TestPolls is Test, Delegations, Polls {
     Polls testPolls;
 
     string BASIC_POLL_TITLE = "What should we have for dinner?";
@@ -18,6 +19,9 @@ contract TestPolls is Test, Polls {
     uint256 BASIC_POLL_VOTING_START_DARTE = block.timestamp + 12 hours;
     uint256 BASIC_POLL_DELEGATE_END_DATE = block.timestamp + 1 days;
     uint256 BASIC_POLL_END_DATE = block.timestamp + 5 days;
+
+    address USER1 = address(0x1);
+    address USER2 = address(0x2);
 
     function setUp() external {
         DeployPolls deployPolls = new DeployPolls();
@@ -61,6 +65,17 @@ contract TestPolls is Test, Polls {
         _;
     }
 
+    function userOneBecomesDelegateAndUserTwoDelegates() internal {
+        vm.startPrank(USER1);
+        testPolls.becomeMemberOfGroup(BASIC_POLL_GROUP);
+        testPolls.becomeDelegate(BASIC_POLL_GROUP);
+        vm.stopPrank();
+        vm.startPrank(USER2);
+        testPolls.becomeMemberOfGroup(BASIC_POLL_GROUP);
+        testPolls.delegate(BASIC_POLL_GROUP, USER1);
+        vm.stopPrank();
+    }
+
     function voteWithZeroScore() internal {
         testPolls.vote({ _pollId: 1, _proposalId: 1, _score: 0 });
     }
@@ -100,6 +115,28 @@ contract TestPolls is Test, Polls {
         voteWithZeroScore();
         vm.expectRevert();
         voteWithZeroScore();
+    }
+
+    function testVoteAsDelegateWithScore() public createPollWithOneHundredMaxScore addProposalAndBecomeMemberOfGroup {
+        userOneBecomesDelegateAndUserTwoDelegates();
+        vm.startPrank(USER1);
+        testPolls.voteAsDelegate({ _pollId: 1, _proposalId: 1, _score: 50 });
+        Proposal[] memory pollProposals = testPolls.getProposals(1);
+        uint scoreOfProposal = pollProposals[0].score;
+        uint votesForProposal = pollProposals[0].voteCount;
+        assertEq(scoreOfProposal, 50);
+        assertEq(votesForProposal, 1);
+    }
+
+    function testVoteAsDelegateWithZeroScore() public createPollWithZeroMaxScore addProposalAndBecomeMemberOfGroup {
+        userOneBecomesDelegateAndUserTwoDelegates();
+        vm.startPrank(USER1);
+        testPolls.voteAsDelegate({ _pollId: 1, _proposalId: 1, _score: 0 });
+        Proposal[] memory pollProposals = testPolls.getProposals(1);
+        uint scoreOfProposal = pollProposals[0].score;
+        uint votesForProposal = pollProposals[0].voteCount;
+        assertEq(scoreOfProposal, 0);
+        assertEq(votesForProposal, 1);
     }
 
     function testVotingBeforeVotingIsOpen() public createPollWithOneHundredMaxScore {

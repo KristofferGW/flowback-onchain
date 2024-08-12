@@ -18,6 +18,11 @@ contract PollHelpers {
     }
 
     mapping(uint => Poll) public polls;
+
+    mapping(uint => address[]) internal votersForPoll;
+
+    mapping(uint => address[]) internal delegateVotersForPoll;
+
     uint public pollCount;
 
     function controlProposalEndDate(uint _pollId) internal view {
@@ -38,6 +43,34 @@ contract PollHelpers {
 
     function requireVoterScoreWithinRange(uint8 _score, uint _pollId) internal view {
         require(_score <= polls[_pollId].maxVoteScore, "Vote score must be between 0 and max score");
+    }
+
+    function hasVoted(uint _pollId) internal view returns(bool voted) {
+        address[] memory addresses = votersForPoll[_pollId];
+
+        for (uint i; i < addresses.length;) {
+            if (addresses[i] == msg.sender) {
+                return true;
+            }
+            unchecked {
+                ++i;
+            }
+        }
+        return false;
+    }
+
+    function hasVotedAsDelegate(uint _pollId) internal view returns(bool voted) {
+        address[] memory addresses = delegateVotersForPoll[_pollId];
+
+        for (uint i; i < addresses.length;) {
+            if (addresses[i] == msg.sender) {
+                return true;
+            }
+            unchecked {
+                ++i;
+            }
+        }
+        return false;
     }
 
 }
