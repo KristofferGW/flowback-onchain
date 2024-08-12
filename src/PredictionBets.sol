@@ -10,30 +10,10 @@ contract PredictionBets is PollHelpers, ProposalHelpers, PredictionHelpers, Pred
 
     event PredictionBetCreated(uint indexed predictionId, bool bet, uint likelihood);
 
-    function requirePollPropPredToExist(uint _pollId, uint _proposalId, uint _predictionId) internal view returns (bool) {
-        uint pollsLength = pollCount;
-        for (uint i = 0; i < pollsLength; i++) {
-            if (polls[i].pollId == _pollId) {
-                uint proposalsLength = proposals[_pollId].length;
-                for (uint j = 0; j < proposalsLength; j++) {
-                    if (proposals[_pollId][j].proposalId == _proposalId) {
-                        uint predictionsLength = predictions[_proposalId].length;
-                        for (uint k = 0; k < predictionsLength; k++) {
-                            if (predictions[_proposalId][k].predictionId == _predictionId) {
-                                return true;
-                            }
-                        }
-                        return false;
-                    }
-                }
-                return false;
-            }
-        }
-        return false;
-    }
-
     modifier requireExist(uint _pollId, uint _proposalId, uint _predictionId) {
-        require(requirePollPropPredToExist(_pollId, _proposalId, _predictionId), "Wrong poll, proposal or prediction");
+        requirePollToExist(_pollId);
+        requireProposalToExist (_pollId, _proposalId);
+        requirePredictionToExist(_proposalId, _predictionId);
         _;
     }
 

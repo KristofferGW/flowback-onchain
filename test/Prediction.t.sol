@@ -24,8 +24,7 @@ contract PredictionTest is Test, Polls{
         vm.broadcast(0x18d1161FaBAC4891f597386f0c9B932E3fD3A1FD);
     }
 
-    function testCreatePrediction() public {
-     
+    function createPoll() private {
         testPolls.createPoll(
             "new poll", 
             "tag", 
@@ -34,8 +33,13 @@ contract PredictionTest is Test, Polls{
             proposalEndDate , 
             votingStartDate, 
             delegateEndDate, 
-            endDate
-            );
+            endDate,
+            0
+        );
+    }
+
+    function testCreatePrediction() public {
+        createPoll();
         vm.expectRevert(bytes("Proposal does not exist"));
         testPolls.createPrediction(1, 1, "pred");
         vm.stopPrank();
@@ -55,16 +59,7 @@ contract PredictionTest is Test, Polls{
         vm.expectRevert(bytes("Proposal does not exist"));
         testPolls.getPredictions(1, 1);
         vm.stopPrank();
-        testPolls.createPoll(
-            "new poll", 
-            "tag", 
-            1, 
-            pollStartDate, 
-            proposalEndDate , 
-            votingStartDate, 
-            delegateEndDate, 
-            endDate
-            );
+        createPoll();
         testPolls.addProposal(1, "new proposal");
         testPolls.createPrediction(1, 1, "predone"); 
         testPolls.createPrediction(1, 1, "predtwo");  
@@ -79,16 +74,7 @@ contract PredictionTest is Test, Polls{
 
 
     function testEmitPredictionCreated() public {
-        testPolls.createPoll(
-            "new poll", 
-            "tag", 
-            1, 
-            pollStartDate, 
-            proposalEndDate , 
-            votingStartDate, 
-            delegateEndDate, 
-            endDate
-            );
+        createPoll();
         testPolls.addProposal(1, "new proposal");
         vm.expectEmit();
         emit PredictionCreated(1,1,1, "pred");

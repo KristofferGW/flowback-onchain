@@ -7,20 +7,6 @@ import {PredictionHelpers} from './PredictionHelpers.sol';
 
 contract Predictions is PollHelpers, ProposalHelpers, PredictionHelpers {
 
-    function requireProposalToExist(uint _pollId, uint _proposalId) internal view returns (bool){  
-        uint predictionsLength= proposals[_pollId].length;
-        for (uint i=0; i < predictionsLength;){
-           
-            if (proposals[_pollId][i].proposalId==_proposalId) {
-                return true;
-            }
-            unchecked {
-                ++i;
-            }
-        }
-        return false;
-    }
-
     event PredictionCreated(uint pollId, uint proposalId, uint predictionId, string prediction);
     function createPrediction(
         uint _pollId, 
