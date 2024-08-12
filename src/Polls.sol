@@ -92,6 +92,45 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
 
     function vote(uint _pollId, uint _proposalId, uint8 _score) public {
         uint _pollGroup = polls[_pollId].group;
+
+        requirePollToExist(_pollId);
+
+        require(isUserMemberOfGroup(_pollId), "The user is not a member of poll group");
+
+        isVotingOpen(_pollId);
+        
+        require(!hasVoted(_pollId), "Vote has already been cast");
+
+        require(requireProposalToExist(_pollId, _proposalId));
+
+        require(!hasDelegatedInGroup(_pollGroup), "You have delegated your vote in the polls group.");
+
+        requireVoterScoreWithinRange(_score, _pollId);
+
+        Proposal[] storage pollProposals = proposals[_pollId];
+
+        uint proposalsLength = pollProposals.length;
+
+        uint _votesForProposal;
+
+        for (uint i; i < proposalsLength;) {
+            if (pollProposals[i].proposalId == _proposalId) {
+                pollProposals[i].voteCount + 1;
+                pollProposals[i].score += _score;
+                _votesForProposal = pollProposals[i].voteCount;
+                votersForPoll[_pollId].push(msg.sender);
+                emit VoteSubmitted(_pollId, msg.sender, _votesForProposal);
+                return;
+            }
+            unchecked {
+                ++i;
+            }
+        }
+        return;
+    }
+
+    function voteAsDelegate(uint _pollId, uint _proposalId, uint8 _score) public {
+        uint _pollGroup = polls[_pollId].group;
         uint delegatedVotingPower;
         address[] memory delegatingAddresses;
 
@@ -101,7 +140,7 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
 
         isVotingOpen(_pollId);
         
-        require(!hasVoted(_pollId), "Vote has already been cast");
+        require(!hasVotedAsDelegate(_pollId), "Delegate vote has already been cast");
 
         require(requireProposalToExist(_pollId, _proposalId));
 
@@ -142,8 +181,8 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
 
         for (uint i; i < proposalsLength;) {
             if (pollProposals[i].proposalId == _proposalId) {
-                pollProposals[i].voteCount += delegatedVotingPower + 1;
-                pollProposals[i].score += _score;
+                pollProposals[i].voteCount += delegatedVotingPower;
+                pollProposals[i].score += _score * delegatedVotingPower;
                 _votesForProposal = pollProposals[i].voteCount;
                 votersForPoll[_pollId].push(msg.sender);
                 emit VoteSubmitted(_pollId, msg.sender, _votesForProposal);
