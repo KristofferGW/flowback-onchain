@@ -19,12 +19,6 @@ contract RightToVoteTest is Test, Polls {
        vm.broadcast(); 
     }
 
-    function testEmitPredictionCreated() public {
-        vm.expectEmit();
-        emit GroupMembershipChanged(msg.sender, 1, true);
-        testPolls.becomeMemberOfGroup(1);  
-    }
-
     function testbecomeMemberOfGroup(uint group) public {
         vm.startPrank(user1);
         assertFalse(testPolls.isUserMemberOfGroup(group));

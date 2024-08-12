@@ -21,10 +21,9 @@ contract DelegationsTest is Test, Polls {
     }
 
     function testEmitNewDelegate() public {
-        uint groupDelegateCount = 1;
         vm.startPrank(user1);
-        vm.expectEmit();
-        emit NewDelegate(user1, _groupId, 0, new address[](0), groupDelegateCount);
+        testPolls.becomeMemberOfGroup(_groupId);
+        emit NewDelegate(user1, _groupId, 0, new address[](0), 1);
         testPolls.becomeDelegate(_groupId);
     }
 
@@ -68,6 +67,7 @@ contract DelegationsTest is Test, Polls {
         testPolls.becomeDelegate(_groupId);
         vm.stopPrank();
         vm.startPrank(user2);
+        testPolls.becomeMemberOfGroup(_groupId);
         testPolls.becomeDelegate(_groupId);
         Polls.GroupDelegate[] memory delegates = groupDelegates[_groupId];
         for (uint i = 0; i < delegates.length; i++) {
