@@ -3,12 +3,11 @@
 pragma solidity ^0.8.18;
 
 import {Test, console} from 'forge-std/Test.sol';
-import {Delegations} from '../src/Delegations.sol';
 import {Polls} from '../src/Polls.sol';
 import {DeployPolls} from '../script/DeployPolls.s.sol';
 import {PollHelpers} from '../src/PollHelpers.sol';
 
-contract TestPolls is Test, Delegations, Polls {
+contract TestPolls is Test, Polls {
     Polls testPolls;
 
     string BASIC_POLL_TITLE = "What should we have for dinner?";
