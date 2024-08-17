@@ -47,30 +47,6 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
             polls[pollCount] = newPoll;
         }
 
-    event ProposalAdded(uint indexed pollId, uint proposalId, string description);
-
-    function addProposal(uint _pollId, string calldata _description) public {
-        requirePollToExist(_pollId);
-        controlProposalEndDate(_pollId);
-        polls[_pollId].proposalCount++;
-        uint _proposalId = polls[_pollId].proposalCount;
-
-        proposals[_pollId].push(Proposal({
-            description: _description,
-            voteCount: 0,
-            proposalId: _proposalId,
-            predictionCount: 0,
-            score: 0
-        }));
-
-        emit ProposalAdded(_pollId, _proposalId, _description);
-    }
-
-    function getProposals(uint _pollId) external view returns(Proposal[] memory) {
-        requirePollToExist(_pollId);
-        return proposals[_pollId];
-    }
-
     function getPollResults(uint _pollId) public view returns (string[] memory, uint[] memory, uint[] memory) {
         requirePollToExist(_pollId);
 
