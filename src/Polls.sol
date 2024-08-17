@@ -47,25 +47,6 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
             polls[pollCount] = newPoll;
         }
 
-    function getPollResults(uint _pollId) public view returns (string[] memory, uint[] memory, uint[] memory) {
-        requirePollToExist(_pollId);
-
-        Proposal[] memory pollProposals = proposals[_pollId];
-
-        string[] memory proposalDescriptions = new string[](pollProposals.length);
-        uint[] memory voteCounts = new uint[](pollProposals.length);
-        uint[] memory scores = new uint[](pollProposals.length);
-
-        for (uint i; i < pollProposals.length; i++) {
-            proposalDescriptions[i] = pollProposals[i].description;
-            voteCounts[i] = pollProposals[i].voteCount;
-            scores[i] = pollProposals[i].score;
-        }
-
-        return (proposalDescriptions, voteCounts, scores);
-
-    }
-
     event VoteSubmitted(uint indexed pollId, address indexed voter, uint votesForProposal);
 
     function vote(uint _pollId, uint _proposalId, uint8 _score) public {
@@ -171,10 +152,5 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
             }
         }
         return;
-    }
-
-    function getPoll(uint _pollId) public view returns (Poll memory) {
-        requirePollToExist(_pollId);
-        return polls[_pollId];
     }
 }

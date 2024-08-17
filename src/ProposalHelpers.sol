@@ -35,6 +35,25 @@ contract ProposalHelpers is PollHelpers {
         emit ProposalAdded(_pollId, _proposalId, _description);
     }
 
+    function getPollResults(uint _pollId) public view returns (string[] memory, uint[] memory, uint[] memory) {
+        requirePollToExist(_pollId);
+
+        Proposal[] memory pollProposals = proposals[_pollId];
+
+        string[] memory proposalDescriptions = new string[](pollProposals.length);
+        uint[] memory voteCounts = new uint[](pollProposals.length);
+        uint[] memory scores = new uint[](pollProposals.length);
+
+        for (uint i; i < pollProposals.length; i++) {
+            proposalDescriptions[i] = pollProposals[i].description;
+            voteCounts[i] = pollProposals[i].voteCount;
+            scores[i] = pollProposals[i].score;
+        }
+
+        return (proposalDescriptions, voteCounts, scores);
+
+    }
+
     function getProposals(uint _pollId) external view returns(Proposal[] memory) {
         requirePollToExist(_pollId);
         return proposals[_pollId];
