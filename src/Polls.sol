@@ -71,20 +71,22 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
         return proposals[_pollId];
     }
 
-    function getPollResults(uint _pollId) public view returns (string[] memory, uint[] memory) {
+    function getPollResults(uint _pollId) public view returns (string[] memory, uint[] memory, uint[] memory) {
         requirePollToExist(_pollId);
 
         Proposal[] memory pollProposals = proposals[_pollId];
 
         string[] memory proposalDescriptions = new string[](pollProposals.length);
         uint[] memory voteCounts = new uint[](pollProposals.length);
+        uint[] memory scores = new uint[](pollProposals.length);
 
         for (uint i; i < pollProposals.length; i++) {
             proposalDescriptions[i] = pollProposals[i].description;
             voteCounts[i] = pollProposals[i].voteCount;
+            scores[i] = pollProposals[i].score;
         }
 
-        return (proposalDescriptions, voteCounts);
+        return (proposalDescriptions, voteCounts, scores);
 
     }
 
@@ -115,7 +117,7 @@ contract Polls is RightToVote, Delegations, PollHelpers, ProposalHelpers, Predic
 
         for (uint i; i < proposalsLength;) {
             if (pollProposals[i].proposalId == _proposalId) {
-                pollProposals[i].voteCount + 1;
+                pollProposals[i].voteCount += 1;
                 pollProposals[i].score += _score;
                 _votesForProposal = pollProposals[i].voteCount;
                 votersForPoll[_pollId].push(msg.sender);

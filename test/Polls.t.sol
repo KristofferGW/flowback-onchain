@@ -116,6 +116,17 @@ contract TestPolls is Test, Polls {
         voteWithZeroScore();
     }
 
+    function testGetPollResuts() public createPollWithOneHundredMaxScore addProposalAndBecomeMemberOfGroup {
+        testPolls.vote({ _pollId: 1, _proposalId: 1, _score: 50});
+
+        (string[] memory proposalDescriptions, uint[] memory voteCounts, uint[] memory scores) =
+        testPolls.getPollResults(1);
+
+        assertEq(proposalDescriptions.length, 1, "There should be one proposal description");
+        assertEq(voteCounts[0], 1, "There should be one vote");
+        assertEq(scores[0], 50, "The score should be 50");        
+    }
+
     function testVoteAsDelegateWithScore() public createPollWithOneHundredMaxScore addProposalAndBecomeMemberOfGroup {
         userOneBecomesDelegateAndUserTwoDelegates();
         vm.startPrank(USER1);
@@ -156,7 +167,9 @@ contract TestPolls is Test, Polls {
         testPolls.vote({ _pollId: 1, _proposalId: 1, _score: 50 });
         Proposal[] memory pollProposals = testPolls.getProposals(1);
         uint scoreOfProposal = pollProposals[0].score;
+        uint voteCountOfProposal = pollProposals[0].voteCount;
         assertEq(scoreOfProposal, 50);
+        assertEq(voteCountOfProposal, 1);
     }
 
     function testVotingWithZeroScore() public createPollWithZeroMaxScore addProposalAndBecomeMemberOfGroup {
